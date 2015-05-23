@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?scenebuilder-classpath-element ../images?>
+
+<AnchorPane id="AnchorPane" prefHeight="545.0" prefWidth="612.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="trial.contrôleurs.PageAccueilController">
+  <children>
+    <!--http://www.javacodegeeks.com/2013/03/javafx-2-with-spring.html-->
+    <!--<fx:include source="/trial/fichiersFxml/RootLayout.fxml"/> -->
+    <Accordion layoutX="213.0" layoutY="147.0" minWidth="175.0" prefHeight="294.0" prefWidth="340.0">
+      <expandedPane>
+        <TitledPane fx:id="x1" animated="false" prefWidth="312.0" text="Functionalite">
+          <content>
+            <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+              <children>
+                <Label layoutX="14.0" layoutY="14.0" prefHeight="152.0" prefWidth="143.0" text="Description" />
+              </children>
+            </AnchorPane>
+          </content>
+        </TitledPane>
+      </expandedPane>
+      <panes>
+        <fx:reference source="x1" />
+        <TitledPane animated="false" text="Utilite">
+          <content>
+            <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+              <children>
+                <Label layoutX="14.0" layoutY="14.0" prefHeight="152.0" prefWidth="141.0" text="Description" />
+              </children>
+            </AnchorPane>
+          </content>
+        </TitledPane>
+        <TitledPane fx:id="x2" animated="false" text="Efficacite">
+          <content>
+            <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+              <children>
+                <Label layoutX="14.0" layoutY="6.0" prefHeight="162.0" prefWidth="143.0" text="Description" />
+              </children>
+            </AnchorPane>
+          </content>
+        </TitledPane>
+      </panes>
+    </Accordion>
+    <Label alignment="CENTER" layoutX="65.0" layoutY="99.0" prefWidth="488.0" style="-fx-font: NORMAL 20 Tahoma;" text="Bienvenue chez MotsApp!" textAlignment="CENTER">
+      <font>
+        <Font name="System Bold" size="20.0" />
+      </font>
+    </Label>
+    <ImageView fitHeight="210.81011962890625" fitWidth="171.69072357824646" layoutX="32.0" layoutY="178.0" pickOnBounds="true" preserveRatio="true">
+      <image>
+        <Image url="/trial/images/main.png" />
+      </image>
+    </ImageView>
+    <Label alignment="CENTER" contentDisplay="CENTER" layoutX="0.0" layoutY="468.0" prefWidth="612.0" text="B o n n e    R e c h e r c h e !&#10;*  *  *" textAlignment="CENTER" textFill="#2c008ab8" underline="false">
+      <font>
+        <Font name="System Bold Italic" size="20.0" />
+      </font>
+    </Label>
+  </children>
+</AnchorPane>

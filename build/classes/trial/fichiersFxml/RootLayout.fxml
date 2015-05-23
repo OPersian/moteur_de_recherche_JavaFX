@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="627.0" prefWidth="679.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="trial.contrôleurs.RootLayoutContrôleur">
+  <children>
+    <StackPane fx:id="vistaHolder" />
+    <MenuBar focusTraversable="false" layoutX="14.0" layoutY="14.0" prefWidth="651.0" useSystemMenuBar="false">
+      <effect>
+        <ColorAdjust brightness="-0.18320610687022898" contrast="0.2748091603053433" hue="-0.4580152671755725" saturation="0.28244274809160297" />
+      </effect>
+      <menus>
+        <Menu disable="false" mnemonicParsing="false" text="Fichier">
+          <items>
+            <MenuItem mnemonicParsing="false" onAction="#allerPageAccueil" text="Page d'accueil" fx:id="menuItemPageAccueil" />
+            <MenuItem mnemonicParsing="false" onAction="#allerArticleAjoute" text="Creer l'article" fx:id="menuItemArticleAjoute" />
+            <MenuItem mnemonicParsing="false" onAction="#allerPhotoAjoute" text="Creer photoalbum" fx:id="menuItemPhotoAjoute" />
+            <MenuItem mnemonicParsing="false" text="Ouvrir" fx:id="menuItemOuvrir" />
+            <MenuItem mnemonicParsing="false" text="Sauvegarder" fx:id="menuItemSauvegarder" />
+            <MenuItem mnemonicParsing="false" text="Supprimer" fx:id="menuItemSupprimer" />
+          </items>
+        </Menu>
+        <Menu mnemonicParsing="false" text="Modifier" fx:id="menuItemModifier">
+          <items>
+            <MenuItem mnemonicParsing="false" text="Delete" />
+          </items>
+        </Menu>
+        <Menu mnemonicParsing="false" text="Indexer" fx:id="menuItemIndexer">
+          <items>
+            <MenuItem mnemonicParsing="false" text="About" />
+          </items>
+        </Menu>
+        <Menu mnemonicParsing="false" text="Aider" fx:id="menuItemAider">
+          <items>
+            <MenuItem mnemonicParsing="false" text="Close" />
+          </items>
+        </Menu>
+      </menus>
+    </MenuBar>
+    <TextField fx:id="textFieldRechercher" layoutX="77.0" layoutY="48.0" prefWidth="388.0" promptText="rechercher" />
+    <Button fx:id="rechercherBtn" layoutX="475.0" layoutY="48.0" mnemonicParsing="false" onAction="#rechercher" prefWidth="74.0" text="MotsApp!" textFill="BLACK" />
+    <Separator layoutX="14.0" layoutY="80.0" prefWidth="630.0" />
+    <ScrollBar fx:id="scrollBar" layoutX="653.0" layoutY="42.0" orientation="VERTICAL" prefHeight="571.0" />
+    <Label alignment="CENTER" contentDisplay="CENTER" layoutX="42.0" layoutY="586.0" prefWidth="602.0" text="Cree par Persianova &amp; Golybnucha&#10;2015, Kharkiv, UKRAINE" textAlignment="CENTER" textFill="#210066" underline="false">
+      <font>
+        <Font size="10.0" />
+      </font>
+    </Label>
+    <Separator layoutX="14.0" layoutY="579.0" minHeight="2.0" prefHeight="2.0" prefWidth="630.0" />
+  </children>
+</AnchorPane>
