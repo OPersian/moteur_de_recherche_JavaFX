@@ -17,6 +17,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import trial.MainMotsApp;
+import trial.VueNavigateur;
 
 /**
  * FXML Controller class
@@ -93,6 +94,11 @@ public class ArticleAjouteContrôleur implements Initializable {
             successMsgLabel.setText("On ne peut pas enregistrer vos donnés!");
         }
         
+    }
+
+    @FXML
+    private void voirListeArticles(ActionEvent event) {
+        VueNavigateur.loadVista(VueNavigateur.ARTICLE_TABLEAU); 
     }
     
 }

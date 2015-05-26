@@ -90,12 +90,18 @@ public class RootLayoutContrôleur implements Initializable {
 
         if (file != null) {
             if (MainMotsApp.currentSousVue == VueNavigateur.ARTICLE_AJOUTE || 
-                MainMotsApp.currentSousVue == VueNavigateur.ARTICLE_TABLEAU)
-                    {mainMotsApp.chargerArticleDataDuFichier(file);}
+                MainMotsApp.currentSousVue == VueNavigateur.ARTICLE_TABLEAU){
+                    mainMotsApp.chargerArticleDataDuFichier(file);
+                    VueNavigateur.loadVista(VueNavigateur.ARTICLE_TABLEAU);//reload view 
+                    //to see changes instantly
+            }
                 
             else if (MainMotsApp.currentSousVue == VueNavigateur.PHOTO_AJOUTE || 
-                MainMotsApp.currentSousVue == VueNavigateur.PHOTO_TABLEAU)
-                    {mainMotsApp.chargerPhotoDataDuFichier(file);}
+                MainMotsApp.currentSousVue == VueNavigateur.PHOTO_TABLEAU){
+                    mainMotsApp.chargerPhotoDataDuFichier(file);
+                    VueNavigateur.loadVista(VueNavigateur.PHOTO_TABLEAU);//reload view 
+                    //to see changes instantly
+            }
                  
             else {mainMotsApp.chargerArticleDataDuFichier(file);}
         }

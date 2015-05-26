@@ -17,6 +17,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TextField;
 import javafx.stage.FileChooser;
 import trial.MainMotsApp;
+import trial.VueNavigateur;
 
 /**
  * FXML Controller class
@@ -132,6 +133,8 @@ public class ArticleTableauContrôleur implements Initializable {
         if (file != null) {
             mainMotsApp.chargerArticleDataDuFichier(file);
         }
+        VueNavigateur.loadVista(VueNavigateur.ARTICLE_TABLEAU);//reload view 
+            //to see changes instantly
         
     }
     

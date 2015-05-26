@@ -8,9 +8,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="627.0" prefWidth="679.0" 
-            xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" 
-            fx:controller="trial.Contrôleurs.RootLayoutContrôleur">
+<AnchorPane id="AnchorPane" prefHeight="627.0" prefWidth="679.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="trial.Contrôleurs.RootLayoutContrôleur">
   <children>
     <StackPane fx:id="vistaHolder" />
     <MenuBar focusTraversable="false" layoutX="14.0" layoutY="14.0" prefWidth="651.0" useSystemMenuBar="false">
@@ -22,7 +20,7 @@
           <items>
             <MenuItem mnemonicParsing="false" onAction="#allerPageAccueil" text="Page d'accueil" />
             <MenuItem mnemonicParsing="false" onAction="#allerArticleAjoute" text="Creer l'article" />
-            <MenuItem mnemonicParsing="false" onAction="#allerPhotoAjoute" text="Creer photoalbum" />
+            <MenuItem mnemonicParsing="false" onAction="#allerPhotoAjoute" text="Creer photo" />
             <MenuItem mnemonicParsing="false" onAction="#fichierOuvrir" text="Ouvrir" />
             <MenuItem mnemonicParsing="false" onAction="#fichierSauvegarderComme" text="Sauvegarder" />
             <MenuItem mnemonicParsing="false" onAction="#sortieDeMotsApp" text="Sortir" />
