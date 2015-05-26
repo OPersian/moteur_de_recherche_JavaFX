@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<articles>
+    <article>
+        <auteur>ddd</auteur>
+        <date>2015-05-26</date>
+        <source>http://sample.com.ua</source>
+        <titre>article1</titre>
+        <contenu>ddd</contenu>
+    </article>
+	    <article>
+        <auteur>ddd</auteur>
+        <date>2015-05-26</date>
+        <source>http://sample.com.ua</source>
+        <titre>article2</titre>
+        <contenu>ddd</contenu>
+    </article>
+</articles>

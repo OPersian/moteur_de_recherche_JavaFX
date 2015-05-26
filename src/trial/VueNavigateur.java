@@ -1,6 +1,6 @@
 package trial;
 
-import trial.contrôleurs.RootLayoutContrôleur;
+import trial.Contrôleurs.RootLayoutContrôleur;
 import java.io.IOException;
 import javafx.fxml.FXMLLoader;
 
@@ -13,14 +13,16 @@ import javafx.fxml.FXMLLoader;
 public class VueNavigateur {
     
     /*--------------------------navigation sur scenes----------------------------*/ 
-    public static final String ROOT_LAYOUT = "/trial/fichiersFxml/RootLayout.fxml"; 
-    public static final String PAGE_ACCUEIL = "/trial/fichiersFxml/PageAccueil.fxml"; 
-    public static final String ARTICLE_AJOUTE = "/trial/fichiersFxml/ArticleAjoute.fxml";    
-    public static final String PHOTO_AJOUTE = "/trial/fichiersFxml/PhotoAjoute.fxml"; 
-    public static final String MATIÉRE_TABLEAU = "/trial/fichiersFxml/MatièreTableau.fxml"; 
+    public static final String ROOT_LAYOUT = "/trial/Vues/RootLayout.fxml"; 
+    public static final String PAGE_ACCUEIL = "/trial/Vues/PageAccueil.fxml"; 
+    public static final String ARTICLE_AJOUTE = "/trial/Vues/ArticleAjoute.fxml";    
+    public static final String PHOTO_AJOUTE = "/trial/Vues/PhotoAjoute.fxml"; 
+    public static final String ARTICLE_TABLEAU = "/trial/Vues/ArticleTableau.fxml";
+    public static final String PHOTO_TABLEAU = "/trial/Vues/PhotoTableau.fxml";
     /*------------------------END navigation sur scenes------------------------*/
     
     private static RootLayoutContrôleur mainController;
+    
     
     public static void setMainController(RootLayoutContrôleur mainController){
         VueNavigateur.mainController = mainController;
@@ -35,7 +37,8 @@ public class VueNavigateur {
                     )
                 )         
             );
-            
+            MainMotsApp.currentSousVue = fxml;   
+            System.out.println(MainMotsApp.currentSousVue);//to debug in console
         }
         catch (IOException e) {
             e.printStackTrace();
