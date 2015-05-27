@@ -8,12 +8,13 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="627.0" prefWidth="679.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="trial.Contrôleurs.RootLayoutContrôleur">
+<AnchorPane id="AnchorPane" prefHeight="627.0" prefWidth="679.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" 
+            fx:controller="trial.Contrôleurs.RootLayoutContrôleur">
   <children>
     <StackPane fx:id="vistaHolder" />
     <MenuBar focusTraversable="false" layoutX="14.0" layoutY="14.0" prefWidth="651.0" useSystemMenuBar="false">
       <effect>
-        <ColorAdjust brightness="-0.18320610687022898" contrast="0.2748091603053433" hue="-0.4580152671755725" saturation="0.28244274809160297" />
+        <ColorAdjust brightness="0.01526717557251911" contrast="3.0534351145017347E-4" hue="-0.03053435114503822" saturation="0.007633587786259444" />
       </effect>
       <menus>
         <Menu disable="false" mnemonicParsing="false" text="Fichier">
@@ -26,28 +27,29 @@
             <MenuItem mnemonicParsing="false" onAction="#sortieDeMotsApp" text="Sortir" />
           </items>
         </Menu>
-        <Menu mnemonicParsing="false" text="Modifier" fx:id="menuItemModifier">
+        <Menu mnemonicParsing="false" text="Modifier">
           <items>
             <MenuItem mnemonicParsing="false" text="Modifier" />
             <MenuItem mnemonicParsing="false" text="Supprimer" />
           </items>
         </Menu>
-        <Menu mnemonicParsing="false" text="Indexer" fx:id="menuItemIndexer">
+        <Menu mnemonicParsing="false" text="Indexer">
           <items>
-            <MenuItem mnemonicParsing="false" text="Indexer" />
+            <MenuItem mnemonicParsing="false" onAction="#indexer" text="Indexer" />
           </items>
         </Menu>
         <Menu mnemonicParsing="false" text="Aider">
           <items>
             <MenuItem mnemonicParsing="false" onAction="#montrerAbout" text="Info..." />
+            <MenuItem mnemonicParsing="false" onAction="#montrerAuteurs" text="Auteurs" />
           </items>
         </Menu>
       </menus>
     </MenuBar>
-    <TextField fx:id="textFieldRechercher" layoutX="77.0" layoutY="48.0" prefWidth="388.0" promptText="rechercher" />
-    <Button fx:id="rechercherBtn" layoutX="475.0" layoutY="48.0" mnemonicParsing="false" onAction="#rechercher" prefWidth="74.0" text="MotsApp!" textFill="BLACK" />
+    <TextField id="" fx:id="rechercherChamp" layoutX="77.0" layoutY="48.0" prefWidth="388.0" promptText="rechercher" />
+    <Button id="rechercherBtn" layoutX="475.0" layoutY="48.0" mnemonicParsing="false" onAction="#rechercher" prefWidth="74.0" text="MotsApp!" textFill="BLACK" />
     <Separator layoutX="14.0" layoutY="80.0" prefWidth="630.0" />
-    <ScrollBar fx:id="scrollBar" layoutX="653.0" layoutY="42.0" orientation="VERTICAL" prefHeight="571.0" />
+    <ScrollBar id="scrollBar" layoutX="653.0" layoutY="42.0" orientation="VERTICAL" prefHeight="571.0" />
     <Label alignment="CENTER" contentDisplay="CENTER" layoutX="42.0" layoutY="586.0" prefWidth="602.0" text="Cree par Persianova &amp; Golybnucha&#10;2015, Kharkiv, UKRAINE" textAlignment="CENTER" textFill="#210066" underline="false">
       <font>
         <Font size="10.0" />

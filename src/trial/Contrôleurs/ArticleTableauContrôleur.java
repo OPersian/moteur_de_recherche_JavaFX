@@ -115,7 +115,7 @@ public class ArticleTableauContrôleur implements Initializable {
               
     }    
 
-    MainMotsApp mainMotsApp = new MainMotsApp();
+    MainMotsApp mainMotsApp = new MainMotsApp();//replace showOpenDialog' arg with null and delete this field! (to check if possible)
     
     @FXML
     private void lireDuFichier(ActionEvent event) throws Exception {
@@ -131,7 +131,7 @@ public class ArticleTableauContrôleur implements Initializable {
         File file = fileChooser.showOpenDialog(mainMotsApp.getPrimaireStage());
 
         if (file != null) {
-            mainMotsApp.chargerArticleDataDuFichier(file);
+            MainMotsApp.chargerArticleDataDuFichier(file);//mainMotsApp, before the method became static
         }
         VueNavigateur.loadVista(VueNavigateur.ARTICLE_TABLEAU);//reload view 
             //to see changes instantly

@@ -8,7 +8,13 @@
   </information>
   <resources>
     <j2se version="1.6+" href="http://java.sun.com/products/autodl/j2se"/>
-    <jar href="trial.jar" size="147840" download="eager" />
+    <jar href="lib/AbsoluteLayout.jar" size="2903" download="eager" />
+    <jar href="lib/icu4j-54.1.jar" size="11126867" download="eager" />
+    <jar href="lib/lucene-analyzers-common-5.1.0.jar" size="1551604" download="eager" />
+    <jar href="lib/lucene-analyzers-icu-5.1.0.jar" size="78851" download="eager" />
+    <jar href="lib/lucene-core-5.1.0.jar" size="2318561" download="eager" />
+    <jar href="lib/lucene-queryparser-5.1.0.jar" size="400510" download="eager" />
+    <jar href="trial.jar" size="152012" download="eager" />
   </resources>
   <applet-desc  width="800" height="600" main-class="com.javafx.main.NoJavaFXFallback"  name="trial" >
     <param name="requiredFXVersion" value="8.0+"/>

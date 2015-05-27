@@ -51,6 +51,11 @@ public class MainMotsApp extends Application {
     public static String currentSousVue; //to parametrize open/save menu buttons' methods
                                     //whether we work with photos or articles 
     
+    public static Stage maStage_lucene; //to enable lucene indexing of files
+    public static String filePath_lucene; //to enable lucene indexing of files
+    public static ObservableList<Article> mabaseArticle_stockage_lucene;//to enable lucene indexing of files 
+        //and not to make a method chargerArticleDataDuFichier to return value
+    
     @Override
     public void start(Stage stage) throws Exception {
         
@@ -59,6 +64,8 @@ public class MainMotsApp extends Application {
         //stage.setTitle("MotsApp Application");        
         this.primaireStage.setTitle("MotsApp Application");  
         this.primaireStage.setResizable(false);
+        
+        maStage_lucene = this.primaireStage; //to enable lucene indexing of files
         
         stage.setScene(
             createScene(
@@ -108,7 +115,9 @@ public class MainMotsApp extends Application {
  * 
  * @return
  */
-public File getMatièreFichierChemin() {
+    
+/*
+public static File getMatièreFichierChemin() {
     Preferences prefs = Preferences.userNodeForPackage(MainMotsApp.class);
     //String filePath = prefs.get("/trial/fichiers/file1.xml", null);
     String filePath = prefs.get("LAST_OUTPUT_DIR", null);
@@ -119,6 +128,7 @@ public File getMatièreFichierChemin() {
         return null;
     }
 }
+ */
 
 /**
  * Sets the file path of the currently loaded file. The path is persisted in
@@ -126,22 +136,27 @@ public File getMatièreFichierChemin() {
  * 
  * @param file the file or null to remove the path
  */
-public void setMatièreFichierChemin(File file) {
+public static void setMatièreFichierChemin(File file) {
     Preferences prefs = Preferences.userNodeForPackage(MainMotsApp.class);
     if (file != null) {
         //prefs.put("/trial/fichiers/file1.xml", file.getPath());
         prefs.put("LAST_OUTPUT_DIR", file.getPath());
 
         // Update the stage title.
-        primaireStage.setTitle("MotsApp - " + file.getName()); //DOESNT WORK!
+        //primaireStage.setTitle("MotsApp - " + file.getName()); //DOESNT WORK!
         //even tried this.primaireStage
+        maStage_lucene.setTitle("MotsApp - " + file.getName());//maybe works; as method is static!
+        
     } else {
         prefs.remove("/trial/fichiers/file1.xml");
-
         // Update the stage title.
-        primaireStage.setTitle("MotsApp");//DOESNT WORK!
+        //primaireStage.setTitle("MotsApp");//DOESNT WORK!
         //even tried this.primaireStage
+        maStage_lucene.setTitle("MotsApp");//maybe works; as method is static!
+        
     }
+    
+    filePath_lucene = file.getPath(); //to lucene index
 }
     
     /**
@@ -159,9 +174,10 @@ public void setMatièreFichierChemin(File file) {
  * be replaced.
  * 
  * @param file
+     * @return 
      * @throws java.lang.Exception
  */
-public void chargerArticleDataDuFichier(File file) throws Exception {
+public static void chargerArticleDataDuFichier(File file) throws Exception {
     try {
         JAXBContext context = JAXBContext
                 .newInstance(ArticleListWrapper.class);
@@ -177,10 +193,14 @@ public void chargerArticleDataDuFichier(File file) throws Exception {
 
         // Save the file path to the registry.
         setMatièreFichierChemin(file);
+        
+        mabaseArticle_stockage_lucene = mabaseArticle_stockage; //to lucene index;
+            //may not be necessary; check usage
 
     } catch (Exception e) { // catches ANY exception
         System.out.println("Could not load data from file:\n" + 
                 file.getPath() + "\n" + e.toString());
+       // return mabaseArticle_stockage; //to lucene index
     }
 }
 

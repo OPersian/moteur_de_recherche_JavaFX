@@ -1,6 +1,7 @@
 package trial.Contrôleurs;
 
 import java.io.File;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -9,16 +10,12 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
-import javafx.scene.control.Button;
-import javafx.scene.control.Menu;
-import javafx.scene.control.MenuItem;
-import javafx.scene.control.ScrollBar;
 import javafx.scene.control.TextField;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
 import javafx.stage.FileChooser;
+import org.apache.lucene.queryparser.classic.ParseException;
 import trial.MainMotsApp;
-import trial.VueNavigateur;
+import trial.ModèlesGestion.LuceneMoteur;
 import trial.VueNavigateur;
 
 /**
@@ -28,18 +25,12 @@ import trial.VueNavigateur;
  */
 public class RootLayoutContrôleur implements Initializable {
     
-    
     @FXML private StackPane vistaHolder;
-    @FXML private ScrollBar scrollBar;
+    @FXML private TextField rechercherChamp;
     
     public void setView(Node node) {
         vistaHolder.getChildren().setAll(node);
-    }       
-  
-    @FXML private Menu menuItemModifier;
-    @FXML private Menu menuItemIndexer;
-    @FXML private TextField textFieldRechercher;
-    @FXML private Button rechercherBtn;
+    } 
 
     /**
      * Initializes the controller class.
@@ -65,13 +56,15 @@ public class RootLayoutContrôleur implements Initializable {
     }
 
     @FXML
-    private void rechercher(ActionEvent event) {
-        VueNavigateur.loadVista(VueNavigateur.ARTICLE_TABLEAU);        
+    private void rechercher(ActionEvent event) throws ParseException, IOException {
+        //VueNavigateur.loadVista(VueNavigateur.ARTICLE_TABLEAU);
+        String requête;
+        requête = rechercherChamp.getText();
+        LuceneMoteur.chercherDansIndex(requête);
     }   
 
     /*-------------------------travail avec fichiers--------------------------*/   
-    MainMotsApp mainMotsApp = new MainMotsApp();  
-    
+    MainMotsApp mainMotsApp = new MainMotsApp();      
     
     /**
      * Opens a FileChooser to let the user select a MotsApp! to load.
@@ -80,18 +73,19 @@ public class RootLayoutContrôleur implements Initializable {
     private void fichierOuvrir() throws Exception {
         FileChooser fileChooser = new FileChooser();
         
-        // Set extension filter
+        // Set extension filter; only xml can be read
         FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter(
                 "XML files (*.xml)", "*.xml");
         fileChooser.getExtensionFilters().add(extFilter);
 
         // Show save file dialog
         File file = fileChooser.showOpenDialog(mainMotsApp.getPrimaireStage());
+        //File file = fileChooser.showOpenDialog(null);//try it!
 
         if (file != null) {
             if (MainMotsApp.currentSousVue == VueNavigateur.ARTICLE_AJOUTE || 
                 MainMotsApp.currentSousVue == VueNavigateur.ARTICLE_TABLEAU){
-                    mainMotsApp.chargerArticleDataDuFichier(file);
+                    MainMotsApp.chargerArticleDataDuFichier(file);//mainMotsApp, before it became static
                     VueNavigateur.loadVista(VueNavigateur.ARTICLE_TABLEAU);//reload view 
                     //to see changes instantly
             }
@@ -103,9 +97,8 @@ public class RootLayoutContrôleur implements Initializable {
                     //to see changes instantly
             }
                  
-            else {mainMotsApp.chargerArticleDataDuFichier(file);}
+            else {MainMotsApp.chargerArticleDataDuFichier(file);}//mainMotsApp, before it became static
         }
-        
 
     }
     
@@ -165,5 +158,13 @@ public class RootLayoutContrôleur implements Initializable {
         System.exit(0);
     }
 
+    @FXML
+    private void montrerAuteurs(ActionEvent event) {
+    }
+
+    @FXML
+    private void indexer(ActionEvent event) throws IOException {
+        LuceneMoteur.créerIndex();
+    }
 
 }
