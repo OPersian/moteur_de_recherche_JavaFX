@@ -5,8 +5,11 @@
         <group>
             <file>file:/C:/Users/Olena/Documents/NetBeansProjects/trial/src/trial/ModèlesGestion/LuceneMoteur.java</file>
             <file>file:/C:/Users/Olena/Documents/NetBeansProjects/trial/src/trial/MainMotsApp.java</file>
+            <file>file:/C:/Users/Olena/Documents/NetBeansProjects/trial/src/trial/Contrôleurs/NewClass.java</file>
+            <file>file:/C:/Users/Olena/Documents/NetBeansProjects/trial/src/trial/Modèles/BaseDePhoto.java</file>
             <file>file:/C:/Users/Olena/Documents/NetBeansProjects/trial/src/trial/Modèles/Matière.java</file>
-            <file>file:/C:/Users/Olena/Documents/NetBeansProjects/trial/src/trial/Modèles/BaseDesArticles.java</file>
+            <file>file:/C:/Users/Olena/Documents/NetBeansProjects/trial/src/trial/Contrôleurs/PhotoTableauController.java</file>
+            <file>file:/C:/Users/Olena/Documents/NetBeansProjects/trial/src/trial/Modèles/Photo.java</file>
         </group>
     </open-files>
 </project-private>

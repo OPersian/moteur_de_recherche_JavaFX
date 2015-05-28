@@ -15,9 +15,10 @@ public class VueNavigateur {
     /*--------------------------navigation sur scenes----------------------------*/ 
     public static final String ROOT_LAYOUT = "/trial/Vues/RootLayout.fxml"; 
     public static final String PAGE_ACCUEIL = "/trial/Vues/PageAccueil.fxml"; 
-    public static final String ARTICLE_AJOUTE = "/trial/Vues/ArticleAjoute.fxml";    
-    public static final String PHOTO_AJOUTE = "/trial/Vues/PhotoAjoute.fxml"; 
+    public static final String ARTICLE_AJOUTE = "/trial/Vues/ArticleAjoute.fxml"; 
     public static final String ARTICLE_TABLEAU = "/trial/Vues/ArticleTableau.fxml";
+    public static final String ARTICLE_RECHERCHE = "/trial/Vues/ArticleRechercheResultats.fxml";
+    public static final String PHOTO_AJOUTE = "/trial/Vues/PhotoAjoute.fxml"; 
     public static final String PHOTO_TABLEAU = "/trial/Vues/PhotoTableau.fxml";
     /*------------------------END navigation sur scenes------------------------*/
     

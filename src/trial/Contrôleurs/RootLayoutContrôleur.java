@@ -61,6 +61,8 @@ public class RootLayoutContrôleur implements Initializable {
         String requête;
         requête = rechercherChamp.getText();
         LuceneMoteur.chercherDansIndex(requête);
+        VueNavigateur.loadVista(VueNavigateur.ARTICLE_RECHERCHE);
+        MainMotsApp.requêteTexte = requête;
     }   
 
     /*-------------------------travail avec fichiers--------------------------*/   

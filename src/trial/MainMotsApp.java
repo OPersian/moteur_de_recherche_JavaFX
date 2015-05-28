@@ -50,12 +50,17 @@ public class MainMotsApp extends Application {
     
     public static String currentSousVue; //to parametrize open/save menu buttons' methods
                                     //whether we work with photos or articles 
+
     
-    public static Stage maStage_lucene; //to enable lucene indexing of files
-    public static String filePath_lucene; //to enable lucene indexing of files
-    public static ObservableList<Article> mabaseArticle_stockage_lucene;//to enable lucene indexing of files 
+    //enables to operate with maxHits (LuceneMoteur; chercherDansIndex)
+    public static int maxHits; //see Main
+    
+    public static Stage maStage_lucene; //enables lucene indexing of files
+    public static String filePath_lucene; //enables lucene indexing of files
+    public static ObservableList<Article> mabaseArticle_stockage_lucene;//to enable lucene recherche (stockage des resultats )
         //and not to make a method chargerArticleDataDuFichier to return value
-    
+    public static String requêteTexte; //enables depicting of search request text in the scene with tableview of results
+            
     @Override
     public void start(Stage stage) throws Exception {
         
@@ -105,7 +110,9 @@ public class MainMotsApp extends Application {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        launch(args);        
+        launch(args);    
+        //enables to operate with maxHits (LuceneMoteur; chercherDansIndex)
+        //maxHits = Integer.parseInt(args[2]);
     }
     
 /**

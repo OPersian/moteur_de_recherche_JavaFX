@@ -41,7 +41,6 @@ public class ArticleTableauContrôleur implements Initializable {
     @FXML private TextField sourceTextField;  
        
     private ObservableList<Article> mabase;     
-    // Reference to the main application.
     
     @FXML
     private void ajouteArticleToTable(ActionEvent event) throws MalformedURLException {

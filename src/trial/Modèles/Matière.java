@@ -1,5 +1,6 @@
 package trial.Modèles;
 
+import java.io.Serializable;
 import java.net.URL;
 import java.time.LocalDate;
 import javafx.beans.property.ObjectProperty;
@@ -13,7 +14,7 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
  * @author Persianova, Golubnycha
  */
     
-public abstract class Matière implements Comparable {
+public abstract class Matière implements Comparable , Serializable {
 
 //private StringProperty titre; //...auteur, date, source 
 private final SimpleStringProperty titre = new SimpleStringProperty(null);
