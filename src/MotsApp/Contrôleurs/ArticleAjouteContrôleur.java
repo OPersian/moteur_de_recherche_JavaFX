@@ -17,6 +17,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import MotsApp.MainMotsApp;
+import MotsApp.ModèlesGestion.FormatAdapteur;
 import MotsApp.VueNavigateur;
 
 /**
@@ -47,29 +48,10 @@ public class ArticleAjouteContrôleur implements Initializable {
     
     @FXML
     private void sauvegarder(ActionEvent event) throws MalformedURLException {
-       
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-"
-                + "MM-yyyy"); //HH-mm-ss
-        LocalDate date = LocalDate.now();
-        String date_format = textFieldDate.getText();
-        try {
-            date = LocalDate.parse(date_format, formatter);
-        } 
-        catch (DateTimeParseException e) {
-            System.out.println("Date format est incorrect!");
-        }  
         
-        String monurl = textFieldSource.getText();   
-        //URL source = new URL(monurl); 
-        URL source = new URL("http://sample.com.ua");                
-        try {
-            source = new URL(monurl);
-        }
-        catch (MalformedURLException e) {
-            System.out.println("URL format incorrect!");
-            successMsgLabel.setText("On ne peut pas enregistrer vos donnés!");
-        }           
-        
+        LocalDate date = FormatAdapteur.dateFormat(textFieldDate.getText());
+        URL source = FormatAdapteur.urlFormat(textFieldSource.getText());
+
         Article monArticle = new Article(
                 textFieldTitre.getText(),
                 textFieldAuteur.getText(),

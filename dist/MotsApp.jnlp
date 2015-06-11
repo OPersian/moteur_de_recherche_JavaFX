@@ -8,7 +8,7 @@
   </information>
   <resources>
     <j2se version="1.6+" href="http://java.sun.com/products/autodl/j2se"/>
-    <jar href="MotsApp.jar" size="165783" download="eager" />
+    <jar href="MotsApp.jar" size="175007" download="eager" />
     <jar href="lib/AbsoluteLayout.jar" size="2903" download="eager" />
     <jar href="lib/icu4j-54.1.jar" size="11126867" download="eager" />
     <jar href="lib/lucene-analyzers-common-5.1.0.jar" size="1551604" download="eager" />

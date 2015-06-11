@@ -3,7 +3,6 @@ package MotsApp;
 import java.io.File;
 import MotsApp.Contrôleurs.RootLayoutContrôleur;
 import java.io.IOException;
-import java.util.prefs.Preferences;
 import javafx.application.Application;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
@@ -14,11 +13,11 @@ import javax.xml.bind.JAXBContext;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 import MotsApp.Modèles.Article;
-import MotsApp.ModèlesGestion.ArticleListWrapper;
-import MotsApp.Modèles.BaseDePhoto;
+import MotsApp.ModèlesGestion.ArticleListeEmballage;
+import MotsApp.Modèles.BaseDesPhotos;
 import MotsApp.Modèles.BaseDesArticles;
 import MotsApp.Modèles.Photo;
-import MotsApp.ModèlesGestion.PhotoListWrapper;
+import MotsApp.ModèlesGestion.PhotoListeEmballage;
 
 /**
  *
@@ -28,49 +27,34 @@ import MotsApp.ModèlesGestion.PhotoListWrapper;
 public class MainMotsApp extends Application {
     
     /*--------------------------gestion des scenes----------------------------*/    
-    //http://stackoverflow.com/questions/19602727/how-to-reference-javafx-fxml-files-in-resource-folder    
-    public Stage primaireStage; //private    
-    /*------------------------END gestion des scenes--------------------------*/    
+    public Stage primaireStage; //private  
+    public static String couranteSousVue; //to parametrize open/save menu buttons' methods
+                                          //(whether we work with photos or articles)
+    /*------------------------END gestion des scenes--------------------------*/
     
     
     /*----------------------------pour TableView------------------------------*/
     public static ObservableList<Article> mabaseArticle_stockage;
     public static ObservableList<Photo> mabasePhoto_stockage;
-    //public static ObservableList<Matière> mabase_stockage;
-    //public static BaseDeMatières mabase_stockage;    
-    //private ObservableList<Article> mabase = FXCollections.observableArrayList() 
-    /*------------------------------------------------------------------------*/    
-    //accessed MainMotsApp.mabase, not a local mabase (ArticleAjouteController'), 
-    //to adoid the following:
-    //if ArticleAjouteController reloaded and if local variable used, 
-    //previous instances would have been deleted 
     public static BaseDesArticles mabaseArticle = new BaseDesArticles(); //to populate tableview in future  
-    public static BaseDePhoto mabasePhoto = new BaseDePhoto(); 
+    public static BaseDesPhotos mabasePhoto = new BaseDesPhotos(); 
     /*--------------------------END pour TableView----------------------------*/
-    
-    public static String couranteSousVue; //to parametrize open/save menu buttons' methods
-                                    //whether we work with photos or articles 
 
-    
-    //enables to operate with maxHits (LuceneMoteur; chercherDansIndex)
-    public static int maxHits; //see Main
-    
-    // public static Stage maStage_lucene; //enables lucene indexing of files
+
+    /*--------------------------pour Lucene recherche-------------------------*/
+    public static int maxHits; //see Main; enables to operate with maxHits (LuceneMoteur; chercherDansIndex)
     public static String filePath_lucene; //enables lucene indexing of files
-    public static ObservableList<Article> mabaseArticle_stockage_lucene;//to enable lucene recherche (stockage des resultats )
-        //and not to make a method chargerArticleDataDuFichier to return value
+    public static ObservableList<Article> mabaseArticle_stockage_lucene;//to enable lucene search (stockage des resultats)
+                                                                        //(and not to make a method chargerArticleDataDuFichier to return value)
     public static String requêteTexte; //enables depicting of search request text in the scene with tableview of results
-            
+    /*-------------------------END pour Lucene recherche----------------------*/
+           
     @Override
     public void start(Stage stage) throws Exception {
         
         this.primaireStage = stage;
-        //http://docs.oracle.com/javafx/2/fxml_get_started/fxml_tutorial_intermediate.htm#CACHBAEJ 
-        //stage.setTitle("MotsApp Application");        
         this.primaireStage.setTitle("MotsApp Application");  
         this.primaireStage.setResizable(false);
-        
-        // maStage_lucene = this.primaireStage; //to enable lucene indexing of files
         
         stage.setScene(
             createScene(
@@ -113,45 +97,10 @@ public class MainMotsApp extends Application {
         launch(args);   
     }
 
-
-/**
- * Sets the file path of the currently loaded file. The path is persisted in
- * the OS specific registry.
- * 
- * @param file the file or null to remove the path
- */
-/*public static void setMatièreFichierChemin(File file) {
-    Preferences prefs = Preferences.userNodeForPackage(MainMotsApp.class);
-    if (file != null) {
-        //prefs.put("/trial/fichiers/file1.xml", file.getPath());
-        prefs.put("LAST_OUTPUT_DIR", file.getPath());
-        // maStage_lucene.setTitle("MotsApp - " + file.getName());
-        
-    } else {
-        prefs.remove("/trial/fichiers/file1.xml");
-        // Update the stage title.
-        //primaireStage.setTitle("MotsApp");//DOESNT WORK!
-        //even tried this.primaireStage
-        maStage_lucene.setTitle("MotsApp");//maybe works; as method is static!
-        
-    
-    
-    filePath_lucene = file.getPath(); //to lucene index
-}}*/
-    
-    /**
-     * Returns the main stage. Useful to work with files (IO) -- OPersian
-     * @return
-     */
-    /*public Stage getPrimaireStage() {
-        return primaireStage;
-        //even tried this.primaireStage
-    }*/
-    
     
  /**
- * Loads article data from the specified file. The current person data will
- * be replaced.
+ * Loads article data from the specified file. The current article data will
+ * be safe.
  * 
  * @param file
      * @return 
@@ -160,29 +109,24 @@ public class MainMotsApp extends Application {
 public static void chargerArticleDataDuFichier(File file) throws Exception {
     try {
         JAXBContext context = JAXBContext
-                .newInstance(ArticleListWrapper.class);
+                .newInstance(ArticleListeEmballage.class);
         Unmarshaller um = context.createUnmarshaller();
-
+        
         // Reading XML from the file and unmarshalling.
-        ArticleListWrapper wrapper = (ArticleListWrapper) um.unmarshal(file);
+        ArticleListeEmballage wrapper = (ArticleListeEmballage) um.unmarshal(file);
         
-        //uncomment, if you want to delete articles current (added within a session)
-        //mabaseArticle_stockage.clear();//not mabaseArticle!
+        // uncomment to delete current articles (that was added within a session)
+        // mabaseArticle_stockage.clear(); // attention: not mabaseArticle!
         
+        // Adding wrapped article data to the current observableList of articles.
         mabaseArticle_stockage.addAll(wrapper.getArticles());
-
-        // Save the file path to the registry.
-        // setMatièreFichierChemin(file);
         
-        filePath_lucene = file.getPath(); //to lucene index
+        filePath_lucene = file.getPath(); //for lucene index
+        mabaseArticle_stockage_lucene = mabaseArticle_stockage; //for lucene index
         
-        mabaseArticle_stockage_lucene = mabaseArticle_stockage; //to lucene index;
-            //may not be necessary; check usage
-
     } catch (Exception e) { // catches ANY exception
         System.out.println("Could not load data from file:\n" + 
                 file.getPath() + "\n" + e.toString());
-       // return mabaseArticle_stockage; //to lucene index
     }
 }
 
@@ -195,19 +139,16 @@ public static void chargerArticleDataDuFichier(File file) throws Exception {
 public void sauvegarderArticleDataToFile(File file) throws Exception {
     try {
         JAXBContext context = JAXBContext
-                .newInstance(ArticleListWrapper.class);
+                .newInstance(ArticleListeEmballage.class);
         Marshaller m = context.createMarshaller();
         m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
 
-        // Wrapping our article data.
-        ArticleListWrapper wrapper = new ArticleListWrapper();
+        // Wrapping the article data.
+        ArticleListeEmballage wrapper = new ArticleListeEmballage();
         wrapper.setArticles(mabaseArticle_stockage);
 
         // Marshalling and saving XML to the file.
         m.marshal(wrapper, file);
-
-        // Save the file path to the registry.
-        // setMatièreFichierChemin(file);
         
         filePath_lucene = file.getPath(); //to lucene index
         
@@ -227,11 +168,11 @@ public void sauvegarderArticleDataToFile(File file) throws Exception {
 public static void chargerPhotoDataDuFichier(File file) throws Exception {
     try {
         JAXBContext context = JAXBContext
-                .newInstance(PhotoListWrapper.class);
+                .newInstance(PhotoListeEmballage.class);
         Unmarshaller um = context.createUnmarshaller();
 
         // Reading XML from the file and unmarshalling.
-        PhotoListWrapper wrapper = (PhotoListWrapper) um.unmarshal(file);
+        PhotoListeEmballage wrapper = (PhotoListeEmballage) um.unmarshal(file);
 
         mabasePhoto_stockage.clear();//not mabase!
         mabasePhoto_stockage.addAll(wrapper.getPhotos());
@@ -255,12 +196,12 @@ public static void chargerPhotoDataDuFichier(File file) throws Exception {
 public void sauvegarderPhotoDataToFile(File file) throws Exception {
     try {
         JAXBContext context = JAXBContext
-                .newInstance(PhotoListWrapper.class);
+                .newInstance(PhotoListeEmballage.class);
         Marshaller m = context.createMarshaller();
         m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
 
         // Wrapping our article data.
-        PhotoListWrapper wrapper = new PhotoListWrapper();
+        PhotoListeEmballage wrapper = new PhotoListeEmballage();
         wrapper.setPhotos(mabasePhoto_stockage);
 
         // Marshalling and saving XML to the file.

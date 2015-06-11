@@ -14,9 +14,6 @@ public class Article extends Matière {
 
     //private StringProperty contenu;
     private final SimpleStringProperty contenu = new SimpleStringProperty(null);
-    //private boolean version; //0 - en version electronique seulement,
-                          //1 - en versions electronique et en papier  
-    
     
     //default constructor; enables to work with FXML Table View population
     //for FXML (FXCollections in TableView) no-args needed!
@@ -38,7 +35,6 @@ public class Article extends Matière {
         //this.contenu = new SimpleStringProperty(contenu);
         //this.version = true;
         this.setContenu(contenu);
-        
     }
     
     @Override
@@ -54,15 +50,12 @@ public class Article extends Matière {
         return super.toString() + s; 
     }
     
-    public void setContenu(String contenu){this.contenu.set(contenu);}    
-    public String getContenu(){return contenu.get();} 
+    public void setContenu(String contenu)  { this.contenu.set(contenu); }    
+    public String getContenu()              { return contenu.get(); } 
+    
+    public StringProperty contenuProperty() { return contenu; } //return values in FXML TableView
     
    /* public void setVersion(boolean version){this.version.set(version);}    
     public boolean getVersion(){return version.get();}  */
-    
-    //return values in FXML TableView
-    public StringProperty contenuProperty() { return contenu; }
-    
-    
 
 }

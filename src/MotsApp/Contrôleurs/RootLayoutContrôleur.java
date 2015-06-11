@@ -61,8 +61,8 @@ public class RootLayoutContrôleur implements Initializable {
         String requête;
         requête = rechercherChamp.getText();
         LuceneMoteur.chercherDansIndex(requête);
-        VueNavigateur.loadVue(VueNavigateur.ARTICLE_RECHERCHE);
         MainMotsApp.requêteTexte = requête;
+        VueNavigateur.loadVue(VueNavigateur.RESULTATS_RECHERCHE);
     }   
 
     /*------------------------travail avec des fichiers------------------------*/   
@@ -148,7 +148,11 @@ public class RootLayoutContrôleur implements Initializable {
     private void montrerAbout() {
         Alert alert = new Alert(AlertType.INFORMATION);
         alert.setTitle("MotsApp!");
-        alert.setHeaderText("About: MotsApp! is a little application which enables the user to add articles and photos, to navigate and modify them, and to search through.");
+        alert.setHeaderText("About: MotsApp! is a little application "
+                + "\nwhich enables the user to add "
+                + "\narticles and photos, to navigate "
+                + "\nand modify them, and to search "
+                + "\nthrough.");
         alert.setContentText("Authors: Olena Persianova, Olga Golybnucha");
         alert.showAndWait();
     }

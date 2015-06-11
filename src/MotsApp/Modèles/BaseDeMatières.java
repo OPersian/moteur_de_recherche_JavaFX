@@ -30,7 +30,6 @@ public class BaseDeMatières {
     
     public ObservableList<Matière> getMatièreData() {
     //public BaseDeMatières getMatièreData() {
-    
         return mabase;
     }    
     

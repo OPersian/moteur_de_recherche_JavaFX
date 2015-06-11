@@ -130,9 +130,6 @@ public class LuceneMoteur {
                 article.setDate(LocalDate.parse(date));
                 article.setSource(source);
                 baseArticleResultats.ajouterArticle(article); //to perform in TableView
-                /*System.out.println(titre);
-                titreShow = titre;
-                document = doc;*/
                 
                 /*for (int j = 1; j <= hits.length; j++){
                 //Document d = instance.getDocument(hits[i].doc); //instance of the Field class

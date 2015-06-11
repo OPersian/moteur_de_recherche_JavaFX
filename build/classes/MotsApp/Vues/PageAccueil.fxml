@@ -10,47 +10,45 @@
 <?import javafx.scene.text.*?>
 <?scenebuilder-classpath-element ../images?>
 
-<AnchorPane id="AnchorPane" prefHeight="650.0" prefWidth="750.0" xmlns:fx="http://javafx.com/fxml/1" 
-            xmlns="http://javafx.com/javafx/2.2" 
-            fx:controller="MotsApp.Contrôleurs.PageAccueilContrôleur">
+<AnchorPane id="AnchorPane" prefHeight="650.0" prefWidth="750.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="MotsApp.Contrôleurs.PageAccueilContrôleur">
   <children>
     <!--http://www.javacodegeeks.com/2013/03/javafx-2-with-spring.html-->
     <!--<fx:include source="/trial/fichiersFxml/RootLayout.fxml"/> -->
-    <Accordion layoutX="213.0" layoutY="147.0" minWidth="175.0" prefHeight="355.0" prefWidth="443.0">
+    <Accordion layoutX="213.0" layoutY="137.0" minWidth="175.0" prefHeight="376.0" prefWidth="443.0">
       <expandedPane>
-        <TitledPane fx:id="x2" animated="false" text="Efficacite">
+        <TitledPane id="x2" fx:id="x1" animated="false" style="-fx-font: NORMAL 18 Tahoma;" text="Efficacite">
           <content>
-            <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+            <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-font: NORMAL 15 Tahoma;">
               <children>
-                <Label layoutX="14.0" layoutY="6.0" prefHeight="162.0" prefWidth="143.0" text="Description" />
+                <Label fx:id="efficaciteLabel" alignment="TOP_LEFT" layoutX="14.0" layoutY="25.0" prefHeight="223.0" prefWidth="413.0" text="Description" />
               </children>
             </AnchorPane>
           </content>
         </TitledPane>
       </expandedPane>
       <panes>
-        <TitledPane fx:id="x1" animated="false" prefWidth="312.0" text="Functionalite">
+        <TitledPane id="" alignment="TOP_LEFT" animated="false" prefWidth="312.0" style="-fx-font: NORMAL 18 Tahoma;" text="Functionalite">
           <content>
-            <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+            <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-font: NORMAL 15 Tahoma;">
               <children>
-                <Label layoutX="14.0" layoutY="14.0" prefHeight="152.0" prefWidth="143.0" text="Description" />
+                <Label fx:id="functionaliteLabel" alignment="TOP_LEFT" layoutX="14.0" layoutY="26.0" prefHeight="222.0" prefWidth="411.0" text="Description" />
               </children>
             </AnchorPane>
           </content>
         </TitledPane>
-        <TitledPane animated="false" text="Utilite">
+        <TitledPane alignment="TOP_LEFT" animated="false" style="-fx-font: NORMAL 18 Tahoma;" text="Utilite">
           <content>
-            <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+            <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-font: NORMAL 15 Tahoma;">
               <children>
-                <Label layoutX="14.0" layoutY="14.0" prefHeight="152.0" prefWidth="141.0" text="Description" />
+                <Label fx:id="utiliteLabel" alignment="TOP_LEFT" layoutX="14.0" layoutY="30.0" prefHeight="218.0" prefWidth="413.0" text="Description" />
               </children>
             </AnchorPane>
           </content>
         </TitledPane>
-        <fx:reference source="x2" />
+        <fx:reference source="x1" />
       </panes>
     </Accordion>
-    <Label alignment="CENTER" layoutX="213.0" layoutY="99.0" prefWidth="443.0" style="-fx-font: NORMAL 20 Tahoma;" text="Bienvenue chez MotsApp!" textAlignment="CENTER">
+    <Label alignment="CENTER" layoutX="213.0" layoutY="99.0" prefWidth="443.0" style="-fx-font: NORMAL 20 Tahoma;" text="Bienvenue chez MotsApp!" textAlignment="CENTER" underline="false">
       <font>
         <Font name="System Bold" size="20.0" />
       </font>
@@ -60,7 +58,7 @@
         <Image url="@../images/main.png" />
       </image>
     </ImageView>
-    <Label alignment="CENTER" contentDisplay="CENTER" layoutX="213.0" layoutY="523.0" prefWidth="443.0" text="B o n n e    R e c h e r c h e !&#10;*  *  *" textAlignment="CENTER" textFill="#2c008ab8" underline="false">
+    <Label alignment="CENTER" contentDisplay="CENTER" layoutX="32.0" layoutY="529.0" prefWidth="696.0" text="B o n n e    R e c h e r c h e !&#10;*  *  *" textAlignment="CENTER" textFill="#2c008ab8" underline="false" wrapText="false">
       <font>
         <Font name="System Bold Italic" size="20.0" />
       </font>

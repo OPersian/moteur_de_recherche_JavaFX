@@ -1,6 +1,6 @@
 package MotsApp.Modèles;
 
-import MotsApp.ModèlesGestion.LocalDateAdapteur;
+import MotsApp.ModèlesGestion.FormatAdapteur;
 import java.io.Serializable;
 import java.net.URL;
 import java.time.LocalDate;
@@ -65,7 +65,7 @@ public void setTitre(String titre){this.titre.set(titre);}
 public String getTitre(){return titre.get();}   
 
 public void setDate(LocalDate date){this.date.set(date);} 
-@XmlJavaTypeAdapter(LocalDateAdapteur.class) //to write data field to XML file
+@XmlJavaTypeAdapter(FormatAdapteur.class) //to write localdata field to XML file
 public LocalDate getDate(){return date.get();} 
 
 public void setAuteur(String auteur){this.auteur.set(auteur);}    

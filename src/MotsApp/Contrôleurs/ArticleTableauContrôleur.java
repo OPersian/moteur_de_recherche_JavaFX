@@ -17,6 +17,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TextField;
 import javafx.stage.FileChooser;
 import MotsApp.MainMotsApp;
+import MotsApp.ModèlesGestion.FormatAdapteur;
 import MotsApp.VueNavigateur;
 
 /**
@@ -48,27 +49,9 @@ public class ArticleTableauContrôleur implements Initializable {
         ObservableList<Article> mabase = matièreTableView.getItems();
         //private ObservableList<Article> mabase = FXCollections.observableArrayList();
         
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-"
-                + "MM-yyyy");    
-        LocalDate date = LocalDate.now();
-        String date_format = dateTextField.getText();
-        try {
-            date = LocalDate.parse(date_format, formatter);
-        } 
-        catch (DateTimeParseException e) {
-            System.out.println("Date format est incorrect!");
-        }  
-        
-        String monurl = sourceTextField.getText();   
-        //URL source = new URL(monurl); 
-        URL source = new URL("http://sample.com.ua");                
-        try {
-            source = new URL(monurl);
-        }
-        catch (MalformedURLException e) {
-            System.out.println("URL format incorrect!");
-        }     
-        
+        LocalDate date = FormatAdapteur.dateFormat(dateTextField.getText());        
+        URL source = FormatAdapteur.urlFormat(sourceTextField.getText());
+
         mabase.add(new Article(titreTextField.getText(),
             auteurTextField.getText(),
             contenuTextField.getText(),

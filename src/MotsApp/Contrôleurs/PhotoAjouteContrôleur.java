@@ -45,8 +45,9 @@ import javax.imageio.ImageIO;
 import MotsApp.MainMotsApp;
 import MotsApp.VueNavigateur;
 import MotsApp.Modèles.BaseDeMatières;
-import MotsApp.Modèles.BaseDePhoto;
+import MotsApp.Modèles.BaseDesPhotos;
 import MotsApp.Modèles.Photo;
+import MotsApp.ModèlesGestion.FormatAdapteur;
 //import it.sauronsoftware.base64.*;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
@@ -74,7 +75,7 @@ import org.w3c.dom.*;
 /**
  * FXML Controller class
  *
- * @author Olena
+ * @author Olena, Olga
  */
 public class PhotoAjouteContrôleur implements Initializable {    
       
@@ -90,12 +91,9 @@ public class PhotoAjouteContrôleur implements Initializable {
    // private byte[] imgV;
     @FXML private Button voir_btn;
    // private Object imageCellView;
-    @FXML
-    private Color x2;
-    @FXML
-    private Font x1;
-    @FXML
-    private Label resolution;
+    @FXML private Color x2;
+    @FXML private Font x1;
+    @FXML private Label resolution;
     
     //Element node;
 
@@ -107,7 +105,7 @@ public class PhotoAjouteContrôleur implements Initializable {
         // TODO
     }    
 
-    BaseDePhoto mabasePhoto = new BaseDePhoto();
+    BaseDesPhotos mabasePhoto = new BaseDesPhotos();
     BaseDeMatières mabase2 = new BaseDeMatières();
     
     String img;
@@ -120,10 +118,10 @@ public class PhotoAjouteContrôleur implements Initializable {
        FileChooser fileChooser= new FileChooser();
        FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter(
                "Image Files", "*.png", "*.jpg", "*.gif");
-        fileChooser.getExtensionFilters().add(extFilter);
-        fileChooser.setTitle("Choisissez le fichier Image!");
-         File file = fileChooser.showOpenDialog(new Stage());
-         if(file != null){
+       fileChooser.getExtensionFilters().add(extFilter);
+       fileChooser.setTitle("Choisissez le fichier Image!");
+       File file = fileChooser.showOpenDialog(new Stage());
+       if(file != null){
             //System.out.println(file); //print URI C:\...
             imgU = file.toURI().toURL().toString();//URI to URL
             String imgC = imgU.substring(6, imgU.length()); // C:/...
@@ -153,45 +151,15 @@ public class PhotoAjouteContrôleur implements Initializable {
             // complete textFieldSource
             textFieldSource.setText(imgC);
             resolution.setText("Resolution: "+h+" x "+w+" px");
-           
        
     }
 }
-    
-    
-    
  
     @FXML
     private void sauvegarder(ActionEvent event) throws MalformedURLException {
-    
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-"
-                + "MM-yyyy");    
-        LocalDate date = LocalDate.now();
-        String date_format = textFieldDate.getText();
-        try {
-            date = LocalDate.parse(date_format, formatter);
-        } 
-        catch (DateTimeParseException e) {
-            System.out.println("Date format est incorrect!");
-        }  
- 
         
-        String monurl = img;   // file:/C:/...
-        //System.out.println(monurl); // file:/C:/...
-        URL source = new URL("http://sample.com.ua"); 
-        System.out.println(source);
-        try {
-            source = new URL(monurl);           
-            //System.out.println(source);
-        }
-        catch (MalformedURLException e) {
-            System.out.println("URL format incorrect!");
-            successMsgLabel.setText("On ne peut pas enregistrer vos donnés!");
-        } 
-              
-
-                 
-              
+        LocalDate date = FormatAdapteur.dateFormat(textFieldDate.getText());
+        URL source = FormatAdapteur.urlFormat(img);
                       
         Photo monPhoto;
         monPhoto = new Photo(
@@ -212,8 +180,6 @@ public class PhotoAjouteContrôleur implements Initializable {
             successMsgLabel.setText("On ne peut pas enregistrer vos donnés!");
         }   
     }
-
-
 
     @FXML
     private void voir(ActionEvent event) {

@@ -17,7 +17,7 @@ public class VueNavigateur {
     public static final String PAGE_ACCUEIL = "/MotsApp/Vues/PageAccueil.fxml"; 
     public static final String ARTICLE_AJOUTE = "/MotsApp/Vues/ArticleAjoute.fxml"; 
     public static final String ARTICLE_TABLEAU = "/MotsApp/Vues/ArticleTableau.fxml";
-    public static final String ARTICLE_RECHERCHE = "/MotsApp/Vues/ArticleRechercheResultats.fxml";
+    public static final String RESULTATS_RECHERCHE = "/MotsApp/Vues/RechercheResultats.fxml";
     public static final String PHOTO_AJOUTE = "/MotsApp/Vues/PhotoAjoute.fxml"; 
     public static final String PHOTO_TABLEAU = "/MotsApp/Vues/PhotoTableau.fxml";
     /*------------------------END navigation sur scenes------------------------*/
