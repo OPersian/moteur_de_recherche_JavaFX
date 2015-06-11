@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="650.0" prefWidth="750.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" 
+            fx:controller="MotsApp.Contrôleurs.ArticleAjouteContrôleur">
+  <children>
+    <Button id="button" fx:id="save_btn" layoutX="471.0" layoutY="511.0" onAction="#sauvegarder" prefHeight="25.0" text="Sauvegarder" />
+    <TextField id="textField" fx:id="textFieldTitre" layoutX="192.0" layoutY="178.0" prefWidth="371.0" />
+    <TextArea id="textArea1" fx:id="textAreaContenu" layoutX="192.0" layoutY="222.0" prefHeight="123.0" prefWidth="371.0" wrapText="true" />
+    <Label layoutX="121.0" layoutY="181.0" text="Le titre" />
+    <Label layoutX="121.0" layoutY="222.0" text="Le contenu" />
+    <Label layoutX="120.0" layoutY="409.0" text="Le date &#10;dd-mm-yyy" />
+    <Label layoutX="120.0" layoutY="367.0" text="L'auteur" />
+    <TextField id="textField" fx:id="textFieldDate" layoutX="191.0" layoutY="414.0" prefWidth="371.0" />
+    <TextField id="textField" fx:id="textFieldAuteur" layoutX="191.0" layoutY="367.0" prefWidth="371.0" />
+    <Label alignment="CENTER" contentDisplay="CENTER" layoutX="-3.0" layoutY="108.0" prefWidth="750.0" style="-fx-font: NORMAL 20 Tahoma;" text="Creation du nouvel article" textAlignment="CENTER">
+      <font>
+        <Font name="System Bold" size="15.0" />
+      </font>
+    </Label>
+    <Label layoutX="119.0" layoutY="459.0" text="Le source" />
+    <TextField id="textField" fx:id="textFieldSource" layoutX="190.0" layoutY="459.0" prefWidth="371.0" />
+    <Label fx:id="successMsgLabel" layoutX="121.0" layoutY="514.0" prefWidth="194.0" text="" textFill="#1400ff">
+      <font>
+        <Font name="System Italic" size="12.0" />
+      </font>
+    </Label>
+    <Button id="button" layoutX="315.0" layoutY="511.0" onAction="#voirListeArticles" prefHeight="25.0" prefWidth="133.0" text="Voir Liste des Articles" />
+  </children>
+</AnchorPane>
