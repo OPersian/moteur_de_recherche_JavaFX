@@ -14,11 +14,11 @@ import javax.xml.bind.JAXBContext;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 import trial.Modèles.Article;
-import trial.Modèles.ArticleListWrapper;
+import trial.ModèlesGestion.ArticleListWrapper;
 import trial.Modèles.BaseDePhoto;
 import trial.Modèles.BaseDesArticles;
 import trial.Modèles.Photo;
-import trial.Modèles.PhotoListWrapper;
+import trial.ModèlesGestion.PhotoListWrapper;
 
 /**
  *
@@ -110,32 +110,9 @@ public class MainMotsApp extends Application {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        launch(args);    
-        //enables to operate with maxHits (LuceneMoteur; chercherDansIndex)
-        //maxHits = Integer.parseInt(args[2]);
+        launch(args);   
     }
-    
-/**
- * Returns the article file preference, i.e. the file that was last opened.
- * The preference is read from the OS specific registry. If no such
- * preference can be found, null is returned.
- * 
- * @return
- */
-    
-/*
-public static File getMatièreFichierChemin() {
-    Preferences prefs = Preferences.userNodeForPackage(MainMotsApp.class);
-    //String filePath = prefs.get("/trial/fichiers/file1.xml", null);
-    String filePath = prefs.get("LAST_OUTPUT_DIR", null);
 
-    if (filePath != null) {
-        return new File(filePath);
-    } else {
-        return null;
-    }
-}
- */
 
 /**
  * Sets the file path of the currently loaded file. The path is persisted in
@@ -143,16 +120,12 @@ public static File getMatièreFichierChemin() {
  * 
  * @param file the file or null to remove the path
  */
-public static void setMatièreFichierChemin(File file) {
+/*public static void setMatièreFichierChemin(File file) {
     Preferences prefs = Preferences.userNodeForPackage(MainMotsApp.class);
     if (file != null) {
         //prefs.put("/trial/fichiers/file1.xml", file.getPath());
         prefs.put("LAST_OUTPUT_DIR", file.getPath());
-
-        // Update the stage title.
-        //primaireStage.setTitle("MotsApp - " + file.getName()); //DOESNT WORK!
-        //even tried this.primaireStage
-        maStage_lucene.setTitle("MotsApp - " + file.getName());//maybe works; as method is static!
+        // maStage_lucene.setTitle("MotsApp - " + file.getName());
         
     } else {
         prefs.remove("/trial/fichiers/file1.xml");
@@ -161,19 +134,19 @@ public static void setMatièreFichierChemin(File file) {
         //even tried this.primaireStage
         maStage_lucene.setTitle("MotsApp");//maybe works; as method is static!
         
-    }
+    
     
     filePath_lucene = file.getPath(); //to lucene index
-}
+}}*/
     
     /**
      * Returns the main stage. Useful to work with files (IO) -- OPersian
      * @return
      */
-    public Stage getPrimaireStage() {
+    /*public Stage getPrimaireStage() {
         return primaireStage;
         //even tried this.primaireStage
-    }    
+    }*/
     
     
  /**
@@ -199,7 +172,9 @@ public static void chargerArticleDataDuFichier(File file) throws Exception {
         mabaseArticle_stockage.addAll(wrapper.getArticles());
 
         // Save the file path to the registry.
-        setMatièreFichierChemin(file);
+        // setMatièreFichierChemin(file);
+        
+        filePath_lucene = file.getPath(); //to lucene index
         
         mabaseArticle_stockage_lucene = mabaseArticle_stockage; //to lucene index;
             //may not be necessary; check usage
@@ -232,7 +207,10 @@ public void sauvegarderArticleDataToFile(File file) throws Exception {
         m.marshal(wrapper, file);
 
         // Save the file path to the registry.
-        setMatièreFichierChemin(file);
+        // setMatièreFichierChemin(file);
+        
+        filePath_lucene = file.getPath(); //to lucene index
+        
     } catch (Exception e) { // catches ANY exception
         System.out.println("Could not save data to file:\n" + file.getPath() +
                             "\n" + e.toString());
@@ -246,7 +224,7 @@ public void sauvegarderArticleDataToFile(File file) throws Exception {
  * @param file
      * @throws java.lang.Exception
  */
-public void chargerPhotoDataDuFichier(File file) throws Exception {
+public static void chargerPhotoDataDuFichier(File file) throws Exception {
     try {
         JAXBContext context = JAXBContext
                 .newInstance(PhotoListWrapper.class);
@@ -259,7 +237,8 @@ public void chargerPhotoDataDuFichier(File file) throws Exception {
         mabasePhoto_stockage.addAll(wrapper.getPhotos());
 
         // Save the file path to the registry.
-        setMatièreFichierChemin(file);
+        // setMatièreFichierChemin(file);
+        filePath_lucene = file.getPath(); //to lucene index
 
     } catch (Exception e) { // catches ANY exception
         System.out.println("Could not load data from file:\n" + 
@@ -288,7 +267,9 @@ public void sauvegarderPhotoDataToFile(File file) throws Exception {
         m.marshal(wrapper, file);
 
         // Save the file path to the registry.
-        setMatièreFichierChemin(file);
+        // setMatièreFichierChemin(file);
+        filePath_lucene = file.getPath(); //to lucene index
+        
     } catch (Exception e) { // catches ANY exception
         System.out.println("Could not save data to file:\n" + file.getPath() +
                             "\n" + e.toString());

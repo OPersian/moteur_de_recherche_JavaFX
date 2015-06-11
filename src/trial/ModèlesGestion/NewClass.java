@@ -22,7 +22,7 @@ import trial.Modèles.Photo;
  * @author Persianova, Golubnycha
  */
 public class NewClass {
-
+    /*
     public static void main(String[] args) throws MalformedURLException, ClassNotFoundException {
         List<Photo> l = new ArrayList<>();
         l.add(new Photo(null, "sdf", "dsf", "sdf", LocalDate.now(), new URL("http://sfdf")));
@@ -48,4 +48,5 @@ public class NewClass {
             Logger.getLogger(NewClass.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    */
 }

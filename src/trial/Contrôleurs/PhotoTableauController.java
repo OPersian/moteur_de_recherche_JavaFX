@@ -1,21 +1,26 @@
 package trial.Contrôleurs;
 
 
+import java.io.File;
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.ResourceBundle;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TableView;
 import trial.Modèles.Photo;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.EventType;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.stage.FileChooser;
 import javafx.util.Callback;
 import trial.MainMotsApp;
 import trial.VueNavigateur;
@@ -30,29 +35,33 @@ public class PhotoTableauController implements Initializable {
     //@FXML private TableView<Photo> photoTableView = new TableView<Photo>();
     private ObservableList<Photo> mabasePhoto;
     //private MainMotsApp mainMotsApp; 
+    
+    private final StringProperty description = new SimpleStringProperty(this, "description","");
 
-    @FXML private TableColumn<Photo, ImageView> photoImage;
+    //@FXML private TableColumn<Photo, ImageView> photoImage;
     @FXML private TableColumn<Photo, String> photoTitre;
     @FXML private TableColumn<Photo, String> photoAuteur;
     @FXML private TableColumn<Photo, String> photoDescription;
     @FXML private TableColumn<Photo, LocalDate> photoDate;
     @FXML private TableColumn<Photo, URL> photoSource;
     @FXML private Button ajoute_btn;
+    //private TableColumn<?, ?> photoImage;
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
                if (MainMotsApp.mabasePhoto_stockage != null){
             //TableColumn Definition
-            TableColumn photoImage = new TableColumn("Photo");
+           /* TableColumn photoImage = new TableColumn("Photo");
                 photoImage.setCellValueFactory(new PropertyValueFactory("photo"));
-                   photoImage.setPrefWidth(200);  
+                   photoImage.setPrefWidth(200);  */
                    
             // Setting CellFactory pour TableColumn("Photo")                 
-photoImage.setCellFactory(new Callback<TableColumn<Photo,ImageView>,TableCell<Photo,ImageView>>(){        
+/*photoImage.setCellFactory(new Callback<TableColumn<Photo,ImageView>,TableCell<Photo,ImageView>>(){        
 	@Override
 	public TableCell<Photo, ImageView> call(TableColumn<Photo, ImageView> param) {                
 		TableCell<Photo, ImageView> cell = new TableCell<Photo, ImageView>(){
 			ImageView imageview = new ImageView();
+                        
                     @Override
                     public void updateItem(ImageView item, boolean empty) {                        
 				if(item!=null){                            
@@ -77,26 +86,32 @@ photoImage.setCellFactory(new Callback<TableColumn<Photo,ImageView>,TableCell<Ph
                         }
                     });*/
                 
-		System.out.println(cell.getIndex());               
+		/*System.out.println(cell.getIndex());               
 		return cell;
 	}
 
-});
+});*/
                  
             photoTitre.setCellValueFactory(
                 cellData -> cellData.getValue().titreProperty());
-
+            
             photoAuteur.setCellValueFactory(
                 cellData -> cellData.getValue().auteurProperty());
 
             photoDescription.setCellValueFactory(
                 cellData -> cellData.getValue().descriptionProperty());
+            photoDescription.setEditable(true);
+            /* photoDescription.setCellValueFactory(
+                new PropertyValueFactory<>("description"));*/
 
             photoDate.setCellValueFactory(
                 cellData -> cellData.getValue().dateProperty());
             
             photoSource.setCellValueFactory(
-                cellData -> cellData.getValue().sourceProperty());
+                cellData -> cellData.getValue().sourceProperty());            
+
+            
+            
             photoTableView.getItems().setAll(MainMotsApp.mabasePhoto_stockage);
         }
     } 
@@ -106,5 +121,33 @@ photoImage.setCellFactory(new Callback<TableColumn<Photo,ImageView>,TableCell<Ph
     private void ajoutePhotoToTable(ActionEvent event) {
      VueNavigateur.loadVista(VueNavigateur.PHOTO_AJOUTE); 
     }
+    
+     MainMotsApp mainMotsApp = new MainMotsApp();//replace showOpenDialog' arg with null and delete this field! (to check if possible)
+    
+    @FXML
+    private void lireDuFichier(ActionEvent event) throws Exception {
+        
+        FileChooser fileChooser = new FileChooser();
+        
+        // Set extension filter
+        FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter(
+                "XML files (*.xml)", "*.xml");
+        fileChooser.getExtensionFilters().add(extFilter);
+
+        // Show save file dialog
+        File file = fileChooser.showOpenDialog(null);
+
+        if (file != null) {
+            MainMotsApp.chargerPhotoDataDuFichier(file);//mainMotsApp, before the method became static
+        }
+        VueNavigateur.loadVista(VueNavigateur.PHOTO_TABLEAU);//reload view 
+            //to see changes instantly
+        
+    }
+    
+    //сделать булевые переменные: да/нет - ч/б, цветная
+    //сделать вывод разрешения фото
+    //ошибка индексации люсцен
+    
 }
     

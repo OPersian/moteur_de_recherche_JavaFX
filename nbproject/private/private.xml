@@ -2,18 +2,6 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group>
-            <file>file:/C:/Users/Olena/Documents/NetBeansProjects/trial/src/trial/ModèlesGestion/LuceneMoteur.java</file>
-            <file>file:/C:/Users/Olena/Documents/NetBeansProjects/trial/src/trial/MainMotsApp.java</file>
-            <file>file:/C:/Users/Olena/Documents/NetBeansProjects/trial/src/trial/Contrôleurs/ArticleTableauContrôleur.java</file>
-            <file>file:/C:/Users/Olena/Documents/NetBeansProjects/trial/src/trial/Contrôleurs/ArticleRechercheResultatsController.java</file>
-            <file>file:/C:/Users/Olena/Documents/NetBeansProjects/trial/src/trial/Modèles/Matière.java</file>
-            <file>file:/C:/Users/Olena/Documents/NetBeansProjects/trial/src/trial/Vues/ArticleRechercheResultats.fxml</file>
-            <file>file:/C:/Users/Olena/Documents/NetBeansProjects/trial/src/trial/Contrôleurs/PhotoTableauController.java</file>
-            <file>file:/C:/Users/Olena/Documents/NetBeansProjects/trial/src/trial/VueNavigateur.java</file>
-            <file>file:/C:/Users/Olena/Documents/NetBeansProjects/trial/src/trial/Contrôleurs/RootLayoutContrôleur.java</file>
-            <file>file:/C:/Users/Olena/Documents/NetBeansProjects/trial/src/trial/Contrôleurs/ArticleAjouteContrôleur.java</file>
-            <file>file:/C:/Users/Olena/Documents/NetBeansProjects/trial/src/trial/Modèles/BaseDesArticles.java</file>
-        </group>
+        <group/>
     </open-files>
 </project-private>

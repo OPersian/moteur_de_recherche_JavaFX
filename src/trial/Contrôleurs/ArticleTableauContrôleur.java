@@ -127,13 +127,14 @@ public class ArticleTableauContrôleur implements Initializable {
         fileChooser.getExtensionFilters().add(extFilter);
 
         // Show save file dialog
-        File file = fileChooser.showOpenDialog(mainMotsApp.getPrimaireStage());
+        // File file = fileChooser.showOpenDialog(mainMotsApp.getPrimaireStage());
+        File file = fileChooser.showOpenDialog(null);
 
         if (file != null) {
             MainMotsApp.chargerArticleDataDuFichier(file);//mainMotsApp, before the method became static
         }
         VueNavigateur.loadVista(VueNavigateur.ARTICLE_TABLEAU);//reload view 
-            //to see changes instantly
+        //to see changes instantly after adding data from the file to the current "observable list" of articles
         
     }
     

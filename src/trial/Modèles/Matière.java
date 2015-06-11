@@ -1,5 +1,6 @@
 package trial.Modèles;
 
+import trial.ModèlesGestion.LocalDateAdapteur;
 import java.io.Serializable;
 import java.net.URL;
 import java.time.LocalDate;

@@ -65,7 +65,7 @@ public class RootLayoutContrôleur implements Initializable {
         MainMotsApp.requêteTexte = requête;
     }   
 
-    /*-------------------------travail avec fichiers--------------------------*/   
+    /*------------------------travail avec des fichiers------------------------*/   
     MainMotsApp mainMotsApp = new MainMotsApp();      
     
     /**
@@ -81,8 +81,8 @@ public class RootLayoutContrôleur implements Initializable {
         fileChooser.getExtensionFilters().add(extFilter);
 
         // Show save file dialog
-        File file = fileChooser.showOpenDialog(mainMotsApp.getPrimaireStage());
-        //File file = fileChooser.showOpenDialog(null);//try it!
+        // File file = fileChooser.showOpenDialog(mainMotsApp.getPrimaireStage());
+        File file = fileChooser.showOpenDialog(null);
 
         if (file != null) {
             if (MainMotsApp.currentSousVue == VueNavigateur.ARTICLE_AJOUTE || 
@@ -94,7 +94,7 @@ public class RootLayoutContrôleur implements Initializable {
                 
             else if (MainMotsApp.currentSousVue == VueNavigateur.PHOTO_AJOUTE || 
                 MainMotsApp.currentSousVue == VueNavigateur.PHOTO_TABLEAU){
-                    mainMotsApp.chargerPhotoDataDuFichier(file);
+                    MainMotsApp.chargerPhotoDataDuFichier(file); // mainMotsApp
                     VueNavigateur.loadVista(VueNavigateur.PHOTO_TABLEAU);//reload view 
                     //to see changes instantly
             }
@@ -117,7 +117,8 @@ public class RootLayoutContrôleur implements Initializable {
         fileChooser.getExtensionFilters().add(extFilter);
 
         // Show save file dialog
-        File file = fileChooser.showSaveDialog(mainMotsApp.getPrimaireStage());
+        // File file = fileChooser.showSaveDialog(mainMotsApp.getPrimaireStage());
+        File file = fileChooser.showSaveDialog(null);
 
         if (file != null) {
             // Make sure it has the correct extension
