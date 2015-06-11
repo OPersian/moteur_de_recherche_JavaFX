@@ -1,24 +1,17 @@
 package trial.ModèlesGestion;
 
-import java.io.File;
-import static java.io.FileDescriptor.in;
-import java.io.FileReader;
 import java.io.IOException;
-import java.io.Reader;
-import static java.lang.System.in;
+import java.net.URL;
 import java.nio.file.Paths;
-import javafx.collections.ObservableList;
-import javafx.stage.FileChooser;
-import static javax.management.Query.in;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import org.apache.lucene.analysis.Analyzer;
 import org.apache.lucene.analysis.core.StopAnalyzer;
-import org.apache.lucene.analysis.standard.StandardAnalyzer;
 import org.apache.lucene.document.Document;
 import org.apache.lucene.document.Field;
 import org.apache.lucene.document.FieldType;
 import org.apache.lucene.index.DirectoryReader;
 import org.apache.lucene.index.IndexOptions;
-import org.apache.lucene.index.IndexReader;
 import org.apache.lucene.index.IndexWriter;
 import org.apache.lucene.index.IndexWriterConfig;
 import org.apache.lucene.index.IndexWriterConfig.OpenMode;
@@ -28,15 +21,10 @@ import org.apache.lucene.search.IndexSearcher;
 import org.apache.lucene.search.Query;
 import org.apache.lucene.search.ScoreDoc;
 import org.apache.lucene.search.TopDocs;
-import org.apache.lucene.search.TopScoreDocCollector;
 import org.apache.lucene.store.Directory;
 import org.apache.lucene.store.FSDirectory;
 import trial.MainMotsApp;
-import static trial.MainMotsApp.filePath_lucene;
-import static trial.MainMotsApp.mabaseArticle_stockage_lucene;
 import trial.Modèles.Article;
-import org.apache.lucene.store.RAMDirectory;
-import org.apache.lucene.util.Version;
 import trial.Modèles.BaseDesArticles;
 
 /**
@@ -45,9 +33,8 @@ import trial.Modèles.BaseDesArticles;
  */
 public class LuceneMoteur {
     
-    public static String FILE_PATH;
     public static Document document; //pour paurcorir resultats de recherche
-    public static String titreShow; //to debug in console; see in the code below
+    //public static String titreShow; //to debug in console; see in the code below
     
     //to add search results to a list
      public static BaseDesArticles baseArticleResultats = new BaseDesArticles();
@@ -55,6 +42,8 @@ public class LuceneMoteur {
     public static void créerIndex() throws IOException{
         try {
             StopAnalyzer analyzer = new StopAnalyzer();
+            //StopAnalyzer removes common English words that are not usually useful for indexing.
+            
             Directory dir = FSDirectory.open(Paths.get("."));
             IndexWriterConfig iwc = new IndexWriterConfig(analyzer);
             iwc.setOpenMode(OpenMode.CREATE);
@@ -69,19 +58,19 @@ public class LuceneMoteur {
                 myFieldType.setStored(true); // on stocke le texte
                 myFieldType.setTokenized(true);
                 myFieldType.freeze();
-                Field myField1 = new Field("titre",i.getTitre(),myFieldType); 
-                document.add(myField1);
+                Field myFieldTitre = new Field("titre",i.getTitre(),myFieldType); 
+                document.add(myFieldTitre);
                 // etc. pour tous les champs souhaités                        
-                Field myField2 = new Field("auteur",i.getAuteur(),myFieldType); 
-                document.add(myField2);                        
-                Field myField3 = new Field("auteur",i.getAuteur(),myFieldType); 
-                document.add(myField3); 
-                Field myField4 = new Field("contenu",i.getContenu(),myFieldType); 
-                document.add(myField4);                         
-                Field myField5 = new Field("date",i.getDate().toString(),myFieldType); 
-                document.add(myField5); 
-                Field myField6 = new Field("source",i.getSource().toString(),myFieldType); 
-                document.add(myField6);                         
+                Field myFieldAuteur = new Field("auteur",i.getAuteur(),myFieldType); 
+                document.add(myFieldAuteur);                        
+                /*Field myField3 = new Field("auteur",i.getAuteur(),myFieldType); 
+                document.add(myField3); */
+                Field myFieldContenu = new Field("contenu",i.getContenu(),myFieldType); 
+                document.add(myFieldContenu);                         
+                Field myFieldDate = new Field("date",i.getDate().toString(),myFieldType); 
+                document.add(myFieldDate); 
+                Field myFieldSource = new Field("source",i.getSource().toString(),myFieldType); 
+                document.add(myFieldSource);                         
                 writer.addDocument(document);
                             
                 System.out.println(document + "\n");//to debug in console
@@ -114,7 +103,7 @@ public class LuceneMoteur {
             Analyzer analyzer = new StopAnalyzer();
             
             // build a Query object
-            QueryParser parser = new QueryParser("titre",analyzer);
+            QueryParser parser = new QueryParser("titre", analyzer);
             Query q = parser.parse(requête);
             
             // search for the query
@@ -122,48 +111,38 @@ public class LuceneMoteur {
             TopDocs docs = searcher.search(q, maxHits); // changed from 1 to 10
             
             //parcourir les résultats
-            ScoreDoc[] hits = docs.scoreDocs;//!!!
-            
-            // retrieve each matching document from the ScoreDoc array
-            /*for (int i = 1; i <= hits.length; i++){
-                //Document d = instance.getDocument(hits[i].doc); //instance of the Field class
-                Document d = null;
-                int docId = hits[i].doc;
-                d = searcher.doc(docId);
-                float score = hits[i].score;
-                String titre = document.get("titre");
-                System.out.println("The next document found: " + d); //to debug with console
-                titreShow = titre;//to see only the last one in "console debug"
-                System.out.println(titre + " --- ");
-                //System.out.println((i + 1) + ". " + d.get("path") + " score=" + score);
-                System.out.println((i + 1) + ". titre: " + titre + " score=" + score); 
-                //make it performed in TableView???
-            }*/
+            ScoreDoc[] hits = docs.scoreDocs;
             
             // retrieve each matching document from the ScoreDoc array
             //http://stackoverflow.com/questions/14966208/hits-object-deprecated-in-lucene-net-3-03-how-do-i-replace-it
             for (ScoreDoc i : hits) {
-                // retrieve the document from the 'ScoreDoc' object
-               Document doc = searcher.doc(i.doc);
-               String titre = doc.get("titre");
-               
-               Article article = new Article();
-               article.setTitre(titre);
-               //set other fields!!!
-               
-               baseArticleResultats.ajouterArticle(article); //to perform in TableView
-                       
-               /*System.out.println(titre);
-               titreShow = titre;
-               document = doc;*/
+               // retrieve the document from the 'ScoreDoc' object
+                Document doc = searcher.doc(i.doc);
+                String titre = doc.get("titre");
+                String auteur = doc.get("auteur");
+                String contenu = doc.get("contenu");
+                String date = doc.get("date");              
+                URL source = new URL(doc.get("source"));
+                Article article = new Article();
+                article.setTitre(titre);
+                article.setAuteur(auteur);
+                article.setContenu(contenu);
+                article.setDate(LocalDate.parse(date));
+                article.setSource(source);
+                baseArticleResultats.ajouterArticle(article); //to perform in TableView
+                /*System.out.println(titre);
+                titreShow = titre;
+                document = doc;*/
+                
+                /*for (int j = 1; j <= hits.length; j++){
+                //Document d = instance.getDocument(hits[i].doc); //instance of the Field class
+                Document d = null;
+                int docId = hits[j].doc;
+                d = searcher.doc(docId);
+                float score = hits[j].score;
+                System.out.println("the score is: " + score);
+                }*/
             }
-            
-            //to debug in console
-            /*
-            System.out.println("We have searched in the next documents: " + document);
-            System.out.println("The user has entered the next request:               " + requête);
-            System.out.println("Research is successfully processed; article found:   " + titreShow);//OK if only one found
-            */
   
         }
         catch (Exception e) {

@@ -64,7 +64,7 @@ public void setTitre(String titre){this.titre.set(titre);}
 public String getTitre(){return titre.get();}   
 
 public void setDate(LocalDate date){this.date.set(date);} 
-@XmlJavaTypeAdapter(LocalDateAdapteur.class) //necessary to write to XML file
+@XmlJavaTypeAdapter(LocalDateAdapteur.class) //to write data field to XML file
 public LocalDate getDate(){return date.get();} 
 
 public void setAuteur(String auteur){this.auteur.set(auteur);}    

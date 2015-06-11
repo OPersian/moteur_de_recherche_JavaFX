@@ -49,7 +49,7 @@ public class ArticleAjouteContrôleur implements Initializable {
     private void sauvegarder(ActionEvent event) throws MalformedURLException {
        
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-"
-                + "MM-yyyy");    
+                + "MM-yyyy"); //HH-mm-ss
         LocalDate date = LocalDate.now();
         String date_format = textFieldDate.getText();
         try {
@@ -90,6 +90,7 @@ public class ArticleAjouteContrôleur implements Initializable {
         MainMotsApp.mabaseArticle_stockage = MainMotsApp.mabaseArticle.getArticleData();
                 
         try {successMsgLabel.setText("L'article a été bien sauvegardé!");}
+        
         catch (Exception e) {
             successMsgLabel.setText("On ne peut pas enregistrer vos donnés!");
         }

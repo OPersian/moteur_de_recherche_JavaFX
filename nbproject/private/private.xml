@@ -5,11 +5,15 @@
         <group>
             <file>file:/C:/Users/Olena/Documents/NetBeansProjects/trial/src/trial/ModèlesGestion/LuceneMoteur.java</file>
             <file>file:/C:/Users/Olena/Documents/NetBeansProjects/trial/src/trial/MainMotsApp.java</file>
-            <file>file:/C:/Users/Olena/Documents/NetBeansProjects/trial/src/trial/Contrôleurs/NewClass.java</file>
-            <file>file:/C:/Users/Olena/Documents/NetBeansProjects/trial/src/trial/Modèles/BaseDePhoto.java</file>
+            <file>file:/C:/Users/Olena/Documents/NetBeansProjects/trial/src/trial/Contrôleurs/ArticleTableauContrôleur.java</file>
+            <file>file:/C:/Users/Olena/Documents/NetBeansProjects/trial/src/trial/Contrôleurs/ArticleRechercheResultatsController.java</file>
             <file>file:/C:/Users/Olena/Documents/NetBeansProjects/trial/src/trial/Modèles/Matière.java</file>
+            <file>file:/C:/Users/Olena/Documents/NetBeansProjects/trial/src/trial/Vues/ArticleRechercheResultats.fxml</file>
             <file>file:/C:/Users/Olena/Documents/NetBeansProjects/trial/src/trial/Contrôleurs/PhotoTableauController.java</file>
-            <file>file:/C:/Users/Olena/Documents/NetBeansProjects/trial/src/trial/Modèles/Photo.java</file>
+            <file>file:/C:/Users/Olena/Documents/NetBeansProjects/trial/src/trial/VueNavigateur.java</file>
+            <file>file:/C:/Users/Olena/Documents/NetBeansProjects/trial/src/trial/Contrôleurs/RootLayoutContrôleur.java</file>
+            <file>file:/C:/Users/Olena/Documents/NetBeansProjects/trial/src/trial/Contrôleurs/ArticleAjouteContrôleur.java</file>
+            <file>file:/C:/Users/Olena/Documents/NetBeansProjects/trial/src/trial/Modèles/BaseDesArticles.java</file>
         </group>
     </open-files>
 </project-private>
