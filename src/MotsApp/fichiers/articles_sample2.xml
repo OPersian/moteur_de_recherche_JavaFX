@@ -2,7 +2,14 @@
 <articles>
     <article>
         <auteur></auteur>
-        <date>2015-06-11</date>
+        <date>2015-06-12</date>
+        <source>http://sample.com.ua</source>
+        <titre>t</titre>
+        <contenu></contenu>
+    </article>
+    <article>
+        <auteur></auteur>
+        <date>2015-06-12</date>
         <source>http://sample.com.ua</source>
         <titre>t</titre>
         <contenu></contenu>

@@ -48,7 +48,7 @@
         <fx:reference source="x1" />
       </panes>
     </Accordion>
-    <Label alignment="CENTER" layoutX="213.0" layoutY="99.0" prefWidth="443.0" style="-fx-font: NORMAL 20 Tahoma;" text="Bienvenue chez MotsApp!" textAlignment="CENTER" underline="false">
+    <Label alignment="CENTER" layoutX="32.0" layoutY="88.0" prefWidth="696.0" style="-fx-font: NORMAL 25 Tahoma;" text="Bienvenue chez MotsApp!" textAlignment="CENTER" underline="false">
       <font>
         <Font name="System Bold" size="20.0" />
       </font>

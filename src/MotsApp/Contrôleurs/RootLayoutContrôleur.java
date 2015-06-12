@@ -1,6 +1,5 @@
 package MotsApp.Contrôleurs;
 
-import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -8,14 +7,13 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.StackPane;
-import javafx.stage.FileChooser;
 import org.apache.lucene.queryparser.classic.ParseException;
 import MotsApp.MainMotsApp;
+import MotsApp.Modèles.AlertGestion;
 import MotsApp.ModèlesGestion.LuceneMoteur;
+import MotsApp.ModèlesGestion.ioXmlGestion;
 import MotsApp.VueNavigateur;
 
 /**
@@ -25,11 +23,11 @@ import MotsApp.VueNavigateur;
  */
 public class RootLayoutContrôleur implements Initializable {
     
-    @FXML private StackPane vistaHolder;
+    @FXML private StackPane vuePorteur;
     @FXML private TextField rechercherChamp;
-    
+   
     public void setView(Node node) {
-        vistaHolder.getChildren().setAll(node);
+        vuePorteur.getChildren().setAll(node);
     } 
 
     /**
@@ -66,79 +64,17 @@ public class RootLayoutContrôleur implements Initializable {
     }   
 
     /*------------------------travail avec des fichiers------------------------*/   
-    MainMotsApp mainMotsApp = new MainMotsApp();      
+    MainMotsApp mainMotsApp = new MainMotsApp();  
     
-    /**
-     * Opens a FileChooser to let the user select a MotsApp! to load.
-     */
     @FXML
     private void fichierOuvrir() throws Exception {
-        FileChooser fileChooser = new FileChooser();
-        
-        // Set extension filter; only xml can be read
-        FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter(
-                "XML files (*.xml)", "*.xml");
-        fileChooser.getExtensionFilters().add(extFilter);
-
-        // Show save file dialog
-        // File file = fileChooser.showOpenDialog(mainMotsApp.getPrimaireStage());
-        File file = fileChooser.showOpenDialog(null);
-
-        if (file != null) {
-            if (MainMotsApp.couranteSousVue == VueNavigateur.ARTICLE_AJOUTE || 
-                MainMotsApp.couranteSousVue == VueNavigateur.ARTICLE_TABLEAU){
-                    MainMotsApp.chargerArticleDataDuFichier(file);//mainMotsApp, before it became static
-                    VueNavigateur.loadVue(VueNavigateur.ARTICLE_TABLEAU);//reload view 
-                    //to see changes instantly
-            }
-                
-            else if (MainMotsApp.couranteSousVue == VueNavigateur.PHOTO_AJOUTE || 
-                MainMotsApp.couranteSousVue == VueNavigateur.PHOTO_TABLEAU){
-                    MainMotsApp.chargerPhotoDataDuFichier(file); // mainMotsApp
-                    VueNavigateur.loadVue(VueNavigateur.PHOTO_TABLEAU);//reload view 
-                    //to see changes instantly
-            }
-                 
-            else {MainMotsApp.chargerArticleDataDuFichier(file);}//mainMotsApp, before it became static
-        }
-
-    }
+        ioXmlGestion.fichierOuvrir();
+    }   
     
-    /**
-    * Opens a FileChooser to let the user select a file to save to.
-    */
     @FXML
     private void fichierSauvegarderComme() throws Exception {
-        FileChooser fileChooser = new FileChooser();
-
-        // Set extension filter
-        FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter(
-                "XML files (*.xml)", "*.xml");
-        fileChooser.getExtensionFilters().add(extFilter);
-
-        // Show save file dialog
-        // File file = fileChooser.showSaveDialog(mainMotsApp.getPrimaireStage());
-        File file = fileChooser.showSaveDialog(null);
-
-        if (file != null) {
-            // Make sure it has the correct extension
-            if (!file.getPath().endsWith(".xml")) {
-                file = new File(file.getPath() + ".xml");
-            }
-            
-            if (MainMotsApp.couranteSousVue == VueNavigateur.ARTICLE_AJOUTE || 
-                MainMotsApp.couranteSousVue == VueNavigateur.ARTICLE_TABLEAU)
-                    mainMotsApp.sauvegarderArticleDataToFile(file);
-                
-            else if (MainMotsApp.couranteSousVue == VueNavigateur.PHOTO_AJOUTE || 
-                MainMotsApp.couranteSousVue == VueNavigateur.PHOTO_TABLEAU)
-                    mainMotsApp.sauvegarderPhotoDataToFile(file);
-                
-            else mainMotsApp.sauvegarderArticleDataToFile(file);
-            
-            //mainMotsApp.sauvegarderArticleDataToFile(file);
-        }     
-    }
+        ioXmlGestion.fichierSauvegarderComme(mainMotsApp);
+    }   
     /*------------------------END travail avec fichiers-----------------------*/  
     
    /**
@@ -146,15 +82,9 @@ public class RootLayoutContrôleur implements Initializable {
      */
     @FXML
     private void montrerAbout() {
-        Alert alert = new Alert(AlertType.INFORMATION);
-        alert.setTitle("MotsApp!");
-        alert.setHeaderText("About: MotsApp! is a little application "
-                + "\nwhich enables the user to add "
-                + "\narticles and photos, to navigate "
-                + "\nand modify them, and to search "
-                + "\nthrough.");
-        alert.setContentText("Authors: Olena Persianova, Olga Golybnucha");
-        alert.showAndWait();
+        AlertGestion.displayInfoAlert(  AlertGestion.infoTitre, 
+                                        AlertGestion.infoCorps,
+                                        AlertGestion.infoAuteurs);
     }
 
     /**
@@ -165,10 +95,16 @@ public class RootLayoutContrôleur implements Initializable {
         System.exit(0);
     }
 
+    /**
+    * Shows detail information on authors.
+    */
     @FXML
     private void montrerAuteurs(ActionEvent event) {
     }
-
+    
+    /**
+    * Runs indexing of documents (with search goals).
+    */
     @FXML
     private void indexer(ActionEvent event) throws IOException {
         LuceneMoteur.créerIndex();

@@ -8,9 +8,10 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="650.0" prefWidth="750.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="MotsApp.Contrôleurs.RootLayoutContrôleur">
+<AnchorPane id="AnchorPane" prefHeight="650.0" prefWidth="750.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" 
+            fx:controller="MotsApp.Contrôleurs.RootLayoutContrôleur">
   <children>
-    <StackPane fx:id="vistaHolder" />
+    <StackPane fx:id="vuePorteur" />
     <MenuBar focusTraversable="false" layoutX="0.0" layoutY="0.0" prefWidth="764.0" useSystemMenuBar="false">
       <effect>
         <ColorAdjust brightness="0.01526717557251911" contrast="3.0534351145017347E-4" hue="-0.03053435114503822" saturation="0.007633587786259444" />
@@ -45,8 +46,8 @@
         </Menu>
       </menus>
     </MenuBar>
-    <TextField id="" fx:id="rechercherChamp" layoutX="238.0" layoutY="41.0" prefWidth="406.0" promptText="rechercher" />
-    <Button id="rechercherBtn" layoutX="663.0" layoutY="42.0" mnemonicParsing="false" onAction="#rechercher" prefWidth="74.0" text="MotsApp!" textFill="BLACK" />
+    <TextField id="" fx:id="rechercherChamp" layoutX="238.0" layoutY="35.0" prefWidth="406.0" promptText="rechercher" />
+    <Button id="rechercherBtn" layoutX="655.0" layoutY="36.0" mnemonicParsing="false" onAction="#rechercher" prefWidth="74.0" text="MotsApp!" textFill="BLACK" />
     <Separator layoutX="15.0" layoutY="72.0" prefWidth="722.0000999999975" />
     <Label alignment="CENTER" contentDisplay="CENTER" layoutX="15.0" layoutY="602.0" prefWidth="722.0" text="Cree par Persianova &amp; Golybnucha&#10;2015, Kharkiv, UKRAINE" textAlignment="CENTER" textFill="#210066" underline="false">
       <font>

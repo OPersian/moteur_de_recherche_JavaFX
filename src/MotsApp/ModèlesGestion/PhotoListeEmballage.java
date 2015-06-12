@@ -10,11 +10,11 @@ import MotsApp.Modèles.Photo;
  * list of photos to XML.
  * @author Persianova, Golubnycha
  */
-@XmlRootElement(name = "photos")
+@XmlRootElement(name = "photos") // responsible for xml tag which wraps the list of photos
 public class PhotoListeEmballage {
     
     private List<Photo> photos;
-    @XmlElement(name = "photo")
+    @XmlElement(name = "photo") // responsible for xml tag which wraps every photo
     
     public List<Photo> getPhotos() {
         return photos;

@@ -159,7 +159,7 @@ public void sauvegarderArticleDataToFile(File file) throws Exception {
 }
 
 /**
- * Loads photo data from the specified file. The current person data will
+ * Loads photo data from the specified file. The current photo data will
  * be replaced.
  * 
  * @param file

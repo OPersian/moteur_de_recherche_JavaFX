@@ -2,9 +2,9 @@
 <articles>
     <article>
         <auteur></auteur>
-        <date>2015-06-11</date>
+        <date>2015-06-12</date>
         <source>http://sample.com.ua</source>
-        <titre>ttt</titre>
+        <titre>tre</titre>
         <contenu></contenu>
     </article>
     <article>
@@ -43,12 +43,5 @@
         <source>http://institutfrancais-italia.com/fr/node/4791</source>
         <titre>L’ENSEIGNEMENT SUPÉRIEUR FRANÇAIS</titre>
         <contenu>Dans le droit fil de la Déclaration de la Sorbonne (1998) et de la Déclaration de Bologne (1999) visant à créer un Espace européen de l’enseignement supérieur, la France comme tous les pays signataires a fait évoluer l’architecture de son système et de ses formations universitaires. 46 pays sont désormais membres du Processus de Bologne.Le Processus de Bologne a pour but de construire une Europe du savoir sur un modèle et des objectifs communs. Deux types d’établissements composent le paysage de l’enseignement supérieur français : les universités, et les écoles (Grandes Écoles et écoles spécialisées), établissements privés ou publics accessibles par concours.</contenu>
-    </article>
-    <article>
-        <auteur></auteur>
-        <date>2015-06-11</date>
-        <source>http://sample.com.ua</source>
-        <titre>titre1</titre>
-        <contenu></contenu>
     </article>
 </articles>

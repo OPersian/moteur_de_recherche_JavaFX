@@ -8,9 +8,10 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="650.0" prefWidth="750.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="MotsApp.Contrôleurs.RootLayoutContrôleur">
+<AnchorPane id="AnchorPane" prefHeight="650.0" prefWidth="750.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" 
+            fx:controller="MotsApp.Contrôleurs.RootLayoutContrôleur">
   <children>
-    <StackPane fx:id="vistaHolder" />
+    <StackPane fx:id="vuePorteur" />
     <MenuBar focusTraversable="false" layoutX="0.0" layoutY="0.0" prefWidth="764.0" useSystemMenuBar="false">
       <effect>
         <ColorAdjust brightness="0.01526717557251911" contrast="3.0534351145017347E-4" hue="-0.03053435114503822" saturation="0.007633587786259444" />

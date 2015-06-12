@@ -25,7 +25,6 @@ public class BaseDesArticles {
     
     public ObservableList<Article> getArticleData() {
     //public BaseDeMatières getMatièreData() {
-    
         return mabase;
     }    
     

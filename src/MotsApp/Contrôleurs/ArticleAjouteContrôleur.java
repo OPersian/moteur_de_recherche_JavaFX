@@ -68,7 +68,7 @@ public class ArticleAjouteContrôleur implements Initializable {
         //if ArticleAjouteController reloaded and if local variable used, 
         //previous instances would have been deleted 
         MainMotsApp.mabaseArticle.ajouterArticle(monArticle);
-        MainMotsApp.mabaseArticle.articleAfficher();
+        MainMotsApp.mabaseArticle.articleAfficher(); // to debug in console
         MainMotsApp.mabaseArticle_stockage = MainMotsApp.mabaseArticle.getArticleData();
                 
         try {successMsgLabel.setText("L'article a été bien sauvegardé!");}

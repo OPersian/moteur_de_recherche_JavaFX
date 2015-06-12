@@ -1,7 +1,5 @@
 package MotsApp.Contrôleurs;
 
-
-import java.io.File;
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.ResourceBundle;
@@ -13,16 +11,10 @@ import javafx.scene.control.TableView;
 import MotsApp.Modèles.Photo;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-import javafx.event.EventType;
 import javafx.scene.control.Button;
-import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
-import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.image.ImageView;
-import javafx.scene.layout.HBox;
-import javafx.stage.FileChooser;
-import javafx.util.Callback;
 import MotsApp.MainMotsApp;
+import MotsApp.ModèlesGestion.ioXmlGestion;
 import MotsApp.VueNavigateur;
 
 /**
@@ -122,32 +114,16 @@ public class PhotoTableauContrôleur implements Initializable {
      VueNavigateur.loadVue(VueNavigateur.PHOTO_AJOUTE); 
     }
     
-     MainMotsApp mainMotsApp = new MainMotsApp();//replace showOpenDialog' arg with null and delete this field! (to check if possible)
+     MainMotsApp mainMotsApp = new MainMotsApp();
     
     @FXML
-    private void lireDuFichier(ActionEvent event) throws Exception {
-        
-        FileChooser fileChooser = new FileChooser();
-        
-        // Set extension filter
-        FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter(
-                "XML files (*.xml)", "*.xml");
-        fileChooser.getExtensionFilters().add(extFilter);
-
-        // Show save file dialog
-        File file = fileChooser.showOpenDialog(null);
-
-        if (file != null) {
-            MainMotsApp.chargerPhotoDataDuFichier(file);//mainMotsApp, before the method became static
-        }
+    private void lireDuFichier(ActionEvent event) throws Exception {      
+        ioXmlGestion.fichierOuvrir();
         VueNavigateur.loadVue(VueNavigateur.PHOTO_TABLEAU);//reload view 
-            //to see changes instantly
-        
+                                                           //to see changes instantly
     }
-    
     //сделать булевые переменные: да/нет - ч/б, цветная
     //сделать вывод разрешения фото
     //ошибка индексации люсцен
-    
 }
     
