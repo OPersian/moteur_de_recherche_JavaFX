@@ -36,27 +36,27 @@ public class Photo extends Matière implements Serializable {
             URL source) {
         super(titre, auteur, date, source);
 
-        this.setDescription(description);//comment to serial-deserial
+        this.setContenu(description);//comment to serial-deserial
         //this.description = description;
         //this.imgV = imgV;//comment to serial-deserial
     }
-
+    
     @Override
     public String toString() {
-        String message;
+        // String message;
         //if (this.version) message = "electronique et en papier";
         //else  message = "electronique";
 
-        //String s = ("\n" + "Description: " + this.getDescription() + "\n");
+        //String s = ("\n" + "Description: " + this.getContenu() + "\n");
         // "Version: " + message);
         //return s;       
         return "";
        // return super.toString() + s;
     }
 
-public void setDescription(String description)  { this.description.set(description); }    
-public String getDescription()                  { return description.get(); }
-public StringProperty descriptionProperty()     { return description; }
+public void setContenu(String description)  { this.description.set(description); }    
+public String getContenu()                  { return description.get(); }
+public StringProperty descriptionProperty() { return description; }
 
    /*public ImageView getImage() {
         return imgV;
@@ -78,14 +78,14 @@ public StringProperty descriptionProperty()     { return description; }
     /**
      * @return the description
      */
-   /* public String getDescription() {
+   /* public String getContenu() {
         return description;
     }*/
 
     /**
      * @param description the description to set
      */
-   /* public void setDescription(String description) {
+   /* public void setContenu(String description) {
         this.description = description;
     }*/
 

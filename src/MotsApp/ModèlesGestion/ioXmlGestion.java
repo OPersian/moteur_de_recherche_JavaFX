@@ -5,7 +5,6 @@ import static MotsApp.MainMotsApp.filePath_lucene;
 import static MotsApp.MainMotsApp.mabaseArticle_stockage;
 import static MotsApp.MainMotsApp.mabaseArticle_stockage_lucene;
 import static MotsApp.MainMotsApp.mabasePhoto_stockage;
-import MotsApp.Modèles.AlertGestion;
 import MotsApp.VueNavigateur;
 import java.io.File;
 import javafx.stage.FileChooser;

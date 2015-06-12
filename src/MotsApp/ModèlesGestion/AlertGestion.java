@@ -1,4 +1,4 @@
-package MotsApp.Modèles;
+package MotsApp.ModèlesGestion;
 
 import java.lang.reflect.Method;
 import javafx.scene.Scene;

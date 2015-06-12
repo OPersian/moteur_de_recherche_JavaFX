@@ -11,7 +11,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.StackPane;
 import org.apache.lucene.queryparser.classic.ParseException;
 import MotsApp.MainMotsApp;
-import MotsApp.Modèles.AlertGestion;
+import MotsApp.ModèlesGestion.AlertGestion;
 import MotsApp.ModèlesGestion.LuceneMoteur;
 import MotsApp.ModèlesGestion.ioXmlGestion;
 import MotsApp.VueNavigateur;

@@ -20,58 +20,65 @@ import MotsApp.ModèlesGestion.LuceneMoteur;
  * @author Persianova, Golubnycha
  */
 public class RechercheResultatsContrôleur implements Initializable {
+    /*
+    private TableView<Article> matièreTableView;
+    private TableColumn<Article, String> matièreTitre;
+    private TableColumn<Article, String> matièreAuteur;
+    private TableColumn<Article, String> matièreContenu;
+    private TableColumn<Article, LocalDate> matièreDate;
+    private TableColumn<Article, URL> matièreSource;   
+    */
     
-    @FXML private TableView<Article> matièreTableView;
-    
-    @FXML private TableColumn<Article, String> matièreTitre;
-    @FXML private TableColumn<Article, String> matièreAuteur;
-    @FXML private TableColumn<Article, String> matièreContenu;
-    @FXML private TableColumn<Article, LocalDate> matièreDate;
-    @FXML private TableColumn<Article, URL> matièreSource;    
-    
-    @FXML private TextField titreTextField;
-    @FXML private TextField auteurTextField;
-    @FXML private TextField contenuTextField;
-    @FXML private TextField dateTextField;
-    @FXML private TextField sourceTextField;  
-    
-
     @FXML private Label resultatsRechercheLabel;
     
+    @FXML private TableView<Article> articleTableView;
+    @FXML private TableColumn<Article, String> articleTitre;
+    @FXML private TableColumn<Article, String> articleAuteur;
+    @FXML private TableColumn<Article, String> articleContenu; 
+    @FXML private TableColumn<Article, LocalDate> articleDate;
+    @FXML  private TableColumn<Article, URL> articleSource;
     //private ObservableList<Article> mabase; //needs to be global in order to show new result with every new request
+    @FXML private TableView<?> photoTableView;
+    @FXML private TableColumn<?, ?> photoTitre;
+    @FXML private TableColumn<?, ?> photoAuteur;
+    @FXML private TableColumn<?, ?> photoDescription;
+    @FXML private TableColumn<?, ?> photoDate;
+    @FXML private TableColumn<?, ?> photoSource;
 
     /**
      * Initializes the controller class.
      */
     @Override
-    public void initialize(URL url, ResourceBundle rb) {        
-        if (LuceneMoteur.baseArticleResultats != null){
-            MainMotsApp.mabaseArticle_stockage_lucene = LuceneMoteur.baseArticleResultats.getArticleData();
-            
-            matièreTitre.setCellValueFactory(
-                cellData -> cellData.getValue().titreProperty());
-
-            matièreAuteur.setCellValueFactory(
-                cellData -> cellData.getValue().auteurProperty());
-
-            matièreContenu.setCellValueFactory(
-                cellData -> cellData.getValue().contenuProperty());
-
-            matièreDate.setCellValueFactory(
-                cellData -> cellData.getValue().dateProperty());
-
-            matièreSource.setCellValueFactory(
-                cellData -> cellData.getValue().sourceProperty());
-
-            matièreTableView.getItems().setAll(MainMotsApp.mabaseArticle_stockage_lucene);
-    } 
-        MainMotsApp.mabaseArticle_stockage_lucene.clear(); //clear results
-        matièreTableView = null; //clear tableview 
+    public void initialize(URL url, ResourceBundle rb) {  
+        
         String labelText = "Resultats de la Recherche";
         labelText += ": " + MainMotsApp.requêteTexte;
         resultatsRechercheLabel.setText(labelText);
         // MainMotsApp.requêteTexte = ""; //clear text of request from global variable
         
+        if (LuceneMoteur.baseArticleResultats != null){
+            MainMotsApp.mabaseArticle_stockage_lucene = LuceneMoteur.baseArticleResultats.getArticleData();
+            
+            articleTitre.setCellValueFactory(
+                cellData -> cellData.getValue().titreProperty());
+
+            articleAuteur.setCellValueFactory(
+                cellData -> cellData.getValue().auteurProperty());
+
+            articleContenu.setCellValueFactory(
+                cellData -> cellData.getValue().contenuProperty());
+
+            articleDate.setCellValueFactory(
+                cellData -> cellData.getValue().dateProperty());
+
+            articleSource.setCellValueFactory(
+                cellData -> cellData.getValue().sourceProperty());
+
+            articleTableView.getItems().setAll(MainMotsApp.mabaseArticle_stockage_lucene);
+    } 
+        
+        MainMotsApp.mabaseArticle_stockage_lucene.clear(); //clear results
+        articleTableView = null; //clear tableview 
 
 }
     

@@ -8,7 +8,6 @@ import MotsApp.Modèles.Article;
 /**
  * This is used for saving the
  * list of articles to XML.
- * 
  * @author Persianova, Golubnycha
  */
 
