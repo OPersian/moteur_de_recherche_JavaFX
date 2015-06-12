@@ -4,8 +4,45 @@
         <auteur></auteur>
         <date>2015-06-12</date>
         <source>http://sample.com.ua</source>
-        <titre>tre</titre>
+        <titre>aaa1</titre>
         <contenu></contenu>
+    </article>
+    <article>
+        <auteur>Olena Persianova</auteur>
+        <date>2015-05-26</date>
+        <source>http://stage.esy.es/articles.php?article_id=8</source>
+        <titre>M1, M2, Bac... en France et en Ukraine!</titre>
+        <contenu>Nous allons comparer les structures des systèmes éducatifs en France et en Ukraine parce qu’il est nécessaire de décrire votre première formation en Ukraine en français. Les niveaux suivants (tableaux 1-2) ne sont pas équivalents – ils sont regroupés de façon à ce qu’il soit plus facile de les visualiser et pour faciliter la compréhension. Si vous êtes élève au collège ou au lycée, alors le tableau 1 vous aidera à retrouver les différences entre les écoles primaire et secondaire en France et en Ukraine.Si vous cherchez le stage/la programme pour masters en France, tableau 2 vous démontrera les différences principaux entre les systèmes de l'enseignement supérieur.Alors quand vous préparez le CV, nous vous recommandons de faire attention aux différences entre les systèmes de l'enseignement supérieur pour que les recruteurs françaises vous meilleur comprennent.
+        </contenu>
+    </article>
+    <article>
+        <auteur>Wikipedia</auteur>
+        <date>2015-05-20</date>
+        <source>http://fr.wikipedia.org/wiki/Syst%C3%A8me_%C3%A9ducatif_fran%C3%A7ais</source>
+        <titre>Système éducatif français</titre>
+        <contenu>Le système éducatif français est très centralisé, piloté par le ministère de l’Éducation nationale. Depuis 1959 (réforme Berthoin), l’instruction y est obligatoire de 6 à 16 ans ; l’école à la maison est donc légale (quoique marginale). Il existe plus de 65 000 établissements scolaires, relevant pour la plupart du ministère de l’Éducation nationale, même si environ 15 % (primaire) à 20 % (secondaire) des élèves sont dans des établissements privés.</contenu>
+    </article>
+    <article>
+        <auteur>lenegociantplus</auteur>
+        <date>2015-05-21</date>
+        <source>http://lenegociantplus.com/fr/le-systeme-educatif</source>
+        <titre>Le Système éducatif en Ukraine</titre>
+        <contenu> Le ministère de l’Éducation est l’organisme central qui administre le système éducatif ukrainien. Le ministère est chargé de la planification de l’enseignement, des prévisions et de la réglementation du réseau d’établissements d’enseignement. En sus, le ministère exerce un contrôle direct sur la conception et les contenus des programmes officiels à tous les niveaux du système éducatif du pays.
+		L’administration du système éducatif s’effectue également au niveau local par les autorités compétentes nommées par le ministère. Les conseils locaux des députés du peuple (CLDP) sont chargés du financement des établissements d’enseignement en associant des fonds de source locale et des fonds versés par le gouvernement national. La république de Crimée dispose de son propre ministère de l’Éducation.</contenu>
+    </article>
+    <article>
+        <auteur>Le site officiel de la France</auteur>
+        <date>2015-05-26</date>
+        <source>http://www.france.fr/etudier-en-france/le-systeme-scolaire-francais-de-la-maternelle-au-lycee.html</source>
+        <titre>Le système scolaire français : de la maternelle au lycée</titre>
+        <contenu>Le système éducatif français est organisé en trois grandes étapes : école, collège et lycée. Les enseignements primaires et secondaires sont gratuits, neutres, laïcs et obligatoires de 6 à 16 ans. Toutefois, il existe des écoles privées non soumises à ces obligations et spécificités du système scolaire français.</contenu>
+    </article>
+    <article>
+        <auteur>Institut Francais</auteur>
+        <date>2015-05-28</date>
+        <source>http://institutfrancais-italia.com/fr/node/4791</source>
+        <titre>L’ENSEIGNEMENT SUPÉRIEUR FRANÇAIS</titre>
+        <contenu>Dans le droit fil de la Déclaration de la Sorbonne (1998) et de la Déclaration de Bologne (1999) visant à créer un Espace européen de l’enseignement supérieur, la France comme tous les pays signataires a fait évoluer l’architecture de son système et de ses formations universitaires. 46 pays sont désormais membres du Processus de Bologne.Le Processus de Bologne a pour but de construire une Europe du savoir sur un modèle et des objectifs communs. Deux types d’établissements composent le paysage de l’enseignement supérieur français : les universités, et les écoles (Grandes Écoles et écoles spécialisées), établissements privés ou publics accessibles par concours.</contenu>
     </article>
     <article>
         <auteur>Olena Persianova</auteur>

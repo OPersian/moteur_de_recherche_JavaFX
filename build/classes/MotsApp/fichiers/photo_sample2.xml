@@ -7,4 +7,11 @@
         <titre>ttittrree</titre>
         <description>descriptionnnnnnn</description>
     </photo>
+    <photo>
+        <auteur></auteur>
+        <date>2015-06-12</date>
+        <source>file:/C:/Users/Olena/Documents/NetBeansProjects/trial/pic1.png</source>
+        <titre>gff</titre>
+        <description></description>
+    </photo>
 </photos>
