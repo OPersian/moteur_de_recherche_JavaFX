@@ -114,7 +114,7 @@ public class PhotoTableauContrôleur implements Initializable {
      VueNavigateur.loadVue(VueNavigateur.PHOTO_AJOUTE); 
     }
     
-     MainMotsApp mainMotsApp = new MainMotsApp();
+    MainMotsApp mainMotsApp = new MainMotsApp();
     
     @FXML
     private void lireDuFichier(ActionEvent event) throws Exception {      

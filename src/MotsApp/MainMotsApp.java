@@ -40,6 +40,7 @@ public class MainMotsApp extends Application {
     public static String filePath_lucene; //enables lucene indexing of files
     public static ObservableList<Article> mabaseArticle_stockage_lucene;//to enable lucene search (stockage des resultats)
                                                                         //(and not to make a method chargerArticleDataDuFichier to return value)
+    public static ObservableList<Photo> mabasePhoto_stockage_lucene;
     public static String requêteTexte; //enables depicting of search request text in the scene with tableview of results
     /*-------------------------END pour Lucene recherche----------------------*/
            

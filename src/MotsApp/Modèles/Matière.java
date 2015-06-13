@@ -79,7 +79,11 @@ public StringProperty titreProperty() { return titre; }
 public StringProperty auteurProperty() { return auteur; }
 public ObjectProperty<LocalDate> dateProperty() { return date; }
 public ObjectProperty<URL> sourceProperty() { return source; }
-
+/*
+public static StringProperty getTypeDeMatière() { 
+    return auteur; 
+}
+*/
 }
     
     

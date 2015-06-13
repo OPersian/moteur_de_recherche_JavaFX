@@ -107,7 +107,8 @@ public class RootLayoutContrôleur implements Initializable {
     */
     @FXML
     private void indexer(ActionEvent event) throws IOException {
-        LuceneMoteur.créerIndex();
+        LuceneMoteur.créerArticleIndex();
+        // LuceneMoteur.créerPhotoIndex();
     }
 
 }
