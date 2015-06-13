@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.net.URL;
 import java.nio.file.Paths;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import org.apache.lucene.analysis.Analyzer;
 import org.apache.lucene.analysis.core.StopAnalyzer;
 import org.apache.lucene.document.Document;
@@ -27,10 +26,7 @@ import MotsApp.MainMotsApp;
 import MotsApp.Modèles.Article;
 import MotsApp.Modèles.BaseDesArticles;
 import MotsApp.Modèles.BaseDesPhotos;
-import MotsApp.Modèles.Matière;
 import MotsApp.Modèles.Photo;
-import static com.ibm.icu.lang.UCharacter.GraphemeClusterBreak.T;
-import static javafx.scene.input.KeyCode.T;
 
 /**
  *
@@ -46,7 +42,7 @@ public class LuceneMoteur {
     public static BaseDesPhotos basePhotoResultats = new BaseDesPhotos();
 
     
-    public static void créerArticleIndex() throws IOException{
+    public static void créerIndex() throws IOException{
         try {
             StopAnalyzer analyzer = new StopAnalyzer();
             //StopAnalyzer removes common English words that are not usually useful for indexing.
@@ -54,12 +50,10 @@ public class LuceneMoteur {
             Directory dir = FSDirectory.open(Paths.get("."));
             IndexWriterConfig iwc = new IndexWriterConfig(analyzer); // java.lang.IllegalStateException: do not share IndexWriterConfig instances across IndexWriters
             iwc.setOpenMode(OpenMode.CREATE);
-            IndexWriter writer = new IndexWriter(dir, iwc);
+            IndexWriter writer = new IndexWriter(dir, iwc); // Lucene only allows one writer on an index at a time
             
-            //Document document = new Document();
             for (Article i : MainMotsApp.mabaseArticle_stockage) {
-                //Document document = new Document();
-                document = new Document();
+                document = new Document(); // need to create new document at each iteration not to loose data
                 FieldType myFieldType = new FieldType();             
                 myFieldType.setIndexOptions(IndexOptions.DOCS_AND_FREQS);
                 myFieldType.setStored(true); // on stocke le texte
@@ -67,11 +61,8 @@ public class LuceneMoteur {
                 myFieldType.freeze();
                 Field myFieldTitre = new Field("titre",i.getTitre(),myFieldType); 
                 document.add(myFieldTitre);
-                // etc. pour tous les champs souhaités                        
                 Field myFieldAuteur = new Field("auteur",i.getAuteur(),myFieldType); 
-                document.add(myFieldAuteur);                        
-                /*Field myField3 = new Field("auteur",i.getAuteur(),myFieldType); 
-                document.add(myField3); */
+                document.add(myFieldAuteur);         
                 Field myFieldContenu = new Field("contenu",i.getContenu(),myFieldType); 
                 document.add(myFieldContenu);                         
                 Field myFieldDate = new Field("date",i.getDate().toString(),myFieldType); 
@@ -86,16 +77,13 @@ public class LuceneMoteur {
                 //writer.close(); //avoided: org.apache.lucene.store.AlreadyClosedException: this IndexWriter is closed
             } 
             
-             //Document document = new Document();
             for (Photo i : MainMotsApp.mabasePhoto_stockage) {
                 try {
-                    //Document document = new Document();
                     document = new Document();
                 }
                 catch (Exception e){
                     System.out.println("can't create new document (for photos)\n" + e.toString());
                 }
-                
                 FieldType myFieldType = new FieldType();             
                 myFieldType.setIndexOptions(IndexOptions.DOCS_AND_FREQS);
                 myFieldType.setStored(true); // on stocke le texte
@@ -104,11 +92,8 @@ public class LuceneMoteur {
                 try {
                     Field myFieldTitre = new Field("titre",i.getTitre(),myFieldType); 
                     document.add(myFieldTitre);
-                    // etc. pour tous les champs souhaités                        
                     Field myFieldAuteur = new Field("auteur",i.getAuteur(),myFieldType); 
-                    document.add(myFieldAuteur);                        
-                    /*Field myField3 = new Field("auteur",i.getAuteur(),myFieldType); 
-                    document.add(myField3); */
+                    document.add(myFieldAuteur);   
                     Field myFieldContenu = new Field("contenu",i.getContenu(),myFieldType); 
                     document.add(myFieldContenu);                         
                     Field myFieldDate = new Field("date",i.getDate().toString(),myFieldType); 
@@ -144,8 +129,6 @@ public class LuceneMoteur {
         catch (Exception e) {
             System.out.println("Can not produce indexing with lucene \n" + e.toString());
         }
-        
-  
     }
 
     public static void chercherDansIndex(String requête) 

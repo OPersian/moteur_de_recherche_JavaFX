@@ -4,12 +4,15 @@ import java.net.URL;
 import java.time.LocalDate;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
 
 /**
  *
  * @author Persianova, Golubnycha
  */
 
+// @XmlAccessorType(XmlAccessType.PROPERTY) 
 public class Article extends Matière {
 
     //private StringProperty contenu;
@@ -31,8 +34,7 @@ public class Article extends Matière {
         super(titre, auteur, date, source);
         //this.contenu = new SimpleStringProperty(contenu);
         this.setContenu(contenu);
-    }
-    
+    }    
     
     @Override // to debug in console
     public String toString()

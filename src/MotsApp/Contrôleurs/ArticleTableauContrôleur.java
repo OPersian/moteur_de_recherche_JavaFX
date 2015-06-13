@@ -99,7 +99,7 @@ public class ArticleTableauContrôleur implements Initializable {
     @FXML
     private void lireDuFichier(ActionEvent event) throws Exception {
 
-        ioXmlGestion.fichierOuvrir();
+        ioXmlGestion.fichierOuvrir(false); // save current article list
         
         VueNavigateur.loadVue(VueNavigateur.ARTICLE_TABLEAU);//reload view 
         //to see changes instantly after adding data from the file to the current "observable list" of articles

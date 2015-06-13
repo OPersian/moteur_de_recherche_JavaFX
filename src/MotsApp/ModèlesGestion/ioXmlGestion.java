@@ -5,10 +5,14 @@ import static MotsApp.MainMotsApp.filePath_lucene;
 import static MotsApp.MainMotsApp.mabaseArticle_stockage;
 import static MotsApp.MainMotsApp.mabaseArticle_stockage_lucene;
 import static MotsApp.MainMotsApp.mabasePhoto_stockage;
+import MotsApp.Modèles.Article;
 import MotsApp.VueNavigateur;
 import java.io.File;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.stage.FileChooser;
 import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 
@@ -25,27 +29,47 @@ public class ioXmlGestion {
      * @return 
      * @throws java.lang.Exception
  */
-public static void chargerArticleDataDuFichier(File file) throws Exception {
+public static void chargerArticleDataDuFichier(File file, Boolean delete) throws Exception {
     try {
         JAXBContext context = JAXBContext
                 .newInstance(ArticleListeEmballage.class);
+        
+        //the file location is correct
+        System.out.println(file.toString());
+                    
+        //The context knows that both the Article and ArticleListeEmballage classes exist
+        // System.out.println(context.toString());
+        
         Unmarshaller um = context.createUnmarshaller();
         
         // Reading XML from the file and unmarshalling.
-        ArticleListeEmballage wrapper = (ArticleListeEmballage) um.unmarshal(file);
+        ArticleListeEmballage unwrapper = (ArticleListeEmballage) um.unmarshal(file);
         
         // uncomment to delete current articles (that was added within a session)
         // mabaseArticle_stockage.clear(); // attention: not mabaseArticle!
         
         // Adding wrapped article data to the current observableList of articles.
-        mabaseArticle_stockage.addAll(wrapper.getArticles());
+        if (unwrapper.getArticles() != null) System.out.println("unwrapper is not empty");
+        for (Article i : unwrapper.getArticles()){
+            System.out.println(i);
+        }
+        if (mabaseArticle_stockage == null) System.out.println("mabaseArticle_stockage is empty");
+
+        if (delete) mabaseArticle_stockage.setAll(unwrapper.getArticles());
+        else mabaseArticle_stockage.addAll(unwrapper.getArticles());
         
         filePath_lucene = file.getPath(); //for lucene index
         mabaseArticle_stockage_lucene = mabaseArticle_stockage; //for lucene index
-        
-    } catch (Exception e) { // catches ANY exception
+    } 
+    /*
+    catch (Exception e) { // catches ANY exception        
         System.out.println("Could not load data from file:\n" + 
                 file.getPath() + "\n" + e.toString());
+    }*/
+     catch (JAXBException e) {
+         System.out.println("Could not load data from file:\n" + 
+                file.getPath() + "\n" + e.toString());
+        e.printStackTrace();
     }
 }
 
@@ -84,7 +108,7 @@ public static void sauvegarderArticleDataToFile(File file) throws Exception {
  * @param file
      * @throws java.lang.Exception
  */
-public static void chargerPhotoDataDuFichier(File file) throws Exception {
+public static void chargerPhotoDataDuFichier(File file, Boolean delete) throws Exception {
     try {
         JAXBContext context = JAXBContext
                 .newInstance(PhotoListeEmballage.class);
@@ -93,8 +117,10 @@ public static void chargerPhotoDataDuFichier(File file) throws Exception {
         // Reading XML from the file and unmarshalling.
         PhotoListeEmballage wrapper = (PhotoListeEmballage) um.unmarshal(file);
 
-        mabasePhoto_stockage.clear();//not mabase!
-        mabasePhoto_stockage.addAll(wrapper.getPhotos());
+        // uncomment to delete current photos (that was added within a session)
+        // mabasePhoto_stockage.clear();//not mabase!
+        if (delete) mabasePhoto_stockage.setAll(wrapper.getPhotos());
+        else mabasePhoto_stockage.addAll(wrapper.getPhotos());
 
         // Save the file path to the registry.
         // setMatièreFichierChemin(file);
@@ -141,7 +167,7 @@ public static void sauvegarderPhotoDataToFile(File file) throws Exception {
      * Opens a FileChooser to let the user select the data (file) to load.
      */
     // @FXML
-    public static void fichierOuvrir() throws Exception {
+    public static void fichierOuvrir(Boolean delete) throws Exception {
         FileChooser fileChooser = new FileChooser();
         
         // Set extension filter; only xml can be read
@@ -163,16 +189,16 @@ public static void sauvegarderPhotoDataToFile(File file) throws Exception {
 
         if (file != null) {
             if (VueNavigateur.articleVueCheck()){
-                    chargerArticleDataDuFichier(file);//mainMotsApp, before it became static
+                    chargerArticleDataDuFichier(file, delete);//mainMotsApp, before it became static
                     VueNavigateur.loadVue(VueNavigateur.ARTICLE_TABLEAU);//reload view 
                     //to see changes instantly
             }                
             else if (VueNavigateur.photoVueCheck()){
-                    chargerPhotoDataDuFichier(file); // mainMotsApp, before it became static
+                    chargerPhotoDataDuFichier(file, delete); // mainMotsApp, before it became static
                     VueNavigateur.loadVue(VueNavigateur.PHOTO_TABLEAU);//reload view 
                     //to see changes instantly
             }                 
-            else chargerArticleDataDuFichier(file);
+            else chargerArticleDataDuFichier(file, delete);
         }
     }
 

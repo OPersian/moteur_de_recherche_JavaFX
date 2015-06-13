@@ -68,7 +68,7 @@ public class RootLayoutContrôleur implements Initializable {
     
     @FXML
     private void fichierOuvrir() throws Exception {
-        ioXmlGestion.fichierOuvrir();
+        ioXmlGestion.fichierOuvrir(true); // clear current articles list
     }   
     
     @FXML
@@ -107,8 +107,7 @@ public class RootLayoutContrôleur implements Initializable {
     */
     @FXML
     private void indexer(ActionEvent event) throws IOException {
-        LuceneMoteur.créerArticleIndex();
-        // LuceneMoteur.créerPhotoIndex();
+        LuceneMoteur.créerIndex();
     }
 
 }

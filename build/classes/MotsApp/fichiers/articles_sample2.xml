@@ -1,17 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <articles>
     <article>
-        <auteur></auteur>
-        <date>2015-06-12</date>
-        <source>http://sample.com.ua</source>
-        <titre>t</titre>
-        <contenu></contenu>
-    </article>
-    <article>
-        <auteur></auteur>
-        <date>2015-06-12</date>
-        <source>http://sample.com.ua</source>
-        <titre>t</titre>
-        <contenu></contenu>
+        <article>
+            <auteur>sdf</auteur>
+            <date>2015-06-13</date>
+            <source>http://sample.com.ua</source>
+            <titre>fdsf</titre>
+            <contenu>sdf</contenu>
+        </article>
     </article>
 </articles>

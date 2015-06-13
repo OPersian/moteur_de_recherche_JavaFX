@@ -118,7 +118,7 @@ public class PhotoTableauContrôleur implements Initializable {
     
     @FXML
     private void lireDuFichier(ActionEvent event) throws Exception {      
-        ioXmlGestion.fichierOuvrir();
+        ioXmlGestion.fichierOuvrir(false); // save current photo list
         VueNavigateur.loadVue(VueNavigateur.PHOTO_TABLEAU);//reload view 
                                                            //to see changes instantly
     }

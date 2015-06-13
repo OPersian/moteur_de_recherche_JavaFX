@@ -1,5 +1,11 @@
 package MotsApp.Contrôleurs;
 
+import static MotsApp.MainMotsApp.mabaseArticle;
+import static MotsApp.MainMotsApp.mabaseArticle_stockage;
+import static MotsApp.MainMotsApp.mabasePhoto;
+import static MotsApp.MainMotsApp.mabasePhoto_stockage;
+import MotsApp.Modèles.Article;
+import MotsApp.Modèles.Photo;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
@@ -26,6 +32,22 @@ public class PageAccueilContrôleur implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        
+        // to load sample article from the very beginning
+        Article a = new Article();
+        a.setTitre("titre");
+        a.setAuteur("auteur");
+        a.setContenu("contenu");
+        mabaseArticle.ajouterArticle(a);
+        mabaseArticle_stockage = mabaseArticle.getArticleData();
+        
+        // to load sample photo item from the very beginning
+        Photo p = new Photo();
+        p.setTitre("titre");
+        p.setAuteur("auteur");
+        p.setContenu("description");
+        mabasePhoto.ajouterPhoto(p);
+        mabasePhoto_stockage = mabasePhoto.getPhotoData();
         
         functionaliteLabel.setText("MotsApp! vous permet de bien sauvegarder tous vos "
                 + "\ndonnees de maniere vraiment multifonctionnele! "
