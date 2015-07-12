@@ -1,18 +1,20 @@
 package MotsApp.Contrôleurs;
 
-import static MotsApp.MainMotsApp.mabaseArticle;
-import static MotsApp.MainMotsApp.mabaseArticle_stockage;
-import static MotsApp.MainMotsApp.mabasePhoto;
-import static MotsApp.MainMotsApp.mabasePhoto_stockage;
 import MotsApp.Modèles.Article;
 import MotsApp.Modèles.Photo;
+import java.io.File;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javafx.scene.control.Label;
+import javafx.scene.control.TitledPane;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Label;
-import javafx.scene.control.TitledPane;
-import javafx.scene.layout.AnchorPane;
+import MotsApp.MainMotsApp;
+import MotsApp.ModèlesGestion.ioXmlGestion;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 /**
  * FXML Controller class
@@ -32,54 +34,60 @@ public class PageAccueilContrôleur implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        // pour peupler la liste des articles quand on charge l'application :
+        ObservableList<Article> articlesList = FXCollections.observableArrayList();
         
-        // to load sample article from the very beginning
-        Article a = new Article();
-        a.setTitre("titre");
-        a.setAuteur("auteur");
-        a.setContenu("contenu");
-        mabaseArticle.ajouterArticle(a);
-        mabaseArticle_stockage = mabaseArticle.getArticleData();
+        // obtenir le fichier avec sien chemin relatif
+        File fileArticles = new File("articles_sample.xml");
         
-        // to load sample photo item from the very beginning
-        Photo p = new Photo();
-        p.setTitre("titre");
-        p.setAuteur("auteur");
-        p.setContenu("description");
-        mabasePhoto.ajouterPhoto(p);
-        mabasePhoto_stockage = mabasePhoto.getPhotoData();
+        // charger les données dans la variable locale du fichier "par défaut" 
+        // pour peupler la liste des articles quand on charge l'application: 
+        try {
+            ioXmlGestion.chargerArticleDataDuFichier(fileArticles, true, articlesList);
+            MainMotsApp.mabaseArticle_onload = articlesList;
+        } catch (Exception ex) {
+            Logger.getLogger(PageAccueilContrôleur.class.getName()).log(Level.SEVERE, null, ex);
+        }
+            
+        // pour peupler la liste des photos quand on charge l'application :
+        ObservableList<Photo> photosList = FXCollections.observableArrayList();
         
+        // obtenir le fichier avec sien chemin relatif
+        File filePhotos = new File("photos_sample.xml");
+        
+        // charger les données dans la variable locale du fichier "par défaut" 
+        // pour peupler la liste des photos quand on charge l'application: 
+            try {
+                ioXmlGestion.chargerPhotoDataDuFichier(filePhotos, true, photosList);
+                MainMotsApp.mabasePhoto_onload = photosList;
+            } catch (Exception ex) {
+                Logger.getLogger(PageAccueilContrôleur.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
         functionaliteLabel.setText("MotsApp! vous permet de bien sauvegarder tous vos "
-                + "\ndonnees de maniere vraiment multifonctionnele! "
+                + "données de manière vraiment multifonctionnelle! "
                 + "\n"
                 + "\nLes fichiers en format XML tiennent vos articles et vos "
-                + "\n photos de n'importe quelle volume!"
+                + "photos de n'importe quel volume!"
                 + "\n"                
-                + "\nDe plus, vous pouvez naviguer sur vos donnees et meme "
-                + "\nchercher!");
+                + "\nDe plus, vous pouvez naviguer sur vos données et même "
+                + "chercher!");
         
-        utiliteLabel.setText("L'application est utile dans votre vie privee "
-                + "\net celle de professionelle! Miex vaut tojours tracer "
-                + "\nles resultats de vos travaux en formats des notes ou "
-                + "\nscreenshots. "
+        utiliteLabel.setText("L'application est utile dans votre vie privée et celle de professionelle! Miex vaut tojours tracer "
+                + "les résultats de vos travaux en formats des notes ou screenshots. "
                 + "\n"
-                + "\nVos souvenirs intimes peuvent etre aussi memorizes grace "
-                + "\na MotsApp! "
+                + "\nVos souvenirs intimes peuvent être aussi memorizes grâce à MotsApp! "
                 + "\n"
-                + "\nVous vous interressez au sujet particulier? Les collections des "
-                + "\narticles et des photos sont a votre disposition!");
+                + "\nVous vous intéressez au sujet particulier? Les collections des articles "
+                + "et des photos sont à votre disposition!");
         
-        efficaciteLabel.setText("MotsApp! garde bien vos articles et photos"
-                + "\nen  format XML que vous notamment permettra "
-                + "\nd'echanger vos donnes avec les autres applications "
-                + "\nsans aucun probleme! "
+        efficaciteLabel.setText("MotsApp! garde bien vos articles et photos en format XML que vous notamment permettra d'echanger "
+                + "vos données avec les autres applications sans aucun probleme! "
                 + "\n"
-                + "\nPrenez controle de votre productivite, comme MotsApp! "
-                + "\nvous permet de sauvegarder, modifier et naviguer "
-                + "\nsur vos donnees de facon le plus efficace!"
+                + "\nPrenez le contrôle de votre productivité, comme MotsApp! "
+                + "vous permet de sauvegarder, modifier et naviguer sur vos données de façon le plus efficace!"
                 + "\n"
-                + "\nDe plus, nous vous garantions de vous bien soutenir"
-                + "\npendant tout le periode d'emploi de MotsApp!");
+                + "\nDe plus, nous vous garantissons de vous bien soutenir pendant tout le période d'emploi de MotsApp!");
 
     }    
     

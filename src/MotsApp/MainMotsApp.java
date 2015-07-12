@@ -9,8 +9,6 @@ import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import MotsApp.Modèles.Article;
-import MotsApp.Modèles.BaseDesPhotos;
-import MotsApp.Modèles.BaseDesArticles;
 import MotsApp.Modèles.Photo;
 
 /**
@@ -21,27 +19,35 @@ import MotsApp.Modèles.Photo;
 public class MainMotsApp extends Application {
     
     /*--------------------------gestion des scenes----------------------------*/    
-    public Stage primaireStage; //private  
-    public static String couranteSousVue; //to parametrize open/save menu buttons' methods
-                                          //(whether we work with photos or articles)
+    public Stage primaireStage;
+    // pour paramétrer les méthodes des boutons open/save du menu 
+    // (si on travail avec photos ou avec article, 
+    // comme dans les noms des boutons le type de matière n'est pas indiqué délibérément):
+    public static String couranteSousVue;
     /*------------------------END gestion des scenes--------------------------*/
     
     
     /*----------------------------pour TableView------------------------------*/
-    public static ObservableList<Article> mabaseArticle_stockage;
+    // pour travailler tojours aves une seule liste des articles pendant la "session"
+    public static ObservableList<Article> mabaseArticle_stockage; 
+    // pour travailler tojours aves une seule liste des photos pendant la "session"
     public static ObservableList<Photo> mabasePhoto_stockage;
-    public static BaseDesArticles mabaseArticle = new BaseDesArticles(); //to populate tableview in future  
-    public static BaseDesPhotos mabasePhoto = new BaseDesPhotos(); 
+    // pour peupler la liste des articles quand on charge l'application:
+    public static ObservableList<Article> mabaseArticle_onload; 
+    // pour peupler la liste des photos quand on charge l'application:
+    public static ObservableList<Photo> mabasePhoto_onload; 
     /*--------------------------END pour TableView----------------------------*/
 
 
     /*--------------------------pour Lucene recherche-------------------------*/
-    public static int maxHits; //see Main; enables to operate with maxHits (LuceneMoteur; chercherDansIndex)
-    public static String filePath_lucene; //enables lucene indexing of files
-    public static ObservableList<Article> mabaseArticle_stockage_lucene;//to enable lucene search (stockage des resultats)
-                                                                        //(and not to make a method chargerArticleDataDuFichier to return value)
+    // voir Main; pour d'opérer maxHits (voir: LuceneMoteur --> chercherDansIndex):
+    public static int maxHits; 
+    // pour chercher avec lucene (en particulier, stocker des resultats); 
+    // aussi, pour eviter return-value de chargerArticleDataDuFichier():
+    public static ObservableList<Article> mabaseArticle_stockage_lucene;
     public static ObservableList<Photo> mabasePhoto_stockage_lucene;
-    public static String requêteTexte; //enables depicting of search request text in the scene with tableview of results
+    // pour montrer le texte de la requête (dans la scène avec tableview des resultats):
+    public static String requêteTexte;
     /*-------------------------END pour Lucene recherche----------------------*/
            
     @Override
@@ -49,7 +55,9 @@ public class MainMotsApp extends Application {
         
         this.primaireStage = stage;
         this.primaireStage.setTitle("MotsApp Application");  
-        this.primaireStage.setResizable(false);
+        this.primaireStage.setHeight(650);
+        this.primaireStage.setWidth(690);
+        this.primaireStage.setResizable(true);
         
         stage.setScene(
             createScene(
@@ -61,19 +69,17 @@ public class MainMotsApp extends Application {
     }   
     
     private Pane loadMainPane() throws IOException  {
-        FXMLLoader loader = new FXMLLoader();
+        FXMLLoader loader = new FXMLLoader();    
         
+        // pour charger la scène primaire
         Pane mainPane = (Pane) loader.load(
             getClass().getResourceAsStream(
                 VueNavigateur.ROOT_LAYOUT
             )
-        );
-        
+        );        
         RootLayoutContrôleur mainController = loader.getController();
-        
         VueNavigateur.setMainController(mainController);
-        VueNavigateur.loadVue(VueNavigateur.PAGE_ACCUEIL);
-        
+        VueNavigateur.loadVue(VueNavigateur.PAGE_ACCUEIL);        
         return mainPane;
     }
     

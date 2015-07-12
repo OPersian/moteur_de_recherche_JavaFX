@@ -19,7 +19,7 @@ public class VueNavigateur {
     public static final String RESULTATS_RECHERCHE = "/MotsApp/Vues/RechercheResultats.fxml";
     public static final String PHOTO_AJOUTE = "/MotsApp/Vues/PhotoAjoute.fxml"; 
     public static final String PHOTO_TABLEAU = "/MotsApp/Vues/PhotoTableau.fxml";
-    public static final String AUTEURS_INFO = "/MotsApp/Vues/AuteursInfo.fxml";
+    public static final String AUTEURS_INFO = "/MotsApp/Vues/Auteurs.fxml";
     /*------------------------END navigation sur scenes-----------------------*/
     
     private static RootLayoutContrôleur mainController;
@@ -28,6 +28,7 @@ public class VueNavigateur {
         VueNavigateur.mainController = mainController;
     }
     
+    // cette méthode permet de charger le "sous-vue"
     public static void loadVue(String fxml) {
         try {
             mainController.setView(
@@ -37,11 +38,21 @@ public class VueNavigateur {
                     )
                 )         
             );
-            MainMotsApp.couranteSousVue = fxml;   
-            // System.out.println(MainMotsApp.couranteSousVue);//to debug in console
+            // voir explication du champ couranteSousVue (MainMotsApp)
+            MainMotsApp.couranteSousVue = fxml;
+            // à déboguer dans la console
+            System.out.println(MainMotsApp.couranteSousVue);
         }
         catch (IOException e) {
             e.printStackTrace();
+        }
+        // peupler la liste des articles quand on charge l'application
+        if (MainMotsApp.mabaseArticle_stockage == null) {
+        MainMotsApp.mabaseArticle_stockage = MainMotsApp.mabaseArticle_onload;
+        }
+        // peupler la liste des photos quand on charge l'application
+        if (MainMotsApp.mabasePhoto_stockage == null) {
+        MainMotsApp.mabasePhoto_stockage = MainMotsApp.mabasePhoto_onload;
         }
     }
     

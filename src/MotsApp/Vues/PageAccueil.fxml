@@ -2,6 +2,7 @@
 
 <?import java.lang.*?>
 <?import java.util.*?>
+<?import javafx.geometry.*?>
 <?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.effect.*?>
@@ -10,58 +11,68 @@
 <?import javafx.scene.text.*?>
 <?scenebuilder-classpath-element ../images?>
 
-<AnchorPane id="AnchorPane" prefHeight="650.0" prefWidth="750.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="MotsApp.Contrôleurs.PageAccueilContrôleur">
+<AnchorPane id="AnchorPane" minHeight="-Infinity" prefHeight="650.0" prefWidth="-1.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="MotsApp.Contrôleurs.PageAccueilContrôleur">
   <children>
-    <!--http://www.javacodegeeks.com/2013/03/javafx-2-with-spring.html-->
-    <!--<fx:include source="/trial/fichiersFxml/RootLayout.fxml"/> -->
-    <Accordion layoutX="213.0" layoutY="137.0" minWidth="175.0" prefHeight="376.0" prefWidth="443.0">
-      <expandedPane>
-        <TitledPane id="x2" fx:id="x1" animated="false" style="-fx-font: NORMAL 18 Tahoma;" text="Efficacite">
-          <content>
-            <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-font: NORMAL 15 Tahoma;">
-              <children>
-                <Label fx:id="efficaciteLabel" alignment="TOP_LEFT" layoutX="14.0" layoutY="25.0" prefHeight="223.0" prefWidth="413.0" text="Description" />
-              </children>
-            </AnchorPane>
-          </content>
-        </TitledPane>
-      </expandedPane>
-      <panes>
-        <TitledPane id="" alignment="TOP_LEFT" animated="false" prefWidth="312.0" style="-fx-font: NORMAL 18 Tahoma;" text="Functionalite">
-          <content>
-            <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-font: NORMAL 15 Tahoma;">
-              <children>
-                <Label fx:id="functionaliteLabel" alignment="TOP_LEFT" layoutX="14.0" layoutY="26.0" prefHeight="222.0" prefWidth="411.0" text="Description" />
-              </children>
-            </AnchorPane>
-          </content>
-        </TitledPane>
-        <TitledPane alignment="TOP_LEFT" animated="false" style="-fx-font: NORMAL 18 Tahoma;" text="Utilite">
-          <content>
-            <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-font: NORMAL 15 Tahoma;">
-              <children>
-                <Label fx:id="utiliteLabel" alignment="TOP_LEFT" layoutX="14.0" layoutY="30.0" prefHeight="218.0" prefWidth="413.0" text="Description" />
-              </children>
-            </AnchorPane>
-          </content>
-        </TitledPane>
-        <fx:reference source="x1" />
-      </panes>
-    </Accordion>
-    <Label alignment="CENTER" layoutX="32.0" layoutY="88.0" prefWidth="696.0" style="-fx-font: NORMAL 25 Tahoma;" text="Bienvenue chez MotsApp!" textAlignment="CENTER" underline="false">
-      <font>
-        <Font name="System Bold" size="20.0" />
-      </font>
-    </Label>
-    <ImageView fitHeight="210.81011962890625" fitWidth="171.69072357824646" layoutX="32.0" layoutY="178.0" pickOnBounds="true" preserveRatio="true">
-      <image>
-        <Image url="@../images/main.png" />
-      </image>
-    </ImageView>
-    <Label alignment="CENTER" contentDisplay="CENTER" layoutX="32.0" layoutY="529.0" prefWidth="696.0" text="B o n n e    R e c h e r c h e !&#10;*  *  *" textAlignment="CENTER" textFill="#2c008ab8" underline="false" wrapText="false">
-      <font>
-        <Font name="System Bold Italic" size="20.0" />
-      </font>
-    </Label>
+    <AnchorPane id="AnchorPane" minHeight="-Infinity" prefHeight="500.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
+      <children>
+        <!--http://www.javacodegeeks.com/2013/03/javafx-2-with-spring.html-->
+        <!--<fx:include source="/trial/fichiersFxml/RootLayout.fxml"/> -->
+        <Accordion minWidth="175.0" prefHeight="450.0" prefWidth="443.0" AnchorPane.bottomAnchor="86.0" AnchorPane.leftAnchor="200.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="75.98">
+          <expandedPane>
+            <TitledPane id="x2" fx:id="x1" animated="false" style="-fx-font: NORMAL 18 Tahoma;" text="Efficacité">
+              <content>
+                <AnchorPane id="Content" minHeight="-Infinity" minWidth="-Infinity" prefHeight="180.0" prefWidth="200.0" style="-fx-font: NORMAL 15 Tahoma;">
+                  <children>
+                    <Label fx:id="efficaciteLabel" alignment="TOP_LEFT" cache="true" cacheHint="DEFAULT" contentDisplay="CENTER" depthTest="INHERIT" disable="false" ellipsisString="" focusTraversable="true" graphicTextGap="4.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-1.0" minWidth="-1.0" mnemonicParsing="false" mouseTransparent="false" pickOnBounds="false" prefHeight="250.0" prefWidth="650.0" text="Description" textOverrun="ELLIPSIS" underline="false" wrapText="true" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0" />
+                  </children>
+                </AnchorPane>
+              </content>
+            </TitledPane>
+          </expandedPane>
+          <panes>
+            <TitledPane id="" fx:id="x2" alignment="TOP_LEFT" animated="false" prefWidth="312.0" style="-fx-font: NORMAL 18 Tahoma;" text="Fonctionnalité">
+              <content>
+                <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-font: NORMAL 15 Tahoma;">
+                  <children>
+                    <Label fx:id="functionaliteLabel" alignment="TOP_LEFT" focusTraversable="true" prefHeight="250.0" prefWidth="65.0" text="Description" wrapText="true" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0" />
+                  </children>
+                </AnchorPane>
+              </content>
+            </TitledPane>
+            <TitledPane alignment="TOP_LEFT" animated="false" style="-fx-font: NORMAL 18 Tahoma;" text="Utilité">
+              <content>
+                <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-font: NORMAL 15 Tahoma;">
+                  <children>
+                    <Label fx:id="utiliteLabel" alignment="TOP_LEFT" focusTraversable="true" prefHeight="250.0" prefWidth="650.0" text="Description" wrapText="true" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0" />
+                  </children>
+                </AnchorPane>
+              </content>
+            </TitledPane>
+            <fx:reference source="x1" />
+          </panes>
+        </Accordion>
+        <Label alignment="CENTER" prefHeight="46.0" prefWidth="948.0" style="-fx-font: NORMAL 25 Tahoma;" text="Bienvenue chez MotsApp!" textAlignment="CENTER" underline="false" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="14.0">
+          <font>
+            <Font name="System Bold" size="20.0" />
+          </font>
+        </Label>
+        <ImageView fitHeight="210.81011962890625" fitWidth="171.69072357824646" layoutX="14.0" pickOnBounds="true" preserveRatio="true" AnchorPane.topAnchor="175.98">
+          <image>
+            <Image url="@../images/main.png" />
+          </image>
+        </ImageView>
+        <Label alignment="CENTER" contentDisplay="CENTER" prefWidth="948.0" text="A y e z    u n e    e x p é r i e n c e    a g r é a b l e !&#10;*  *  *" textAlignment="CENTER" textFill="#667eff" underline="false" wrapText="false" AnchorPane.bottomAnchor="22.0" AnchorPane.leftAnchor="-3.0" AnchorPane.rightAnchor="3.0">
+          <font>
+            <Font name="System Bold Italic" size="20.0" />
+          </font>
+        </Label>
+      </children>
+      <padding>
+        <Insets />
+      </padding>
+    </AnchorPane>
   </children>
+  <padding>
+    <Insets bottom="50.0" top="70.0" />
+  </padding>
 </AnchorPane>

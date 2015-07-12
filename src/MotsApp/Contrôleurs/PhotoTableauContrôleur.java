@@ -3,19 +3,19 @@ package MotsApp.Contrôleurs;
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.ResourceBundle;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TableView;
 import MotsApp.Modèles.Photo;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import MotsApp.MainMotsApp;
+import MotsApp.ModèlesGestion.AlertGestion;
+import MotsApp.ModèlesGestion.LuceneMoteur;
 import MotsApp.ModèlesGestion.ioXmlGestion;
 import MotsApp.VueNavigateur;
+
 
 /**
  * FXML Controller class
@@ -24,66 +24,23 @@ import MotsApp.VueNavigateur;
  */
 public class PhotoTableauContrôleur implements Initializable {
     @FXML private TableView<Photo> photoTableView;
-    //@FXML private TableView<Photo> photoTableView = new TableView<Photo>();
-    private ObservableList<Photo> mabasePhoto;
-    //private MainMotsApp mainMotsApp; 
-    
-    private final StringProperty description = new SimpleStringProperty(this, "description","");
-
-    //@FXML private TableColumn<Photo, ImageView> photoImage;
     @FXML private TableColumn<Photo, String> photoTitre;
     @FXML private TableColumn<Photo, String> photoAuteur;
     @FXML private TableColumn<Photo, String> photoDescription;
     @FXML private TableColumn<Photo, LocalDate> photoDate;
     @FXML private TableColumn<Photo, URL> photoSource;
-    @FXML private Button ajoute_btn;
-    //private TableColumn<?, ?> photoImage;
+    @FXML private Button suprime_btn;
+    @FXML private Button ajouter_btn;
+    @FXML private Button copier_btn;
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-               if (MainMotsApp.mabasePhoto_stockage != null){
-            //TableColumn Definition
-           /* TableColumn photoImage = new TableColumn("Photo");
-                photoImage.setCellValueFactory(new PropertyValueFactory("photo"));
-                   photoImage.setPrefWidth(200);  */
-                   
-            // Setting CellFactory pour TableColumn("Photo")                 
-/*photoImage.setCellFactory(new Callback<TableColumn<Photo,ImageView>,TableCell<Photo,ImageView>>(){        
-	@Override
-	public TableCell<Photo, ImageView> call(TableColumn<Photo, ImageView> param) {                
-		TableCell<Photo, ImageView> cell = new TableCell<Photo, ImageView>(){
-			ImageView imageview = new ImageView();
-                        
-                    @Override
-                    public void updateItem(ImageView item, boolean empty) {                        
-				if(item!=null){                            
-					HBox box= new HBox();
-					box.setSpacing(10);
-                        		//imageview.setFitHeight(50);
-					//imageview.setFitWidth(50);
-					imageview.setImage(item.getImage());
-
-					box.getChildren().addAll(imageview); 
-					//Setting Graphic composant pour Cell
-					setGraphic(box);
-				}
-			}
-                };
-                
-                   /* //Cell cliquable
-                    cell.setOnMouseClicked(event -> {
-                        if (event.getClickCount() == 2 && (! cell.isEmpty()) ) {
-                            ImageView cellData = cell.getItem();
-                            System.out.println(cellData);
-                        }
-                    });*/
-                
-		/*System.out.println(cell.getIndex());               
-		return cell;
-	}
-
-});*/
-                 
+        
+        //populate from Photos collection only if any Photo has been saved to
+        // collection with PhotoAjoute
+        
+        if (MainMotsApp.mabasePhoto_stockage != null){
+                          
             photoTitre.setCellValueFactory(
                 cellData -> cellData.getValue().titreProperty());
             
@@ -92,17 +49,12 @@ public class PhotoTableauContrôleur implements Initializable {
 
             photoDescription.setCellValueFactory(
                 cellData -> cellData.getValue().descriptionProperty());
-            photoDescription.setEditable(true);
-            /* photoDescription.setCellValueFactory(
-                new PropertyValueFactory<>("description"));*/
-
+ 
             photoDate.setCellValueFactory(
                 cellData -> cellData.getValue().dateProperty());
             
             photoSource.setCellValueFactory(
-                cellData -> cellData.getValue().sourceProperty());            
-
-            
+                cellData -> cellData.getValue().sourceProperty()); 
             
             photoTableView.getItems().setAll(MainMotsApp.mabasePhoto_stockage);
         }
@@ -114,16 +66,38 @@ public class PhotoTableauContrôleur implements Initializable {
      VueNavigateur.loadVue(VueNavigateur.PHOTO_AJOUTE); 
     }
     
-    MainMotsApp mainMotsApp = new MainMotsApp();
-    
+   
     @FXML
     private void lireDuFichier(ActionEvent event) throws Exception {      
         ioXmlGestion.fichierOuvrir(false); // save current photo list
+        AlertGestion.displayInfoAlert("Attendez","Exécution de l'indexation",
+                    "SVP, attendez qqn sec tandis que l'indexation est terminée \n Cliquez sur ok");
+        LuceneMoteur.créerIndex(); // Lucene indexation
         VueNavigateur.loadVue(VueNavigateur.PHOTO_TABLEAU);//reload view 
-                                                           //to see changes instantly
+        //to see changes instantly after adding data from the file to the current "observable list" of photos
     }
-    //сделать булевые переменные: да/нет - ч/б, цветная
-    //сделать вывод разрешения фото
-    //ошибка индексации люсцен
-}
+
+    @FXML
+    private void suprPhotoTable(ActionEvent event) {
+        //obtenir index de la ligne sélectionnée
+       int row = photoTableView.getSelectionModel().getSelectedIndex(); 
+       photoTableView.getItems().remove(row); //supprimer la ligne sélectionnée
+   }
+
+    /*@FXML
+    private void copierPhotoTable(ActionEvent event) {
+       int row = photoTableView.getSelectionModel().getSelectedIndex(); //obtenir index de la ligne sélectionnée
+      
+       //affecter aux variables statiques les données de la ligne sélectionnée
+       PhotoAjouteContrôleur.titre = photoTitre.getCellData(row);
+       PhotoAjouteContrôleur.auteur = photoAuteur.getCellData(row);
+       PhotoAjouteContrôleur.description = photoDescription.getCellData(row);
+       PhotoAjouteContrôleur.date = photoDate.getCellData(row).toString();
+       PhotoAjouteContrôleur.source = photoSource.getCellData(row).toString();
+       
+          
+       VueNavigateur.loadVue(VueNavigateur.PHOTO_AJOUTE);
+    }*/
+
+  }
     

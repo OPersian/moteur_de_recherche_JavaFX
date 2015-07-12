@@ -8,6 +8,8 @@ import java.time.format.DateTimeParseException;
 import javax.xml.bind.annotation.adapters.XmlAdapter;
 
 /**
+ * formater de types specifiques (localdate, url); lire/écrire 
+ * les données avec le champ de localdate du/dans le fichier XML.
  * 
  * @author Persianova, Golubnycha
  */

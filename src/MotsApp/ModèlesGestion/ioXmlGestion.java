@@ -1,14 +1,13 @@
 package MotsApp.ModèlesGestion;
 
 import MotsApp.MainMotsApp;
-import static MotsApp.MainMotsApp.filePath_lucene;
 import static MotsApp.MainMotsApp.mabaseArticle_stockage;
 import static MotsApp.MainMotsApp.mabaseArticle_stockage_lucene;
 import static MotsApp.MainMotsApp.mabasePhoto_stockage;
 import MotsApp.Modèles.Article;
+import MotsApp.Modèles.Photo;
 import MotsApp.VueNavigateur;
 import java.io.File;
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.stage.FileChooser;
 import javax.xml.bind.JAXBContext;
@@ -21,24 +20,20 @@ import javax.xml.bind.Unmarshaller;
  * @author Olena, Olga
  */
 public class ioXmlGestion {
-    /**
+ /**
  * Loads article data from the specified file. The current article data will
  * be safe.
  * 
- * @param file
-     * @return 
+ * @param file 
      * @throws java.lang.Exception
  */
-public static void chargerArticleDataDuFichier(File file, Boolean delete) throws Exception {
+public static void chargerArticleDataDuFichier(File file, Boolean delete, ObservableList<Article> articlesList) throws Exception {
     try {
         JAXBContext context = JAXBContext
                 .newInstance(ArticleListeEmballage.class);
         
         //the file location is correct
         System.out.println(file.toString());
-                    
-        //The context knows that both the Article and ArticleListeEmballage classes exist
-        // System.out.println(context.toString());
         
         Unmarshaller um = context.createUnmarshaller();
         
@@ -53,23 +48,21 @@ public static void chargerArticleDataDuFichier(File file, Boolean delete) throws
         for (Article i : unwrapper.getArticles()){
             System.out.println(i);
         }
-        if (mabaseArticle_stockage == null) System.out.println("mabaseArticle_stockage is empty");
 
-        if (delete) mabaseArticle_stockage.setAll(unwrapper.getArticles());
-        else mabaseArticle_stockage.addAll(unwrapper.getArticles());
+        if (delete) articlesList.setAll(unwrapper.getArticles());
+        else articlesList.addAll(unwrapper.getArticles());
         
-        filePath_lucene = file.getPath(); //for lucene index
-        mabaseArticle_stockage_lucene = mabaseArticle_stockage; //for lucene index
+        if (articlesList == null) System.out.println(articlesList + " is empty");
+        
+        //nous travaillons avec memoire; pas de besoin quant a l'indexage avec lucene :
+        // filePath_lucene = file.getPath();
+        
+        mabaseArticle_stockage_lucene = articlesList; //for lucene index
     } 
-    /*
-    catch (Exception e) { // catches ANY exception        
+    catch (JAXBException e) { // not Exception
         System.out.println("Could not load data from file:\n" + 
-                file.getPath() + "\n" + e.toString());
-    }*/
-     catch (JAXBException e) {
-         System.out.println("Could not load data from file:\n" + 
-                file.getPath() + "\n" + e.toString());
-        e.printStackTrace();
+            file.getPath() + "\n" + e.toString());
+            // e.printStackTrace();
     }
 }
 
@@ -93,7 +86,8 @@ public static void sauvegarderArticleDataToFile(File file) throws Exception {
         // Marshalling and saving XML to the file.
         m.marshal(wrapper, file);
         
-        filePath_lucene = file.getPath(); //to lucene index
+        //nous travaillons avec memoire; pas de besoin quant a l'indexage avec lucene
+        // filePath_lucene = file.getPath(); 
         
     } catch (Exception e) { // catches ANY exception
         System.out.println("Could not save data to file:\n" + file.getPath() +
@@ -108,7 +102,7 @@ public static void sauvegarderArticleDataToFile(File file) throws Exception {
  * @param file
      * @throws java.lang.Exception
  */
-public static void chargerPhotoDataDuFichier(File file, Boolean delete) throws Exception {
+public static void chargerPhotoDataDuFichier(File file, Boolean delete, ObservableList<Photo> photoList) throws Exception {
     try {
         JAXBContext context = JAXBContext
                 .newInstance(PhotoListeEmballage.class);
@@ -119,12 +113,11 @@ public static void chargerPhotoDataDuFichier(File file, Boolean delete) throws E
 
         // uncomment to delete current photos (that was added within a session)
         // mabasePhoto_stockage.clear();//not mabase!
-        if (delete) mabasePhoto_stockage.setAll(wrapper.getPhotos());
-        else mabasePhoto_stockage.addAll(wrapper.getPhotos());
-
-        // Save the file path to the registry.
-        // setMatièreFichierChemin(file);
-        filePath_lucene = file.getPath(); //to lucene index
+        if (delete) photoList.setAll(wrapper.getPhotos());
+        else photoList.addAll(wrapper.getPhotos());
+        
+        //nous travaillons avec memoire; pas de besoin quant a l'indexage avec lucene
+        // filePath_lucene = file.getPath(); //to lucene index
 
     } catch (Exception e) { // catches ANY exception
         System.out.println("Could not load data from file:\n" + 
@@ -151,89 +144,83 @@ public static void sauvegarderPhotoDataToFile(File file) throws Exception {
 
         // Marshalling and saving XML to the file.
         m.marshal(wrapper, file);
-
-        // Save the file path to the registry.
-        // setMatièreFichierChemin(file);
-        filePath_lucene = file.getPath(); //to lucene index
+        
+        //nous travaillons avec memoire; pas de besoin quant a l'indexage avec lucene
+        // filePath_lucene = file.getPath(); //to lucene index
         
     } catch (Exception e) { // catches ANY exception
         System.out.println("Could not save data to file:\n" + file.getPath() +
                             "\n" + e.toString());
     } 
 }
-    
      
-    /**
-     * Opens a FileChooser to let the user select the data (file) to load.
-     */
-    // @FXML
-    public static void fichierOuvrir(Boolean delete) throws Exception {
-        FileChooser fileChooser = new FileChooser();
+/**
+* Opens a FileChooser to let the user select the data (file) to load.
+*/
+public static void fichierOuvrir(Boolean delete) throws Exception {
+    FileChooser fileChooser = new FileChooser();
         
-        // Set extension filter; only xml can be read
-        FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter(
-                "XML files (*.xml)", "*.xml");
-        fileChooser.getExtensionFilters().add(extFilter);
-
-        // Show save file dialog
-        // File file = fileChooser.showOpenDialog(null);
-        File file;
+    // Set extension filter; only xml can be read
+    FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter(
+        "XML files (*.xml)", "*.xml");
+    fileChooser.getExtensionFilters().add(extFilter);
         
-        if (VueNavigateur.nonMatiereVueCheck()) file = fileChooser.showOpenDialog(null);
-        else {
-            AlertGestion.displayPreventionAlert(AlertGestion.preventionTitre, 
-                                      AlertGestion.preventionCorps,
-                                      AlertGestion.preventionDetails);
-            file = fileChooser.showOpenDialog(null); // necessaire!
-        }
-
-        if (file != null) {
-            if (VueNavigateur.articleVueCheck()){
-                    chargerArticleDataDuFichier(file, delete);//mainMotsApp, before it became static
-                    VueNavigateur.loadVue(VueNavigateur.ARTICLE_TABLEAU);//reload view 
-                    //to see changes instantly
-            }                
-            else if (VueNavigateur.photoVueCheck()){
-                    chargerPhotoDataDuFichier(file, delete); // mainMotsApp, before it became static
-                    VueNavigateur.loadVue(VueNavigateur.PHOTO_TABLEAU);//reload view 
-                    //to see changes instantly
-            }                 
-            else chargerArticleDataDuFichier(file, delete);
-        }
+    File file;
+    // Show save file dialog
+    if (VueNavigateur.nonMatiereVueCheck()) file = fileChooser.showOpenDialog(null);
+    else {
+        AlertGestion.displayPreventionAlert(AlertGestion.preventionTitre, 
+                                    AlertGestion.preventionCorps,
+                                    AlertGestion.preventionDetails);
+        file = fileChooser.showOpenDialog(null); // necessaire!
     }
 
-    /**
-    * Opens a FileChooser to let the user select a file to save to.
-    */
-    // @FXML
-    public static void fichierSauvegarderComme(MainMotsApp mainMotsApp) throws Exception {
-        FileChooser fileChooser = new FileChooser();
-
-        // Set extension filter
-        FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter(
-                "XML files (*.xml)", "*.xml");
-        fileChooser.getExtensionFilters().add(extFilter);
-
-        // Show save file dialog
-        // File file = fileChooser.showSaveDialog(null);
-        File file;
-        
-        if (VueNavigateur.nonMatiereVueCheck()) file = fileChooser.showSaveDialog(null);
-        else {
-                AlertGestion.displayPreventionAlert(AlertGestion.preventionTitre, 
-                                          AlertGestion.preventionCorps,
-                                          AlertGestion.preventionDetails);
-                file = fileChooser.showSaveDialog(null); // necessaire!
-        }
-
-        if (file != null) {
-            // Make sure it has the correct extension
-            if (!file.getPath().endsWith(".xml")) {
-                file = new File(file.getPath() + ".xml");
-            }
-            if (VueNavigateur.articleVueCheck()) sauvegarderArticleDataToFile(file);
-            else if (VueNavigateur.photoVueCheck()) sauvegarderPhotoDataToFile(file);
-            else sauvegarderArticleDataToFile(file);
-        } 
+    if (file != null) {
+        if (VueNavigateur.articleVueCheck()){
+            chargerArticleDataDuFichier(file, delete, mabaseArticle_stockage);
+            VueNavigateur.loadVue(VueNavigateur.ARTICLE_TABLEAU);//reload view to see changes instantly  
+            //
+        }                
+        else if (VueNavigateur.photoVueCheck()){
+            chargerPhotoDataDuFichier(file, delete, mabasePhoto_stockage);
+            VueNavigateur.loadVue(VueNavigateur.PHOTO_TABLEAU);//reload view to see changes instantly
+        }                 
+        else chargerArticleDataDuFichier(file, delete, mabaseArticle_stockage);
     }
+}
+
+/**
+* Opens a FileChooser to let the user select a file to save to.
+*/
+// @FXML
+public static void fichierSauvegarderComme(MainMotsApp mainMotsApp) throws Exception {
+    FileChooser fileChooser = new FileChooser();
+
+    // Set extension filter
+    FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter(
+        "XML files (*.xml)", "*.xml");
+    fileChooser.getExtensionFilters().add(extFilter);
+
+    File file;
+    // Show save file dialog
+        
+    if (VueNavigateur.nonMatiereVueCheck()) file = fileChooser.showSaveDialog(null);
+    else {
+        AlertGestion.displayPreventionAlert(AlertGestion.preventionTitre, 
+        AlertGestion.preventionCorps,
+        AlertGestion.preventionDetails);
+        file = fileChooser.showSaveDialog(null); // necessaire!
+    }
+
+    if (file != null) {
+    // Make sure it has the correct extension
+    if (!file.getPath().endsWith(".xml")) {
+        file = new File(file.getPath() + ".xml");
+    }
+    if (VueNavigateur.articleVueCheck()) sauvegarderArticleDataToFile(file);
+    else if (VueNavigateur.photoVueCheck()) sauvegarderPhotoDataToFile(file);
+    else sauvegarderArticleDataToFile(file);
+    } 
+}
+
 }

@@ -28,7 +28,7 @@ public class RootLayoutContrôleur implements Initializable {
    
     public void setView(Node node) {
         vuePorteur.getChildren().setAll(node);
-    } 
+    }
 
     /**
      * Initializes the controller class.
@@ -55,10 +55,10 @@ public class RootLayoutContrôleur implements Initializable {
 
     @FXML
     private void rechercher(ActionEvent event) throws ParseException, IOException {
-        //VueNavigateur.loadVue(VueNavigateur.ARTICLE_TABLEAU);
         String requête;
         requête = rechercherChamp.getText();
         LuceneMoteur.chercherDansIndex(requête);
+        // à mettre le texte du requête dans le champ
         MainMotsApp.requêteTexte = requête;
         VueNavigateur.loadVue(VueNavigateur.RESULTATS_RECHERCHE);
     }   
@@ -69,6 +69,8 @@ public class RootLayoutContrôleur implements Initializable {
     @FXML
     private void fichierOuvrir() throws Exception {
         ioXmlGestion.fichierOuvrir(true); // clear current articles list
+        if (VueNavigateur.photoVueCheck()) VueNavigateur.loadVue(VueNavigateur.PHOTO_TABLEAU);
+        else VueNavigateur.loadVue(VueNavigateur.ARTICLE_TABLEAU);
     }   
     
     @FXML
@@ -76,10 +78,7 @@ public class RootLayoutContrôleur implements Initializable {
         ioXmlGestion.fichierSauvegarderComme(mainMotsApp);
     }   
     /*------------------------END travail avec fichiers-----------------------*/  
-    
-   /**
-     * Opens an about dialog.
-     */
+
     @FXML
     private void montrerAbout() {
         AlertGestion.displayInfoAlert(  AlertGestion.infoTitre, 
@@ -87,27 +86,34 @@ public class RootLayoutContrôleur implements Initializable {
                                         AlertGestion.infoAuteurs);
     }
 
-    /**
-     * Closes the application.
-     */
+    // sortir de l'application
     @FXML
     private void sortieDeMotsApp() {
         System.exit(0);
     }
 
-    /**
-    * Shows detail information on authors.
-    */
     @FXML
     private void montrerAuteurs(ActionEvent event) {
+        VueNavigateur.loadVue(VueNavigateur.AUTEURS_INFO);
     }
     
     /**
-    * Runs indexing of documents (with search goals).
+    * à lancer l'indexage des documents avec lucene.
     */
+    // 
     @FXML
     private void indexer(ActionEvent event) throws IOException {
         LuceneMoteur.créerIndex();
+    }
+
+    @FXML
+    private void allerListeArticles(ActionEvent event) {
+        VueNavigateur.loadVue(VueNavigateur.ARTICLE_TABLEAU);
+    }
+
+    @FXML
+    private void allerListePhotos(ActionEvent event) {
+        VueNavigateur.loadVue(VueNavigateur.PHOTO_TABLEAU);
     }
 
 }

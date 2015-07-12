@@ -15,19 +15,15 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-import javax.imageio.ImageIO;
 import MotsApp.MainMotsApp;
 import MotsApp.VueNavigateur;
-import MotsApp.Modèles.BaseDeMatières;
-import MotsApp.Modèles.BaseDesPhotos;
 import MotsApp.Modèles.Photo;
 import MotsApp.ModèlesGestion.FormatAdapteur;
-import java.awt.image.BufferedImage;
+import MotsApp.ModèlesGestion.LuceneMoteur;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
-import javax.swing.filechooser.FileSystemView;
 
 
 /**
@@ -50,8 +46,15 @@ public class PhotoAjouteContrôleur implements Initializable {
     @FXML private Color x2;
     @FXML private Font x1;
     @FXML private Label resolution;
-    @FXML
-    private Label labelSource;
+    @FXML private Label labelSource;
+    
+  /*  
+    //initialiser les variables statiques pour remplir les champs par les données de le tableview
+    public static String titre;
+    public static String auteur;
+    public static String description;
+    public static String date;
+    public static String source;*/
     
     //Element node;
 
@@ -60,53 +63,35 @@ public class PhotoAjouteContrôleur implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+    /*    
+        //remplir les champs par les données de le tableview
+        textFieldTitre.setText(titre);
+        textFieldAuteur.setText(auteur);
+        textAreaDescription.setText(description);
+        textFieldDate.setText(date);
+        textFieldSource.setText(source);*/
+
     }    
 
-    BaseDesPhotos mabasePhoto = new BaseDesPhotos();
-    BaseDeMatières mabase2 = new BaseDeMatières();
-    
-    //String img;
     String imgU;
-    //String imgC;
-        
-        @FXML
+
+    /**
+    * Opens a FileChooser to let the user select the data (file) to load.
+    */
+    
+    @FXML
     public void uploadPhoto(ActionEvent event) throws MalformedURLException, IOException {
-        
+       
+       // Set extension filter; only .png, .jpg and .gif files can be read
        FileChooser fileChooser= new FileChooser();
        FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter(
                "Image Files", "*.png", "*.jpg", "*.gif");
        fileChooser.getExtensionFilters().add(extFilter);
        fileChooser.setTitle("Choisissez le fichier Image!");
        File file = fileChooser.showOpenDialog(new Stage());
+       
        if(file != null){
-            //System.out.println(file); //print URI C:\...
             imgU = file.toURI().toURL().toString();//URI to URL
-            //imgC = imgU.substring(6, imgU.length()); // C:/...
-            //System.out.println(imgU);// print URL file:/C:/...
-            
-            // image from file into BufferedImage
-           // File sourceimage = new File(imgC);
-            //System.out.println(sourceimage); // print URI file:\C:\...
-           // BufferedImage bufferedImage = ImageIO.read(sourceimage);
-            //String rename = textFieldTitre.getText(); // renommer le fichier tel qu'il titre
-            // image from BufferedImage into file
-            //File outputfile = new File("MotsAppImages/"+rename);   
-            
-            //File outputfile = new File(System.getProperty("user.home")+"/MotsAppImages/"); 
-          //  File outputfile = new File("MotsAppImages/"); 
-           // outputfile.mkdir(); //creer le dossier "MotsAppImages"
-           // outputfile = new File("MotsAppImages/"+sourceimage.getName());
-            
-            //File outputfile = new File(sourceimage.getName());
-           // ImageIO.write(bufferedImage, "png", outputfile); 
-           // img = outputfile.toURI().toURL().toString(); 
-            //System.out.println(outputfile);
-            //outputfile.getTotalSpace();
-           // File sourceimageHome = new File(System.getProperty("user.home"));
-            //System.out.println(sourceimageHome);
-           // FileSystemView.getFileSystemView().getHomeDirectory();
-            
             
             // display image in ImageView            
             Image image = new Image(imgU);
@@ -114,35 +99,46 @@ public class PhotoAjouteContrôleur implements Initializable {
             double h = image.getHeight();
             double w = image.getWidth();
             System.out.printf("Resolution: %.0f x %.0f px \n",image.getHeight(),image.getWidth());
-            // complete textFieldSource
+            
+            // complete textFieldSource and resolution
             textFieldSource.setText(imgU);
             resolution.setText("Resolution: "+h+" x "+w+" px");
-            //labelSource.setText("Local source de votre image: "+imgC);
+           
     }
 }
  
     @FXML
-    private void sauvegarder(ActionEvent event) throws MalformedURLException {
+    private void sauvegarder(ActionEvent event) {
         
-        LocalDate date = FormatAdapteur.dateFormat(textFieldDate.getText());
-        URL source = FormatAdapteur.urlFormat(textFieldSource.getText());
-                      
-        Photo monPhoto;
-        monPhoto = new Photo(
-                textFieldTitre.getText(),
-                textFieldAuteur.getText(),
-                textAreaDescription.getText(),
-                date,
-                source);                
-                
-        mabase2.ajouterMatière(monPhoto);//to debug in console
-        mabase2.baseAfficher();//to debug in console
-        MainMotsApp.mabasePhoto.ajouterPhoto(monPhoto);
-        MainMotsApp.mabasePhoto.photoAfficher();
-        MainMotsApp.mabasePhoto_stockage = MainMotsApp.mabasePhoto.getPhotoData();
-        
-        try {successMsgLabel.setText("L'image a été bien sauvegardé!");}
-        catch (Exception e) {
+        try {
+            
+            // formatage de types specifiques : localdate, url
+            LocalDate date = FormatAdapteur.dateFormat(textFieldDate.getText());
+            URL source = FormatAdapteur.urlFormat(textFieldSource.getText());
+           
+            
+            Photo monPhoto;
+            monPhoto = new Photo(
+                    textFieldTitre.getText(),
+                    textFieldAuteur.getText(),
+                    textAreaDescription.getText(),
+                    date,
+                    source);
+            
+            // ajouter le nouvel objet photo dans la liste "courante"
+            MainMotsApp.mabasePhoto_stockage.add(monPhoto);
+            
+            // Lucene indexation
+            try {
+                LuceneMoteur.créerIndex();
+            } catch (IOException ex) {
+                successMsgLabel.setText("Erreur d'indexation!");
+            }
+            
+            successMsgLabel.setText("L'image a été bien sauvegardé!");
+
+        }
+        catch (MalformedURLException ex) {
             successMsgLabel.setText("On ne peut pas enregistrer vos donnés!");
         }   
     }

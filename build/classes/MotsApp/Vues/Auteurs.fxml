@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="714.0" prefWidth="681.0000999999975" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2"> 
+            <!--fx:controller="MotsApp.Contrôleurs.AuteursContrôleur"-->
+  <children>
+    <GridPane id="GridPane" layoutX="57.0" layoutY="54.0" prefHeight="410.0" prefWidth="539.0" snapToPixel="true">
+      <children>
+        <ImageView fitHeight="132.88945382095798" fitWidth="116.49779510498047" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1">
+          <image>
+            <Image url="@../images/Olya.jpg" />
+          </image>
+        </ImageView>
+        <ImageView fitHeight="132.6490707397461" fitWidth="118.41633822670134" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="1">
+          <image>
+            <Image url="@../images/Olena.jpg" />
+          </image>
+        </ImageView>
+        <Label prefHeight="232.0" prefWidth="235.0" style="-fx-font: NORMAL 12 Tahoma;" text="Bonjour! &#10;Je m'appelle Olena . J'ai un master en Economie d'Entreprise obtenu a l'UNEKH. J'étudie en IDSM, comme mon amie Olga. C'est notre deuxième projet (en équipe), et nous avons beaucoup d'idées pour le développer! J'adore danser et chanter! Maintenant, je change mon parcours professionnel - je voudrais devenir une développeuse d'applications, plutôt dans le domain de web-development. Je suis inspiré par des nouvelles idées, échange d'expérience, CREATION de quelque chose utile !" textAlignment="JUSTIFY" wrapText="true" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="4" />
+        <Label prefHeight="232.0" prefWidth="242.0" style="-fx-font: NORMAL 12 Tahoma;" text="Bonjour! &#10;Je m'appelle Olga . J'ai un diplome de BAC+4 en éducation physique et sportive et un Master en management sportif obtenu a l'Institut polytechnique de Kharkiv. Maintenant j'etudie dans le programme &quot;Informatique Décisionnelle et Statistique en Management&quot; (IDSM) a l'Université nationale d'économie de Kharkov (UNEKH) et l'Université Lumière Lyon 2. J'ai deux enfants!J'aime le sport!Je suis inspirée par le mouvement, le mouvement vers l'avant, le goût de la VICTOIRE!" textAlignment="JUSTIFY" wrapText="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="4" />
+        <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="42.0" prefWidth="215.0" style="-fx-font: NORMAL 17 Tahoma;" text="Olena Persianova" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="3" />
+        <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="42.0" prefWidth="215.0" style="-fx-font: NORMAL 17 Tahoma;" text="Olga Golubnycha" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" />
+      </children>
+      <columnConstraints>
+        <ColumnConstraints hgrow="SOMETIMES" maxWidth="442.0" minWidth="10.0" prefWidth="285.0" />
+        <ColumnConstraints hgrow="SOMETIMES" maxWidth="258.0" minWidth="10.0" prefWidth="254.0" />
+      </columnConstraints>
+      <rowConstraints>
+        <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+        <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+        <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+        <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+        <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+        <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+      </rowConstraints>
+    </GridPane>
+    <Label alignment="CENTER" contentDisplay="CENTER" layoutX="53.0" layoutY="24.0" prefWidth="590.0" style="-fx-font: NORMAL 20 Tahoma;" text="Auteurs de MotsApp!" textAlignment="CENTER" />
+    <Label alignment="CENTER" contentDisplay="CENTER" layoutX="67.0" layoutY="454.0" prefWidth="590.0" style="-fx-font: NORMAL 20 Tahoma;" text="Merci pour votre attention!" textAlignment="CENTER" />
+  </children>
+</AnchorPane>

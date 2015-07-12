@@ -24,34 +24,33 @@ import org.apache.lucene.store.Directory;
 import org.apache.lucene.store.FSDirectory;
 import MotsApp.MainMotsApp;
 import MotsApp.Modèles.Article;
-import MotsApp.Modèles.BaseDesArticles;
-import MotsApp.Modèles.BaseDesPhotos;
 import MotsApp.Modèles.Photo;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 /**
  *
  * @author Persianova, Golubnycha
  */
 public class LuceneMoteur {
-    
-    public static Document document; //pour paurcorir resultats de recherche
-    //public static String titreShow; //to debug in console; see in the code below
-    
-    //to add search results to a list
-    public static BaseDesArticles baseArticleResultats = new BaseDesArticles();
-    public static BaseDesPhotos basePhotoResultats = new BaseDesPhotos();
 
+    //to add search results to a list
+    public static ObservableList<Article> baseArticleResultats = FXCollections.observableArrayList();
+    public static ObservableList<Photo> basePhotoResultats = FXCollections.observableArrayList();
     
     public static void créerIndex() throws IOException{
-        try {
-            StopAnalyzer analyzer = new StopAnalyzer();
-            //StopAnalyzer removes common English words that are not usually useful for indexing.
+
+        StopAnalyzer analyzer = new StopAnalyzer();
+        //StopAnalyzer removes common English words that are not usually useful for indexing.
             
-            Directory dir = FSDirectory.open(Paths.get("."));
-            IndexWriterConfig iwc = new IndexWriterConfig(analyzer); // java.lang.IllegalStateException: do not share IndexWriterConfig instances across IndexWriters
-            iwc.setOpenMode(OpenMode.CREATE);
-            IndexWriter writer = new IndexWriter(dir, iwc); // Lucene only allows one writer on an index at a time
-            
+        Directory dir = FSDirectory.open(Paths.get("."));
+        IndexWriterConfig iwc = new IndexWriterConfig(analyzer); // java.lang.IllegalStateException: do not share IndexWriterConfig instances across IndexWriters
+        iwc.setOpenMode(OpenMode.CREATE);
+        IndexWriter writer = new IndexWriter(dir, iwc); // Lucene only allows one writer on an index at a time
+        
+        Document document;
+           
+        try {            
             for (Article i : MainMotsApp.mabaseArticle_stockage) {
                 document = new Document(); // need to create new document at each iteration not to loose data
                 FieldType myFieldType = new FieldType();             
@@ -75,15 +74,16 @@ public class LuceneMoteur {
                             
                 writer.commit(); //on finalize
                 //writer.close(); //avoided: org.apache.lucene.store.AlreadyClosedException: this IndexWriter is closed
-            } 
-            
-            for (Photo i : MainMotsApp.mabasePhoto_stockage) {
-                try {
-                    document = new Document();
-                }
-                catch (Exception e){
-                    System.out.println("can't create new document (for photos)\n" + e.toString());
-                }
+            }             
+            System.out.println("Indexing of articles has been successfully produced.");
+        }
+        catch (Exception e) {
+            System.out.println("Can not produce indexing of articles with lucene \n" + e.toString());
+        }
+        
+        try {     
+            for (Photo i : MainMotsApp.mabasePhoto_stockage) {                
+                document = new Document();
                 FieldType myFieldType = new FieldType();             
                 myFieldType.setIndexOptions(IndexOptions.DOCS_AND_FREQS);
                 myFieldType.setStored(true); // on stocke le texte
@@ -121,15 +121,19 @@ public class LuceneMoteur {
                     System.out.println("can't commit the writer with photos\n" + e.toString());
                 }                     
             }
-            writer.close(); //on ferme
-                    
-            System.out.println("Indexing has been successfully produced. \n");
+            System.out.println("Indexing of photos has been successfully produced.");
         }
-        
         catch (Exception e) {
-            System.out.println("Can not produce indexing with lucene \n" + e.toString());
+            System.out.println("Can not produce indexing of photos with lucene \n" + e.toString());
         }
-    }
+        try {
+            writer.close(); //on ferme
+            System.out.println("Writer has been successfully closed.");
+        }
+        catch (Exception e) {
+            System.out.println("Can not close the writer.\n" + e.toString());
+        }
+}
 
     public static void chercherDansIndex(String requête) 
                                         throws ParseException, IOException{
@@ -154,11 +158,9 @@ public class LuceneMoteur {
             //parcourir les résultats
             ScoreDoc[] hits = docs.scoreDocs;
             
-            try{
-            // retrieve each matching document from the ScoreDoc array
-            //http://stackoverflow.com/questions/14966208/hits-object-deprecated-in-lucene-net-3-03-how-do-i-replace-it
-            for (ScoreDoc i : hits) {
-               // retrieve the document from the 'ScoreDoc' object
+            try {
+                for (ScoreDoc i : hits) {
+                // retrieve the document from the 'ScoreDoc' object
                 Document doc = searcher.doc(i.doc);
                 String titre = doc.get("titre");
                 String auteur = doc.get("auteur");
@@ -174,7 +176,7 @@ public class LuceneMoteur {
                     article.setContenu(contenu);
                     article.setDate(LocalDate.parse(date));
                     article.setSource(source);
-                    baseArticleResultats.ajouterArticle(article); //to perform in TableView
+                    baseArticleResultats.add(article); //to perform in TableView
                 }
                 catch (Exception e) {
                     System.out.println("Lucene can not get search reasults (if any) in articles \n" + e.toString());
@@ -188,32 +190,21 @@ public class LuceneMoteur {
                         photo.setContenu(description);
                         photo.setDate(LocalDate.parse(date));
                         photo.setSource(source);
-                        basePhotoResultats.ajouterPhoto(photo); //to perform in TableView 
+                        basePhotoResultats.add(photo); //to perform in TableView 
                     }
-                     catch (Exception e) {
+                    catch (Exception e) {
                         System.out.println("Lucene can not get search reasults (if any) in photos \n" + e.toString());
                         continue;
                     }
+                    }
                 }
-                
-                /*for (int j = 1; j <= hits.length; j++){
-                //Document d = instance.getDocument(hits[i].doc); //instance of the Field class
-                Document d = null;
-                int docId = hits[j].doc;
-                d = searcher.doc(docId);
-                float score = hits[j].score;
-                System.out.println("the score is: " + score);
-                }*/
-            }
-            } //try
+            } //try ended
             catch(Exception e) {
                 System.out.println("Error fetching search results \n" + e.getMessage());
             }
         }
-        catch (Exception e) {
+        catch (IOException | ParseException e) {
             System.out.println("Error searching " + requête + ":\n " + e.getMessage());
         }
-        
     }
-    
 }

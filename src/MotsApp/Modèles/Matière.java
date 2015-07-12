@@ -1,7 +1,6 @@
 package MotsApp.Modèles;
 
 import MotsApp.ModèlesGestion.FormatAdapteur;
-import java.io.Serializable;
 import java.net.URL;
 import java.time.LocalDate;
 import javafx.beans.property.ObjectProperty;
@@ -15,15 +14,14 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
  * @author Persianova, Golubnycha
  */
     
-public abstract class Matière implements Comparable , Serializable {
+public abstract class Matière implements Comparable  {
 
-//private StringProperty titre; //...auteur, date, source 
 private final SimpleStringProperty titre = new SimpleStringProperty(null);
 private final SimpleStringProperty auteur = new SimpleStringProperty(null);
 private final ObjectProperty<LocalDate> date = new SimpleObjectProperty<LocalDate>(null);
 private final ObjectProperty<URL> source = new SimpleObjectProperty<URL>(null);  
 
-//default constructor - for FXML (FXCollections in TableView) no-args needed!
+//default constructor - for FXML (FXCollections in TableView), no-args needed!
 public Matière()
     {  
         this(null, null, null, null);          
@@ -31,12 +29,7 @@ public Matière()
 
 public Matière(String titre, String auteur, 
                LocalDate date, URL source)
-    {      
-        //http://docs.oracle.com/javafx/2/fxml_get_started/fxml_tutorial_intermediate.htm        
-        /*this.titre = new SimpleStringProperty(titre);
-        this.date = new SimpleObjectProperty<LocalDate>(date);
-        this.auteur = new SimpleStringProperty(auteur);
-        this.source = new SimpleObjectProperty<URL>(source); */
+    {
         this.setTitre(titre);
         this.setAuteur(auteur);        
         this.setDate(date);
@@ -49,10 +42,9 @@ public String toString()
 {         
     String s = ("Titre: " + titre + "\n" + "Auteur: " + auteur
             + "\n" + "Date: " + date + "\n" + "Lien: " + source);
-    //source.getAuthority()
     return s;
 }        
-    
+// trier les objets; seulement à déboguer dans la console    
 @Override 
 public int compareTo(Object o)
 {
@@ -79,11 +71,7 @@ public StringProperty titreProperty() { return titre; }
 public StringProperty auteurProperty() { return auteur; }
 public ObjectProperty<LocalDate> dateProperty() { return date; }
 public ObjectProperty<URL> sourceProperty() { return source; }
-/*
-public static StringProperty getTypeDeMatière() { 
-    return auteur; 
-}
-*/
+
 }
     
     

@@ -1,6 +1,5 @@
 package MotsApp.ModèlesGestion;
 
-import java.lang.reflect.Method;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.geometry.Pos;
@@ -63,5 +62,6 @@ public class AlertGestion {
         alert.setContentText(details);
         alert.showAndWait();
     }
+
     
 }

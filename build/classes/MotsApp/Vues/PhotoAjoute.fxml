@@ -2,6 +2,7 @@
 
 <?import java.lang.*?>
 <?import java.util.*?>
+<?import javafx.geometry.*?>
 <?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.effect.*?>
@@ -10,41 +11,73 @@
 <?import javafx.scene.paint.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane id="AnchorPane" minHeight="456.0001389648387" prefHeight="650.0" prefWidth="750.0" 
-            xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" 
-            fx:controller="MotsApp.Contrôleurs.PhotoAjouteContrôleur">
+<AnchorPane id="AnchorPane" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="650.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="MotsApp.Contrôleurs.PhotoAjouteContrôleur">
   <children>
-    <Button fx:id="upload_btn" layoutX="112.0" layoutY="321.0" mnemonicParsing="false" onAction="#uploadPhoto" prefHeight="25.0" prefWidth="126.0" text="ajouter image" wrapText="false" />
-    <Label alignment="CENTER" contentDisplay="CENTER" layoutX="0.0" layoutY="91.0" prefWidth="750.0" style="-fx-font: NORMAL 20 Tahoma;" text="Ajout d'une nouvelle image" textAlignment="CENTER">
-      <font>
-        <Font name="System Bold" size="15.0" />
-      </font>
-    </Label>
-    <Button id="button" fx:id="save_btn" layoutX="408.0" layoutY="505.0" onAction="#sauvegarder" prefHeight="25.0" text="Sauvegarder" />
-    <TextField id="textField" fx:id="textFieldTitre" layoutX="356.0" layoutY="325.0" prefHeight="25.0" prefWidth="295.0" promptText="Titre" text="" />
-    <TextArea id="textArea1" fx:id="textAreaDescription" layoutX="211.0" layoutY="374.0" prefHeight="106.0" prefWidth="438.0" promptText="Description" text="" wrapText="true" />
-    <Label layoutX="290.0" layoutY="330.0" text="Le titre" />
-    <Label layoutX="114.0" layoutY="374.0" text="Description" />
-    <Label layoutX="290.0" layoutY="198.0" text="Le date" />
-    <Label layoutX="290.0" layoutY="154.0" text="L'auteur" />
-    <TextField id="textField" fx:id="textFieldDate" layoutX="357.0" layoutY="194.0" prefHeight="25.0" prefWidth="295.0" promptText="dd-mm-yyy" text="" />
-    <TextField id="textField" fx:id="textFieldAuteur" layoutX="357.0" layoutY="150.0" prefHeight="25.0" prefWidth="295.0" promptText="Auteur" text="" />
-    <Label fx:id="successMsgLabel" layoutX="208.0" layoutY="514.0" prefWidth="165.0" text="">
-      <font>
-        <Font name="System Italic" size="12.0" fx:id="x1" />
-      </font>
-      <textFill>
-        <Color blue="1.000" green="0.000" red="0.078" fx:id="x2" />
-      </textFill>
-    </Label>
-    <ImageView fx:id="imgView" cache="true" cacheHint="DEFAULT" depthTest="ENABLE" disable="false" fitHeight="144.0" fitWidth="192.0" focusTraversable="true" layoutX="79.0" layoutY="147.0" mouseTransparent="false" pickOnBounds="true" preserveRatio="true" smooth="true">
-      <image>
-        <Image url="@../images/sample.png" />
-      </image>
-    </ImageView>
-    <Label layoutX="290.0" layoutY="240.0" text="Le source" />
-    <TextField id="textField" fx:id="textFieldSource" layoutX="357.0" layoutY="239.0" prefHeight="25.0" prefWidth="295.0" promptText="http://sample.com.ua" text="http://sample.com.ua" />
-    <Button id="button" fx:id="voir_btn" layoutX="528.0" layoutY="505.0" onAction="#voir" prefHeight="25.0" prefWidth="121.0" text="Voir Photogallery" />
-    <Label fx:id="resolution" font="$x1" layoutX="93.0" layoutY="298.0" prefWidth="165.0" text="" textFill="$x2" />
+    <AnchorPane id="AnchorPane" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="690.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
+      <children>
+        <Button fx:id="upload_btn" layoutY="230.0" mnemonicParsing="false" onAction="#uploadPhoto" prefHeight="25.0" prefWidth="126.0" text="ajouter image" textAlignment="CENTER" wrapText="true" AnchorPane.leftAnchor="90.0" />
+        <Label alignment="CENTER" contentDisplay="CENTER" layoutY="0.0" prefWidth="750.0" style="-fx-font: NORMAL 20 Tahoma;" text="Ajout d'une nouvelle image" textAlignment="CENTER" wrapText="true" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0">
+          <font>
+            <Font name="System Bold" size="15.0" />
+          </font>
+        </Label>
+        <HBox id="HBox" alignment="CENTER" layoutY="414.0" padding="$x3" spacing="5.0" AnchorPane.leftAnchor="200.0" AnchorPane.rightAnchor="5.0">
+          <children>
+            <Label fx:id="successMsgLabel" prefWidth="165.0" text="">
+              <font>
+                <Font name="System Italic" size="12.0" fx:id="x1" />
+              </font>
+              <textFill>
+                <Color blue="1.000" green="0.000" red="0.078" fx:id="x2" />
+              </textFill>
+              <HBox.margin>
+                <Insets left="5.0" fx:id="x3" />
+              </HBox.margin>
+            </Label>
+            <Button id="button" fx:id="save_btn" onAction="#sauvegarder" prefHeight="25.0" text="Sauvegarder" textAlignment="CENTER" wrapText="true" />
+            <Button id="button" fx:id="voir_btn" onAction="#voir" prefHeight="25.0" prefWidth="121.0" text="Voir Photogallery" textAlignment="CENTER" wrapText="true" />
+          </children>
+        </HBox>
+        <HBox id="HBox" alignment="CENTER" layoutY="234.0" padding="$x3" spacing="5.0" AnchorPane.leftAnchor="220.0" AnchorPane.rightAnchor="5.0">
+          <children>
+            <Label prefWidth="51.0" text="Le titre" wrapText="false" />
+            <TextField id="textField" fx:id="textFieldTitre" prefHeight="25.0" prefWidth="295.0" promptText="Titre" text="" HBox.margin="$x3" />
+          </children>
+        </HBox>
+        <HBox id="HBox" alignment="CENTER" layoutY="283.0" padding="$x3" spacing="5.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="5.0">
+          <children>
+            <Label prefWidth="80.0" text="Description" wrapText="false" />
+            <TextArea id="textArea1" fx:id="textAreaDescription" prefHeight="106.0" prefWidth="438.0" promptText="Description" text="" wrapText="false" HBox.margin="$x3" />
+          </children>
+        </HBox>
+        <HBox id="HBox" alignment="CENTER" layoutY="103.0" padding="$x3" spacing="5.0" AnchorPane.leftAnchor="220.0" AnchorPane.rightAnchor="5.0">
+          <children>
+            <Label prefWidth="51.000099999997474" text="Le date" wrapText="false" />
+            <TextField id="textField" fx:id="textFieldDate" prefHeight="25.0" prefWidth="295.0" promptText="dd-mm-yy" text="" HBox.margin="$x3" />
+          </children>
+        </HBox>
+        <HBox id="HBox" alignment="CENTER" layoutY="59.0" padding="$x3" spacing="5.0" AnchorPane.leftAnchor="220.0" AnchorPane.rightAnchor="5.0">
+          <children>
+            <Label prefWidth="52.0" text="L'auteur" wrapText="false" />
+            <TextField id="textField" fx:id="textFieldAuteur" prefHeight="25.0" prefWidth="295.0" promptText="Auteur" text="" HBox.margin="$x3" />
+          </children>
+        </HBox>
+        <ImageView fx:id="imgView" cache="true" cacheHint="DEFAULT" depthTest="ENABLE" disable="false" fitHeight="144.0" fitWidth="192.0" focusTraversable="true" layoutY="56.0" mouseTransparent="false" pickOnBounds="true" preserveRatio="true" smooth="true" AnchorPane.leftAnchor="50.0">
+          <image>
+            <Image url="@../images/sample.png" />
+          </image>
+        </ImageView>
+        <HBox id="HBox" alignment="CENTER" layoutY="148.0" padding="$x3" spacing="5.0" AnchorPane.leftAnchor="220.0" AnchorPane.rightAnchor="5.0">
+          <children>
+            <Label text="Le source" wrapText="false" />
+            <TextField id="textField" fx:id="textFieldSource" prefHeight="25.0" prefWidth="295.0" promptText="http://sample.com.ua" text="" HBox.margin="$x3" />
+          </children>
+        </HBox>
+        <Label fx:id="resolution" font="$x1" layoutY="207.0" prefWidth="178.00009999999747" text="" textFill="$x2" AnchorPane.leftAnchor="50.0" />
+      </children>
+    </AnchorPane>
   </children>
+  <padding>
+    <Insets bottom="50.0" top="70.0" />
+  </padding>
 </AnchorPane>

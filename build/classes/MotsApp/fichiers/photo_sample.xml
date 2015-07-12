@@ -1,60 +1,68 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <photos>
     <photo>
-        <auteur>Olga</auteur>
+        <auteur>Olga Golubnycha</auteur>
         <date>2015-06-12</date>
         <source>http://stage.esy.es/images_MotsUpp/chat.jpg</source>
         <titre>Chat</titre>
         <contenu>Le chat domestique  est un mammifère carnivore de la famille des félidés. 
-Il est l’un des principaux animaux de compagnie et compte aujourd’hui une cinquantaine de races différentes reconnues 
-par les instances de certification. Dans de nombreux pays, le chat entre dans le cadre de la législation 
+Il est l’un des principaux animaux de compagnie et compte aujourd’hui une 
+cinquantaine de races différentes reconnues par les instances de certification. 
+Dans de nombreux pays, le chat entre dans le cadre de la législation 
 sur les carnivores domestiques à l’instar du chien et du furet.</contenu>
     </photo>
     <photo>
-        <auteur>Olga</auteur>
+        <auteur>Olga Golubnycha</auteur>
         <date>2015-06-12</date>
         <source>http://stage.esy.es/MotsAppImages/Chien.jpg</source>
         <titre>Chien </titre>
-        <contenu>Le chien est la sous-espèce domestique de Canis lupus, un mammifère de la famille des Canidés, 
-laquelle comprend également le loup gris, ancêtre sauvage du chien, et le dingo, chien domestique redevenu sauvage.</contenu>
+        <contenu>Le chien est la sous-espèce domestique de Canis lupus, un mammifère de 
+la famille des Canidés, laquelle comprend également le loup gris, ancêtre 
+sauvage du chien, et le dingo, chien domestique redevenu sauvage.</contenu>
     </photo>
     <photo>
-        <auteur>Olga</auteur>
+        <auteur>Olga Golubnycha</auteur>
         <date>2015-06-12</date>
         <source>http://stage.esy.es/MotsAppImages/porc.jpg</source>
         <titre>Porc</titre>
-        <contenu>L'origine du porc domestique a fait l'objet de longs débats, tant sur le fait de savoir si l'animal était 
-un sanglier domestiqué ou descendait d'un porc sauvage aujourd'hui disparu, que sur le fait de savoir dans quelle région 
-de l'Eurasie s'était faite cette domestication</contenu>
+        <contenu>L'origine du porc domestique a fait l'objet de longs débats, tant sur le 
+fait de savoir si l'animal était un sanglier domestiqué ou descendait 
+d'un porc sauvage aujourd'hui disparu, que sur le fait de savoir dans 
+quelle région de l'Eurasie s'était faite cette domestication</contenu>
     </photo>
     <photo>
-        <auteur>Olga</auteur>
+        <auteur>Olga Golubnycha</auteur>
         <date>2015-06-12</date>
         <source>http://stage.esy.es/MotsAppImages/hérisson.jpg</source>
         <titre>Hérisson</titre>
-        <contenu>Hérisson est un nom vernaculaire qui désigne en français divers petits mammifères insectivores 
-disposant de poils agglomérés, durs, hérissés et piquants. Ce nom dérive du latin ericius. 
-Les espèces les plus connues des francophones sont le Hérisson commun (Erinaceus europaeus) et 
-le Hérisson oriental (Erinaceus concolor) mais il existe d'autres « hérissons » sur divers continents, y compris en Asie.</contenu>
+        <contenu>Hérisson est un nom vernaculaire qui désigne en français divers petits 
+mammifères insectivores disposant de poils agglomérés, durs, hérissés 
+et piquants. Ce nom dérive du latin ericius. Les espèces les plus 
+connues des francophones sont le Hérisson commun (Erinaceus europaeus) 
+et le Hérisson oriental (Erinaceus concolor) mais il existe d'autres 
+« hérissons » sur divers continents, y compris en Asie.</contenu>
     </photo>
     <photo>
-        <auteur>Olga</auteur>
+        <auteur>Olga Golubnycha</auteur>
         <date>2015-06-12</date>
         <source>http://stage.esy.es/MotsAppImages/singe.jpg</source>
         <titre>Singe</titre>
-        <contenu>Les singes sont des mammifères de l'ordre des primates, généralement arboricoles, à la face souvent glabre et caractérisés 
-par un encéphale développé et de longs membres terminés par des doigts. 
-Bien que leur ressemblance avec l'Homme ait toujours frappé les esprits, la science a mis de nombreux siècles à prouver le lien étroit 
-qui existe entre ces animaux et l'espèce humaine.</contenu>
+        <contenu>Les singes sont des mammifères de l'ordre des primates, généralement 
+arboricoles, à la face souvent glabre et caractérisés par un encéphale 
+développé et de longs membres terminés par des doigts. Bien que leur 
+ressemblance avec l'Homme ait toujours frappé les esprits, la science 
+a mis de nombreux siècles à prouver le lien étroit qui existe entre 
+ces animaux et l'espèce humaine.</contenu>
     </photo>
     <photo>
-        <auteur>Olga</auteur>
+        <auteur>Olga Golubnycha</auteur>
         <date>2015-06-12</date>
         <source>http://stage.esy.es/MotsAppImages/pandas.jpg</source>
         <titre>Pandas</titre>
         <contenu>Les pandas sont des animaux originaires de Chine dans le continent asiatique. 
-Le panda est une espece menacée il reste entre 1000 et 500 pandas. Deux espèces existent aujourd'hui (une autre, le panda nain, est une espèce fossile) :
-le panda géant, un ursidé noir et blanc ;
+Le panda est une espece menacée il reste entre 1000 et 500 pandas. 
+Deux espèces existent aujourd'hui (une autre, le panda nain, 
+est une espèce fossile) : le panda géant, un ursidé noir et blanc ;
 le panda roux ou petit panda, un Musteloidea.</contenu>
     </photo>
 </photos>

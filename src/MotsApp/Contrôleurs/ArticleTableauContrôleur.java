@@ -13,9 +13,12 @@ import javafx.event.ActionEvent;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TextField;
 import MotsApp.MainMotsApp;
+import MotsApp.ModèlesGestion.AlertGestion;
 import MotsApp.ModèlesGestion.FormatAdapteur;
+import MotsApp.ModèlesGestion.LuceneMoteur;
 import MotsApp.ModèlesGestion.ioXmlGestion;
 import MotsApp.VueNavigateur;
+import javafx.scene.control.Button;
 
 /**
  * FXML Controller class
@@ -32,23 +35,25 @@ public class ArticleTableauContrôleur implements Initializable {
     @FXML private TableColumn<Article, LocalDate> matièreDate;
     @FXML private TableColumn<Article, URL> matièreSource;    
     
-    @FXML private TextField titreTextField;
-    @FXML private TextField auteurTextField;
-    @FXML private TextField contenuTextField;
-    @FXML private TextField dateTextField;
-    @FXML private TextField sourceTextField;  
+    private TextField titreTextField;
+    private TextField auteurTextField;
+    private TextField contenuTextField;
+    private TextField dateTextField;
+    private TextField sourceTextField;  
        
     private ObservableList<Article> mabase;     
-    
+    @FXML private Button ajouteA_btn;
+    @FXML private Button suprimeA_btn;
     @FXML
+    private Button copierA_btn;
+    
     private void ajouteArticleToTable(ActionEvent event) throws MalformedURLException {
         
-        ObservableList<Article> mabase = matièreTableView.getItems();
-        //private ObservableList<Article> mabase = FXCollections.observableArrayList();
-        
+        // formatage de types specifiques (localdate, url) :
         LocalDate date = FormatAdapteur.dateFormat(dateTextField.getText());        
         URL source = FormatAdapteur.urlFormat(sourceTextField.getText());
 
+        // à obtenir les données entrés par l'utilisateur :
         mabase.add(new Article(titreTextField.getText(),
             auteurTextField.getText(),
             contenuTextField.getText(),
@@ -56,7 +61,8 @@ public class ArticleTableauContrôleur implements Initializable {
             source
             )
         );
-        
+        // à mettre les données entrés par l'utilisateur 
+        // dans la nouvelle instance de la classe Article :
         titreTextField.setText(null);
         auteurTextField.setText(null);
         contenuTextField.setText(null);
@@ -100,9 +106,37 @@ public class ArticleTableauContrôleur implements Initializable {
     private void lireDuFichier(ActionEvent event) throws Exception {
 
         ioXmlGestion.fichierOuvrir(false); // save current article list
-        
+        AlertGestion.displayInfoAlert("Attendez","Exécution de l'indexation",
+                    "SVP, attendez qqn sec tandis que l'indexation est terminée \n Cliquez sur ok");
+        LuceneMoteur.créerIndex(); // Lucene indexation
         VueNavigateur.loadVue(VueNavigateur.ARTICLE_TABLEAU);//reload view 
         //to see changes instantly after adding data from the file to the current "observable list" of articles
     }
+
+    @FXML
+    private void suprArticleTable(ActionEvent event) {
+        //obtenir index de la ligne sélectionnée
+         int row = matièreTableView.getSelectionModel().getSelectedIndex();
+         matièreTableView.getItems().remove(row); //supprimer la ligne sélectionnée
+    }
+
+    @FXML
+    private void ajouterToTable(ActionEvent event) {
+        VueNavigateur.loadVue(VueNavigateur.ARTICLE_AJOUTE);
+    }
+
+  /*  @FXML
+    private void copierArticleTable(ActionEvent event) {
+       int row = matièreTableView.getSelectionModel().getSelectedIndex(); //obtenir index de la ligne sélectionnée
+          
+       //affecter aux variables statiques les données de la ligne sélectionnée
+       ArticleAjouteContrôleur.titreA = matièreTitre.getCellData(row);
+       ArticleAjouteContrôleur.auteurA = matièreAuteur.getCellData(row);
+       ArticleAjouteContrôleur.contenuA = matièreContenu.getCellData(row);
+       ArticleAjouteContrôleur.dateA = matièreDate.getCellData(row).toString();
+       ArticleAjouteContrôleur.sourceA = matièreSource.getCellData(row).toString();
+          
+       VueNavigateur.loadVue(VueNavigateur.ARTICLE_AJOUTE);
+    }*/
     
 }
